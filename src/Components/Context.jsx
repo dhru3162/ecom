@@ -7,7 +7,8 @@ export class Dataprovider extends Component {
 
         this.state = {
             cart: [],
-            total: 0
+            total: 0,
+            count: 1
         }
     }
 
