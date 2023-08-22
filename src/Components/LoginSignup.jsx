@@ -156,6 +156,20 @@ const LoginSignup = () => {
         }
     }
 
+    const paste = (e) => {
+        e.preventDefault()
+        toast("Pasting is not allowed!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        })
+    }
+
     // console.log(submit())
 
     return (
@@ -184,6 +198,8 @@ const LoginSignup = () => {
                                     <input
                                         type="text"
                                         required
+                                        autoComplete='off'
+                                        onPaste={(e) => paste(e)}
                                         className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         onChange={(e) => {
                                             // const value = e.target.value
@@ -198,6 +214,7 @@ const LoginSignup = () => {
                                         }}
                                     />
                                 </div>
+                                <small>{ }</small>
                             </div>
 
                             <div>
@@ -215,6 +232,7 @@ const LoginSignup = () => {
                                     <input
                                         type="password"
                                         required
+                                        onPaste={(e) => paste(e)}
                                         className="block w-full pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         onChange={(e) => { setUserData({ ...userData, pass: e.target.value }) }}
                                     />

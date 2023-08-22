@@ -9,22 +9,12 @@ export class Dataprovider extends Component {
             cart: [],
             total: 0,
             count: 1,
-            // ragisterdata: { fname: "", lname: "", mobile: "", email: "" }
         }
     }
 
-    // ragister = (data) => {
-    //     this.setState({ ragisterdata: data })
-    // }
-
     addToCart = (data) => {
-        const check = this.state.cart.every(item => {
-            return item.id !== data.id
-        })
-        if (check) {
-            this.setState({ cart: [...this.state.cart, data] })
-        } else {
-            toast.warn('The product has already added to cart.', {
+        if (sessionStorage.getItem('email') === null && sessionStorage.getItem('mobile') === null) {
+            toast.info('Please Login First', {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -34,6 +24,25 @@ export class Dataprovider extends Component {
                 progress: undefined,
                 theme: "light",
             });
+
+        } else {
+            const check = this.state.cart.every(item => {
+                return item.id !== data.id
+            })
+            if (check) {
+                this.setState({ cart: [...this.state.cart, data] })
+            } else {
+                toast.warn('The product has already added to cart.', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
         }
     }
 

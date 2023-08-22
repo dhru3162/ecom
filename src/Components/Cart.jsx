@@ -2,11 +2,14 @@ import React, { useContext, useState } from 'react'
 import { Datacontext } from './Context'
 import Navbar from './Navbar'
 import './Numberstyle.css'
+import { NavLink } from 'react-router-dom'
 
 const Cart = () => {
     const contextData = useContext(Datacontext)
     const { cart, gettotle } = contextData
     const [qut, setqut] = useState(1)
+    const email = sessionStorage.getItem('email')
+    const mobile = sessionStorage.getItem('mobile')
 
 
     const items = cart.map((cartdata) => {
@@ -38,41 +41,61 @@ const Cart = () => {
     return (
         <div>
             <Navbar />
-            <div className="h-screen pt-20">
-                {cart.length === 0 ? (
-                    <div>
-                        <h1 className="mb-10 text-center text-2xl font-bold">Cart Was Empty</h1>
-                    </div>
-                ) : (
-                    <div>
-                        <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
-                        <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-                            <div className="rounded-lg md:w-2/3">
-                                {items}
-                            </div>
-                            <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
-                                <div className="mb-2 flex justify-between">
-                                    <p className="text-gray-700">Subtotal</p>
-                                    <p className="text-gray-700">{gettotle}</p>
-                                </div>
-                                <div className="flex justify-between">
-                                    <p className="text-gray-700">Shipping</p>
-                                    <p className="text-gray-700">$4.99</p>
-                                </div>
-                                <hr className="my-4" />
-                                <div className="flex justify-between">
-                                    <p className="text-lg font-bold">Total</p>
-                                    <div className="">
-                                        <p className="mb-1 text-lg font-bold">$134.98</p>
-                                        {/* <p className="text-sm text-gray-700">including VAT</p> */}
-                                    </div>
-                                </div>
-                                <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-700">Check out</button>
-                            </div>
+            {email === null && mobile === null ? (
+                <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                    <div className="text-center">
+                        <p className="text-base font-semibold text-indigo-600">405</p>
+                        <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Access Denied</h1>
+                        <p className="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t access this page without login please login first</p>
+                        <div className="mt-10 flex items-center justify-center gap-x-6">
+                            <NavLink
+                                to="/login"
+                                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                Login Now
+                            </NavLink>
+                            <NavLink to="/contact" className="text-sm font-semibold text-gray-900">
+                                Contact support <span aria-hidden="true">&rarr;</span>
+                            </NavLink>
                         </div>
                     </div>
-                )}
-            </div>
+                </main>
+            ) : (
+                <div className="h-screen pt-20">
+                    {cart.length === 0 ? (
+                        <div>
+                            <h1 className="mb-10 text-center text-2xl font-bold">Cart Was Empty</h1>
+                        </div>
+                    ) : (
+                        <div>
+                            <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
+                            <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+                                <div className="rounded-lg md:w-2/3">
+                                    {items}
+                                </div>
+                                <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+                                    <div className="mb-2 flex justify-between">
+                                        <p className="text-gray-700">Subtotal</p>
+                                        <p className="text-gray-700">{gettotle}</p>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <p className="text-gray-700">Shipping</p>
+                                        <p className="text-gray-700">$4.99</p>
+                                    </div>
+                                    <hr className="my-4" />
+                                    <div className="flex justify-between">
+                                        <p className="text-lg font-bold">Total</p>
+                                        <div className="">
+                                            <p className="mb-1 text-lg font-bold">$134.98</p>
+                                            {/* <p className="text-sm text-gray-700">including VAT</p> */}
+                                        </div>
+                                    </div>
+                                    <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-700">Check out</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>)}
         </div>
     )
 }
