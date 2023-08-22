@@ -4,7 +4,7 @@ import github from '../Logos/github.png'
 import twitter from '../Logos/twitter.png'
 import facebook from '../Logos/facebook.png'
 import instagram from '../Logos/instagram (1).png'
-import logo from './logo.svg'
+import logo from './logo.png'
 
 
 const Footer = () => {

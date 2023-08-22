@@ -9,6 +9,9 @@ import Blog from "./Components/Blog";
 import FQ from "./Components/F&Q";
 import ProductPage from "./Components/ProductPage";
 import Cart from "./Components/Cart";
+import LoginSignup from "./Components/LoginSignup";
+import Profile from "./Components/Profile";
+import RagisterDetails from "./Components/RagisterDetails";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/f&q" element={<FQ />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<LoginSignup />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/ragister" element={<RagisterDetails />} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
     </>

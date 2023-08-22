@@ -8,9 +8,14 @@ export class Dataprovider extends Component {
         this.state = {
             cart: [],
             total: 0,
-            count: 1
+            count: 1,
+            // ragisterdata: { fname: "", lname: "", mobile: "", email: "" }
         }
     }
+
+    // ragister = (data) => {
+    //     this.setState({ ragisterdata: data })
+    // }
 
     addToCart = (data) => {
         const check = this.state.cart.every(item => {
