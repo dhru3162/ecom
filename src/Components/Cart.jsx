@@ -10,7 +10,8 @@ const Cart = () => {
     const { cart, totalprice } = contextData
     const email = sessionStorage.getItem('email')
     const mobile = sessionStorage.getItem('mobile')
-    const price = (eval(totalprice) + 4.99).toFixed(2)
+    // eslint-disable-next-line
+    const price = eval(totalprice) + 4.99
 
     const items = cart.map((cartdata, index) =>
         <div key={index}>
@@ -109,7 +110,7 @@ const Cart = () => {
                                             <div className="flex justify-between">
                                                 <p className="text-lg font-bold">Total</p>
                                                 <div className="">
-                                                    <p className="mb-1 text-lg font-bold">{totalprice <= 100 ? `$${price}` : `$${totalprice}`}</p>
+                                                    <p className="mb-1 text-lg font-bold">{totalprice <= 100 ? `$${price.toFixed(2)}` : `$${totalprice}`}</p>
                                                     {/* <p className="text-sm text-gray-700">Including Tax</p> */}
                                                 </div>
                                             </div>
