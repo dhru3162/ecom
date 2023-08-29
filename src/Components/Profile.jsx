@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { useNavigate } from 'react-router-dom'
 import Footer from './Footer'
@@ -6,6 +6,7 @@ import axios from 'axios'
 import Loader from './Loader'
 import { toast } from 'react-toastify'
 import { NavLink } from 'react-router-dom'
+import { Datacontext } from './Context'
 
 const Profile = () => {
     const navigate = useNavigate()
@@ -13,6 +14,8 @@ const Profile = () => {
     const checkmobile = sessionStorage.getItem('mobile')
     const [data, setdata] = useState({ fname: "", lname: "", mobile: "", email: "", pass: "", id: '' })
     const [loading, setLoading] = useState(true)
+    const contextData = useContext(Datacontext)
+
 
     useEffect(() => {
         getdata()
@@ -171,6 +174,7 @@ const Profile = () => {
                                                 onClick={() => {
                                                     sessionStorage.clear()
                                                     navigate('/')
+                                                    contextData.setchang(!contextData.change)
                                                 }}>Logout</button>
                                         </div>
                                     </div>
@@ -179,8 +183,8 @@ const Profile = () => {
                             <Footer />
                         </div>
                     )}
-                </div >)
-            }
+                </div>
+            )}
         </>
     )
 }
