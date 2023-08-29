@@ -10,6 +10,7 @@ const Cart = () => {
     const { cart, totalprice } = contextData
     const email = sessionStorage.getItem('email')
     const mobile = sessionStorage.getItem('mobile')
+    const price = (eval(totalprice) + 4.99).toFixed(2)
 
     const items = cart.map((cartdata, index) =>
         <div key={index}>
@@ -48,7 +49,7 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 
     return (
@@ -108,8 +109,8 @@ const Cart = () => {
                                             <div className="flex justify-between">
                                                 <p className="text-lg font-bold">Total</p>
                                                 <div className="">
-                                                    <p className="mb-1 text-lg font-bold">$134.98</p>
-                                                    {/* <p className="text-sm text-gray-700">including VAT</p> */}
+                                                    <p className="mb-1 text-lg font-bold">{totalprice <= 100 ? `$${price}` : `$${totalprice}`}</p>
+                                                    {/* <p className="text-sm text-gray-700">Including Tax</p> */}
                                                 </div>
                                             </div>
                                             <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-700">Check out</button>

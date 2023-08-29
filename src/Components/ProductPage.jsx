@@ -12,7 +12,8 @@ const ProductPage = () => {
     const contextData = useContext(Datacontext)
 
     useEffect(() => {
-        getProduct() // eslint-disable-next-line
+        getProduct()
+        // eslint-disable-next-line
     }, [])
 
     const getProduct = async () => {
