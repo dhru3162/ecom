@@ -1,16 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Datacontext } from './Context'
 import Navbar from './Navbar'
 import './Numberstyle.css'
 import { NavLink } from 'react-router-dom'
-import CartLoader from './Loader/CartLoader'
 import { toast } from 'react-toastify'
+import CartLoader from './Loader/CartLoader';
+import { HashLoader } from 'react-spinners'
 
 const Cart = () => {
     const contextData = useContext(Datacontext)
     const { cart, totalprice } = contextData
     const email = sessionStorage.getItem('email')
     const mobile = sessionStorage.getItem('mobile')
+    const [proid, setproid] = useState()
     // eslint-disable-next-line
     const price = eval(totalprice) + 4.99
 
@@ -27,14 +29,37 @@ const Cart = () => {
                         <div className="flex items-center border-gray-100">
                             <button
                                 type='button'
-                                className={`cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 ${cartdata.qtn > 1 && 'hover:bg-blue-500 hover:text-blue-50'} `}
+                                disabled={contextData.loading}
+                                className={`rounded-l bg-gray-100 py-1 px-3.5 duration-100 ${cartdata.qtn === 1 && 'cursor-not-allowed'} ${cartdata.qtn > 1 && 'hover:bg-blue-500 hover:text-blue-50'} `}
                                 onClick={() => contextData.decreaseQtn(cartdata)}
                             > - </button>
-                            <input className="h-8 w-8 border bg-white text-center text-xs outline-none" type="number" min="1" value={cartdata.qtn}
-                                onChange={(e) => e.preventDefault()}
-                            />
-                            <button type='button' className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
-                                onClick={() => contextData.increaseQtn(cartdata)}
+                            <div className="h-8 w-8 border bg-white flex justify-center items-center text-xs outline-none">
+                                {contextData.loading ? (
+                                    <>
+                                        {proid === cartdata.productid ? (
+                                            <>
+                                                <HashLoader
+                                                    color="#1D4EDA"
+                                                    size={14}
+                                                />
+                                            </>
+                                        ) : (
+                                            <span>
+                                                {cartdata.qtn}
+                                            </span>
+                                        )}
+                                    </>
+                                ) : (
+                                    <span>
+                                        {cartdata.qtn}
+                                    </span>
+                                )}
+                            </div>
+                            <button type='button' disabled={contextData.loading} className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                                onClick={() => {
+                                    setproid(cartdata.productid)
+                                    contextData.increaseQtn(cartdata)
+                                }}
                             > + </button>
                         </div>
                         <div className="flex items-center">
@@ -57,12 +82,16 @@ const Cart = () => {
     return (
         <div>
             <Navbar />
-            {contextData.loading ? (
+            {contextData.firstloading ? (
                 <CartLoader />
             ) : (
-                <div>
+                <>
+                    {/* {contextData.loading ? (
+                        <Loader />
+                    ) : (
+                        <> */}
                     {email === null && mobile === null ? (
-                        <div>
+                        <>
                             {cart == null &&
                                 <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
                                     <div className="text-center">
@@ -83,16 +112,16 @@ const Cart = () => {
                                     </div>
                                 </main>
                             }
-                        </div>
+                        </>
 
                     ) : (
                         <div className="h-screen pt-20">
                             {cart.length === 0 ? (
-                                <div>
+                                <>
                                     <h1 className="mb-10 text-center text-2xl font-bold">Cart Was Empty</h1>
-                                </div>
+                                </>
                             ) : (
-                                <div>
+                                <>
                                     <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
                                     <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
                                         <div className="rounded-lg md:w-2/3">
@@ -132,11 +161,13 @@ const Cart = () => {
                                             </button>
                                         </div>
                                     </div>
-                                </div>
+                                </>
                             )}
                         </div>
                     )}
-                </div>
+                    {/* </>
+                    )} */}
+                </>
             )}
         </div>
     )

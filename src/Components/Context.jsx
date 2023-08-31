@@ -10,6 +10,7 @@ const Dataprovider = ({ children }) => {
     const [change, setchang] = useState(true)
     const [userdata, setuserdata] = useState({})
     const [loading, setloading] = useState(false)
+    const [firstloading, setFirstLoading] = useState(true)
     const storeemail = sessionStorage.getItem('email')
     const storemobile = sessionStorage.getItem('mobile')
 
@@ -37,7 +38,6 @@ const Dataprovider = ({ children }) => {
             })
 
             if (check) {
-                // setcart([...cart, data])  
                 axios.put(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${userdata.id}`, { cart: [...cart, { productid: data.id, title: data.title, price: data.price, image: data.image, qtn: 1 }] }, {
                     headers: { 'content-type': 'application/json' },
                 })
@@ -98,8 +98,6 @@ const Dataprovider = ({ children }) => {
                         theme: "light",
                     })
                     const priceqtn = data.price * data.qtn
-                    // const proprice = parseInt(totalprice) - parseInt(priceqtn.toFixed(2))
-                    // setTotalPrice(proprice)
                     const proprice = `${totalprice} - ${priceqtn}`
                     // eslint-disable-next-line
                     setTotalPrice(eval(proprice).toFixed(2))
@@ -160,27 +158,12 @@ const Dataprovider = ({ children }) => {
     }
 
     useEffect(() => {
-        // totalamount()
         fatchcartdata()
-        // axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${userdata.id}`)
-        //     .then((data) => {
-        //         const res = data.data[0].cart.reduce((prev, item) => {
-        //             return prev + (item.price * item.qtn)
-        //         }, 0)
-        //         console.log(res)
-        //         if (res === 100) {
-        //             setTotalPrice(res)
-        //         } else {
-        //             setTotalPrice(res)
-        //         }
-        //     })
         // eslint-disable-next-line
     }, [change])
 
     const fatchcartdata = () => {
-        setloading(true)
         if (storeemail !== null || storemobile !== null) {
-            console.log('context useeffect true')
             if (storemobile === null) {
                 axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${storeemail}`)
                     .then((data) => {
@@ -194,11 +177,11 @@ const Dataprovider = ({ children }) => {
                         } else {
                             setcart([])
                         }
-                        setloading(false)
+                        setFirstLoading(false)
                     })
                     .catch((errd) => {
                         alert(errd.massage)
-                        setloading(false)
+                        setFirstLoading(false)
                     })
             } else {
                 axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${storemobile}`)
@@ -209,28 +192,26 @@ const Dataprovider = ({ children }) => {
                             const res = data.data[0].cart.reduce((prev, item) => {
                                 return prev + (item.price * item.qtn)
                             }, 0)
-                            setTotalPrice(res)
+                            setTotalPrice(res.toFixed(2))
                         } else {
                             setcart([])
                         }
-                        setloading(false)
+                        setFirstLoading(false)
                     })
                     .catch((errd) => {
                         alert(errd.massage)
-                        setloading(false)
+                        setFirstLoading(false)
                     })
             }
         } else {
             setcart([])
-            setloading(false)
-            console.log('context useeffect false')
+            setFirstLoading(false)
         }
-
     }
 
 
     return (
-        <Datacontext.Provider value={{ addToCart, cart, change, setchang, fatchcartdata, removeProduct, loading, increaseQtn, decreaseQtn, totalprice }}>
+        <Datacontext.Provider value={{ addToCart, cart, change, setchang, fatchcartdata, removeProduct, loading, increaseQtn, decreaseQtn, totalprice, firstloading }}>
             {children}
         </Datacontext.Provider>
     )
