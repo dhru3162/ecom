@@ -26,7 +26,7 @@ const Navbar = () => {
                             {contextData.cart.length > 0 &&
                                 <span className='text-xs h-4 w-4 bg-blue-700 rounded-full text-center text-white font-bold relative right-1 -top-2 inline-block'>{contextData.cart.length}</span>}
                         </NavLink>
-                        <NavLink to={checkmobile === null & checklogin === null ? '/login' : '/profile'} type="button" className="ml-5 py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                        <NavLink to={checkmobile === null & checklogin === null ? '/login' : '/profile'} type="button" className="py-2 pr-2 lg:pr-4 lg:pl-3 lg:ml-5 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                             <i className="bi bi-person-circle"></i>
                         </NavLink>
                         <button data-target='#tttt' data-collapse-toggle="#tttt" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false" onClick={() => setcollapse(!collapse)}>

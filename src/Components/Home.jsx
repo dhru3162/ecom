@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom'
-import Loader from './Loader';
 import Footer from './Footer';
 import { Datacontext } from './Context';
 import { HashLoader } from 'react-spinners';
+import HomeLoader from './Loader/HomeLoader';
 
 const Home = () => {
     const [product, setproduct] = useState([])
@@ -88,7 +88,6 @@ const Home = () => {
                                         Add To Cart
                                     </>
                                 )}
-                                {/* Add To Cart */}
                             </Link>
                         </div>
                     </div>
@@ -102,12 +101,14 @@ const Home = () => {
     return (
         <>
             <Navbar />
-            {/* {contextData.loading ? (
-                <Loader />
-            ) : ( */}
             <div>
                 {loading ? (
-                    <Loader />
+                    <div className='mt-16'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+                            <HomeLoader />
+                        </div>
+                    </div>
+
                 ) : (
                     <div className='mt-16'>
                         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
@@ -117,7 +118,6 @@ const Home = () => {
                     </div>
                 )}
             </div>
-            {/* )} */}
         </>
     )
 }

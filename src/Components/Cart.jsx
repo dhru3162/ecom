@@ -3,7 +3,8 @@ import { Datacontext } from './Context'
 import Navbar from './Navbar'
 import './Numberstyle.css'
 import { NavLink } from 'react-router-dom'
-import Loader from './Loader'
+import CartLoader from './Loader/CartLoader'
+import { toast } from 'react-toastify'
 
 const Cart = () => {
     const contextData = useContext(Datacontext)
@@ -57,7 +58,7 @@ const Cart = () => {
         <div>
             <Navbar />
             {contextData.loading ? (
-                <Loader />
+                <CartLoader />
             ) : (
                 <div>
                     {email === null && mobile === null ? (
@@ -111,10 +112,24 @@ const Cart = () => {
                                                 <p className="text-lg font-bold">Total</p>
                                                 <div className="">
                                                     <p className="mb-1 text-lg font-bold">{totalprice <= 100 ? `$${price.toFixed(2)}` : `$${totalprice}`}</p>
-                                                    {/* <p className="text-sm text-gray-700">Including Tax</p> */}
                                                 </div>
                                             </div>
-                                            <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-700">Check out</button>
+                                            <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
+                                                onClick={() => {
+                                                    toast('Coming Soon', {
+                                                        position: "bottom-right",
+                                                        autoClose: 5000,
+                                                        hideProgressBar: false,
+                                                        closeOnClick: true,
+                                                        pauseOnHover: true,
+                                                        draggable: true,
+                                                        progress: undefined,
+                                                        theme: "light",
+                                                    })
+                                                }}
+                                            >
+                                                Check out
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

@@ -230,9 +230,22 @@ const LoginSignup = () => {
                                                 Password
                                             </label>
                                             <div className="text-sm">
-                                                <Link className="font-semibold text-blue-700 hover:text-blue-800">
+                                                <button type='button' className="font-semibold text-blue-700 hover:text-blue-800"
+                                                    onClick={() => {
+                                                        toast('Coming Soon', {
+                                                            position: "bottom-right",
+                                                            autoClose: 5000,
+                                                            hideProgressBar: false,
+                                                            closeOnClick: true,
+                                                            pauseOnHover: true,
+                                                            draggable: true,
+                                                            progress: undefined,
+                                                            theme: "light",
+                                                        });
+                                                    }}
+                                                >
                                                     Forgot password?
-                                                </Link>
+                                                </button>
                                             </div>
                                         </div>
                                         <div className="mt-2">
