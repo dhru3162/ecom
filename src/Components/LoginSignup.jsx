@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import logo from './logo.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Loader from './Loader'
@@ -173,8 +173,6 @@ const LoginSignup = () => {
         })
     }
 
-    // console.log(submit())
-
     return (
         <>
             <Navbar />
@@ -209,10 +207,7 @@ const LoginSignup = () => {
                                                 onPaste={(e) => paste(e)}
                                                 className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 onChange={(e) => {
-                                                    // const value = e.target.value
                                                     setCheckNum(!isNaN(e.target.value))
-                                                    // console.log(!isNaN(+e.target.value))
-                                                    // console.log(checkNum)
                                                     if (checkNum) {
                                                         setUserData({ ...userData, mobile: e.target.value, email: '' })
                                                     } else {
