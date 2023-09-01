@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 import "./Numberstyle.css"
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
-import Loader from './Loader'
+import Loader from './Loader/Loader'
 
 const RagisterDetails = () => {
     const navigate = useNavigate()

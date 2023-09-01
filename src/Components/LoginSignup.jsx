@@ -4,7 +4,7 @@ import logo from './logo.png'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Loader from './Loader'
+import Loader from './Loader/Loader'
 import { Datacontext } from './Context'
 
 const LoginSignup = () => {

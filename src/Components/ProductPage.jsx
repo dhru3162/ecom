@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { useParams } from 'react-router-dom'
 import { Datacontext } from './Context'
-// import Loader from './Loader'
 import Skeleton from 'react-loading-skeleton'
 
 const ProductPage = () => {

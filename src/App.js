@@ -3,7 +3,7 @@ import Home from "./Components/Home";
 import PageNotFound from "./Components/PageNotFound";
 import About from "./Components/About";
 import ContactUs from "./Components/ContactUs";
-import Loader from "./Components/Loader";
+import Loader from "./Components//Loader/Loader";
 import Feature from "./Components/Feature";
 import Blog from "./Components/Blog";
 import FQ from "./Components/F&Q";
