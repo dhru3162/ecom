@@ -21,7 +21,7 @@ const Dataprovider = ({ children }) => {
     const storemobile = sessionStorage.getItem('mobile')
 
     const rendomcode = () => {
-        const characters = "abcdefghiklmnopqrstuvwxyz";
+        const characters = "abcdefghiklmnopqrstuvwxyz1234567890"
 
         //specify the length for the new string
         const lenString = 10;
@@ -309,6 +309,7 @@ const Dataprovider = ({ children }) => {
                 toast.error('Something Went Wrong')
                 setloading(false)
             })
+        rendomcode()
     }
 
     const addAddress = (data) => {
