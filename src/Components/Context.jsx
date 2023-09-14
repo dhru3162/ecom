@@ -356,11 +356,6 @@ const Dataprovider = ({ children }) => {
             })
     }
 
-   
-
-    console.log(ab);
-
-
     return (
         <Datacontext.Provider value={{
             ab,
