@@ -8,12 +8,9 @@ const Navbar = () => {
     const contextData = useContext(Datacontext)
     const checklogin = sessionStorage.getItem('email')
     const checkmobile = sessionStorage.getItem('mobile')
-    // console.log(checklogin)
-    // console.log(checkmobile)
 
     return (
         <div>
-
             <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <NavLink to="/" className="flex items-center">

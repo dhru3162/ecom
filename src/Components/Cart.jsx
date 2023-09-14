@@ -2,19 +2,16 @@ import React, { useContext, useState } from 'react'
 import { Datacontext } from './Context'
 import Navbar from './Navbar'
 import './Numberstyle.css'
-import { NavLink } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { NavLink, useNavigate } from 'react-router-dom'
 import CartLoader from './Loader/CartLoader';
 import { HashLoader } from 'react-spinners'
 
 const Cart = () => {
+    const navigate = useNavigate()
     const contextData = useContext(Datacontext)
     const { cart, totalprice } = contextData
     const email = sessionStorage.getItem('email')
     const mobile = sessionStorage.getItem('mobile')
-    console.log(email)
-    console.log(mobile)
-    console.log(cart)
     const [proid, setproid] = useState()
     // eslint-disable-next-line
     const price = eval(totalprice) + 4.99
@@ -141,18 +138,9 @@ const Cart = () => {
                                                     <p className="mb-1 text-lg font-bold">{totalprice <= 100 ? `$${price.toFixed(2)}` : `$${totalprice}`}</p>
                                                 </div>
                                             </div>
-                                            <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
+                                            <button className="mt-6 w-full rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
                                                 onClick={() => {
-                                                    toast('Coming Soon', {
-                                                        position: "bottom-right",
-                                                        autoClose: 5000,
-                                                        hideProgressBar: false,
-                                                        closeOnClick: true,
-                                                        pauseOnHover: true,
-                                                        draggable: true,
-                                                        progress: undefined,
-                                                        theme: "light",
-                                                    })
+                                                    navigate(`/cart/${contextData.ab}`)
                                                 }}
                                             >
                                                 Check out

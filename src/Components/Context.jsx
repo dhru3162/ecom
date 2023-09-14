@@ -5,14 +5,128 @@ import { toast } from "react-toastify"
 const Datacontext = createContext()
 
 const Dataprovider = ({ children }) => {
+    const [ab, setab] = useState('')
     const [cart, setcart] = useState([])
-    const [totalprice, setTotalPrice] = useState()
+    const [address, setAddress] = useState([])
+    const [card, setCard] = useState([])
+    const [upi, setupi] = useState([])
+    const [myOrders, setMyOrders] = useState([])
+    const [newOrderData, setNewOrderData] = useState([])
+    const [totalprice, setTotalPrice] = useState(0)
     const [change, setchang] = useState(true)
     const [userdata, setuserdata] = useState({})
     const [loading, setloading] = useState(false)
     const [firstloading, setFirstLoading] = useState(true)
     const storeemail = sessionStorage.getItem('email')
     const storemobile = sessionStorage.getItem('mobile')
+
+    const rendomcode = () => {
+        const characters = "abcdefghiklmnopqrstuvwxyz";
+
+        //specify the length for the new string
+        const lenString = 10;
+        var randomstring = '';
+
+        //loop to select a new character in each iteration
+        for (var i = 0; i < lenString; i++) {
+            var rnum = Math.floor(Math.random() * characters.length);
+            randomstring += characters.substring(rnum, rnum + 1);
+        }
+        setab(randomstring)
+    }
+
+    useEffect(() => {
+        fatchcartdata()
+        rendomcode()
+        // eslint-disable-next-line
+    }, [change])
+
+    const fatchcartdata = () => {
+        if (storeemail !== null || storemobile !== null) {
+            if (storemobile === null) {
+                axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${storeemail}`)
+                    .then((data) => {
+                        setuserdata(data.data[0])
+                        if (data.data[0].cart[0] !== null) {
+                            setcart(data.data[0].cart)
+                            const res = data.data[0].cart.reduce((prev, item) => {
+                                return prev + (item.price * item.qtn)
+                            }, 0)
+                            setTotalPrice(res.toFixed(2))
+                        } else {
+                            setcart([])
+                        }
+                        if (data.data[0].address[0] !== null) {
+                            setAddress(data.data[0].address)
+                        } else {
+                            setAddress([])
+                        }
+                        if (data.data[0].card[0] !== null) {
+                            setCard(data.data[0].card)
+                        } else {
+                            setCard([])
+                        }
+                        if (data.data[0].upi[0] !== null) {
+                            setupi(data.data[0].upi)
+                        } else {
+                            setupi([])
+                        }
+                        if (data.data[0].myorders[0] !== null) {
+                            setMyOrders(data.data[0].myorders)
+                        } else {
+                            setMyOrders([])
+                        }
+                        setFirstLoading(false)
+                    })
+                    .catch((errd) => {
+                        alert(errd.massage)
+                        setFirstLoading(false)
+                    })
+            } else {
+                axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${storemobile}`)
+                    .then((data) => {
+                        setuserdata(data.data[0])
+                        if (data.data[0].cart[0] !== null) {
+                            setcart(data.data[0].cart)
+                            const res = data.data[0].cart.reduce((prev, item) => {
+                                return prev + (item.price * item.qtn)
+                            }, 0)
+                            setTotalPrice(res.toFixed(2))
+                        } else {
+                            setcart([])
+                        }
+                        if (data.data[0].address[0] !== null) {
+                            setAddress(data.data[0].address)
+                        } else {
+                            setAddress([])
+                        }
+                        if (data.data[0].card[0] !== null) {
+                            setCard(data.data[0].card)
+                        } else {
+                            setCard([])
+                        }
+                        if (data.data[0].upi[0] !== null) {
+                            setupi(data.data[0].upi)
+                        } else {
+                            setupi([])
+                        }
+                        if (data.data[0].myorders[0] !== null) {
+                            setMyOrders(data.data[0].myorders)
+                        } else {
+                            setMyOrders([])
+                        }
+                        setFirstLoading(false)
+                    })
+                    .catch((errd) => {
+                        alert(errd.massage)
+                        setFirstLoading(false)
+                    })
+            }
+        } else {
+            setcart([])
+            setFirstLoading(false)
+        }
+    }
 
     const addToCart = (data) => {
         setloading(true)
@@ -55,7 +169,7 @@ const Dataprovider = ({ children }) => {
                         })
                         const proprice = `${totalprice} + ${data.price}`
                         // eslint-disable-next-line
-                        setTotalPrice(eval(proprice))
+                        setTotalPrice(eval(proprice).toFixed(2))
                         setloading(false)
                     })
                     .catch(() => {
@@ -157,61 +271,120 @@ const Dataprovider = ({ children }) => {
         setTotalPrice(res.toFixed(2))
     }
 
-    useEffect(() => {
-        fatchcartdata()
-        // eslint-disable-next-line
-    }, [change])
-
-    const fatchcartdata = () => {
-        if (storeemail !== null || storemobile !== null) {
-            if (storemobile === null) {
-                axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${storeemail}`)
-                    .then((data) => {
-                        setuserdata(data.data[0])
-                        if (data.data[0].cart[0] !== null) {
-                            setcart(data.data[0].cart)
-                            const res = data.data[0].cart.reduce((prev, item) => {
-                                return prev + (item.price * item.qtn)
-                            }, 0)
-                            setTotalPrice(res.toFixed(2))
-                        } else {
-                            setcart([])
-                        }
-                        setFirstLoading(false)
-                    })
-                    .catch((errd) => {
-                        alert(errd.massage)
-                        setFirstLoading(false)
-                    })
+    const orderPlaced = (radiodata, payment, paymentMode, totalp, code) => {
+        setloading(true)
+        const date = new Date()
+        const time = date.toDateString()
+        const addNewUpi = () => {
+            if (myOrders.length !== 0) {
+                const orderid = myOrders.map(data => {
+                    return data.orderid
+                })
+                return (Math.max(...orderid) + 1)
             } else {
-                axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${storemobile}`)
-                    .then((data) => {
-                        setuserdata(data.data[0])
-                        if (data.data[0].cart[0] !== null) {
-                            setcart(data.data[0].cart)
-                            const res = data.data[0].cart.reduce((prev, item) => {
-                                return prev + (item.price * item.qtn)
-                            }, 0)
-                            setTotalPrice(res.toFixed(2))
-                        } else {
-                            setcart([])
-                        }
-                        setFirstLoading(false)
-                    })
-                    .catch((errd) => {
-                        alert(errd.massage)
-                        setFirstLoading(false)
-                    })
+                return 1
             }
-        } else {
-            setcart([])
-            setFirstLoading(false)
         }
+        const neworderDetails = {
+            orderid: addNewUpi(),
+            time: time,
+            orderItem: cart,
+            addressdetails: radiodata,
+            paymentdetails: payment,
+            paymentmode: paymentMode,
+            total: totalp,
+            appliedcode: code
+        }
+        setNewOrderData(cart)
+        axios.put(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${userdata.id}`, { cart: [], myorders: [...myOrders, neworderDetails] }, {
+            headers: { 'content-type': 'application/json' },
+        })
+            .then(() => {
+                setMyOrders([...myOrders, neworderDetails])
+                setcart([])
+                setTotalPrice(0)
+                setloading(false)
+            })
+            .catch(() => {
+                toast.error('Something Went Wrong')
+                setloading(false)
+            })
     }
+
+    const addAddress = (data) => {
+        setloading(true)
+        axios.put(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${userdata.id}`, { address: [...address, data] }, {
+            headers: { 'content-type': 'application/json' },
+        })
+            .then(() => {
+                setAddress([...address, data])
+                setloading(false)
+            })
+            .catch(() => {
+                toast.error('Something Went Wrong')
+                setloading(false)
+            })
+    }
+
+    const addCard = (data) => {
+        setloading(true)
+        axios.put(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${userdata.id}`, { card: [...card, data] }, {
+            headers: { 'content-type': 'application/json' },
+        })
+            .then(() => {
+                setCard([...card, data])
+                setloading(false)
+            })
+            .catch(() => {
+                toast.error('Something Went Wrong')
+                setloading(false)
+            })
+    }
+
+    const addUpi = (data) => {
+        setloading(true)
+        axios.put(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${userdata.id}`, { upi: [...upi, data] }, {
+            headers: { 'content-type': 'application/json' },
+        })
+            .then(() => {
+                setupi([...upi, data])
+                setloading(false)
+            })
+            .catch(() => {
+                toast.error('Something Went Wrong')
+                setloading(false)
+            })
+    }
+
+   
+
+    console.log(ab);
 
 
     return (
-        <Datacontext.Provider value={{ addToCart, cart, change, setchang, fatchcartdata, removeProduct, loading, increaseQtn, decreaseQtn, totalprice, firstloading }}>
+        <Datacontext.Provider value={{
+            ab,
+            upi,
+            cart,
+            card,
+            change,
+            address,
+            loading,
+            totalprice,
+            newOrderData,
+            firstloading,
+            addUpi,
+            addCard,
+            setchang,
+            addToCart,
+            addAddress,
+            orderPlaced,
+            increaseQtn,
+            decreaseQtn,
+            fatchcartdata,
+            removeProduct,
+            setNewOrderData
+        }}>
             {children}
         </Datacontext.Provider>
     )
