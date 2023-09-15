@@ -654,7 +654,7 @@ const Cart = () => {
                                                                                     })
                                                                                     if (addressValidate()) {
                                                                                         contextData.addAddress(addressInput)
-                                                                                        setaddid(addressInput.addressid)
+                                                                                        // setaddid(addressInput.addressid)
                                                                                         setExpanded({ ...expanded, addAddress: false })
                                                                                         setAddressinput({
                                                                                             addressid: 0,
@@ -1007,8 +1007,11 @@ const Cart = () => {
                                                                                             if (upivalidate()) {
                                                                                                 contextData.addUpi(upiInput)
                                                                                                 setExpanded({ ...expanded, addUPI: false })
-                                                                                                setupiInput('')
-                                                                                                // alert('ok')
+                                                                                                setupiInput({
+                                                                                                    upiid: 0,
+                                                                                                    upi: '',
+                                                                                                    upipin: ''
+                                                                                                })
                                                                                             }
                                                                                         }}
                                                                                     >
@@ -1127,35 +1130,31 @@ const Cart = () => {
                                                     <button className="mt-6 w-full rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
                                                         onClick={() => {
                                                             if (upiid > 0) {
-                                                                const conformation = prompt('enter upi pin')
-                                                                const checkpin = contextData.upi.every(item => {
-                                                                    if (item.upipin === conformation) {
-                                                                        return true
-                                                                    } else {
-                                                                        return false
-                                                                    }
-                                                                })
-                                                                if (checkpin) {
+                                                                const conformation = prompt('Enter Your Upi Pin')
+                                                                const inqtn = contextData.upi.findIndex(((obj) => obj.upiid === upiid))
+                                                                if (contextData.upi[inqtn].upipin === conformation) {
                                                                     setpaymentok(true)
                                                                     contextData.orderPlaced(radiodata, radioupidata, 'UPI', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)
                                                                 } else {
                                                                     setpaymentok(false)
+                                                                    contextData.setloading(true)
                                                                     contextData.setNewOrderData(contextData.cart)
+                                                                    setTimeout(() => {
+                                                                        contextData.setloading(false)
+                                                                    }, 1500)
                                                                 }
                                                             } else {
-                                                                const checkcvv = contextData.card.every(item => {
-                                                                    if (item.cvv === cvvInput) {
-                                                                        return true
-                                                                    } else {
-                                                                        return false
-                                                                    }
-                                                                })
-                                                                if (checkcvv) {
+                                                                const inqtn = contextData.card.findIndex(((obj) => obj.cardid === cardid))
+                                                                if (contextData.card[inqtn].cvv === cvvInput) {
                                                                     setpaymentok(true)
                                                                     contextData.orderPlaced(radiodata, radiocarddata, 'Card', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)
                                                                 } else {
                                                                     setpaymentok(false)
+                                                                    contextData.setloading(true)
                                                                     contextData.setNewOrderData(contextData.cart)
+                                                                    setTimeout(() => {
+                                                                        contextData.setloading(false)
+                                                                    }, 1500)
                                                                 }
                                                             }
                                                             // contextData.orderPlaced(radiodata, radiocarddata, 'Card', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)

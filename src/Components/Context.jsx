@@ -389,6 +389,7 @@ const Dataprovider = ({ children }) => {
             addCard,
             setchang,
             addToCart,
+            setloading,
             rendomcode,
             addAddress,
             orderPlaced,
