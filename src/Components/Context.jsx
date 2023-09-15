@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 const Datacontext = createContext()
 
 const Dataprovider = ({ children }) => {
-    const [ab, setab] = useState('')
+    const [palceorder, setpalceorder] = useState('')
     const [cart, setcart] = useState([])
     const [address, setAddress] = useState([])
     const [card, setCard] = useState([])
@@ -32,7 +32,7 @@ const Dataprovider = ({ children }) => {
             var rnum = Math.floor(Math.random() * characters.length);
             randomstring += characters.substring(rnum, rnum + 1);
         }
-        setab(randomstring)
+        setpalceorder(randomstring)
     }
 
     useEffect(() => {
@@ -307,9 +307,9 @@ const Dataprovider = ({ children }) => {
             })
             .catch(() => {
                 toast.error('Something Went Wrong')
+                setNewOrderData([])
                 setloading(false)
             })
-        rendomcode()
     }
 
     const addAddress = (data) => {
@@ -357,15 +357,31 @@ const Dataprovider = ({ children }) => {
             })
     }
 
+    const orderNotPlaced = () => {
+        setloading(true)
+        axios.put(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${userdata.id}`, { cart: [] }, {
+            headers: { 'content-type': 'application/json' },
+        })
+            .then(() => {
+                setcart([])
+                setloading(false)
+            })
+            .catch(() => {
+                toast.error('Something Went Wrong')
+                setloading(false)
+            })
+        rendomcode()
+    }
+
     return (
         <Datacontext.Provider value={{
-            ab,
             upi,
             cart,
             card,
             change,
             address,
             loading,
+            palceorder,
             totalprice,
             newOrderData,
             firstloading,
@@ -373,12 +389,14 @@ const Dataprovider = ({ children }) => {
             addCard,
             setchang,
             addToCart,
+            rendomcode,
             addAddress,
             orderPlaced,
             increaseQtn,
             decreaseQtn,
             fatchcartdata,
             removeProduct,
+            orderNotPlaced,
             setNewOrderData
         }}>
             {children}

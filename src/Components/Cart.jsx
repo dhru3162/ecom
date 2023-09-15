@@ -140,7 +140,7 @@ const Cart = () => {
                                             </div>
                                             <button className="mt-6 w-full rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
                                                 onClick={() => {
-                                                    navigate(`/cart/${contextData.ab}`)
+                                                    navigate(`./${contextData.palceorder}`)
                                                 }}
                                             >
                                                 Check out

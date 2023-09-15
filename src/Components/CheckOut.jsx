@@ -3,7 +3,7 @@ import { Datacontext } from './Context'
 import './Numberstyle.css'
 import { NavLink, useNavigate, Link } from 'react-router-dom'
 // import { toast } from 'react-toastify'
-import CartLoader from './Loader/CartLoader'
+// import CartLoader from './Loader/CartLoader'
 import logo from './logo.png'
 import Loader from './Loader/Loader'
 
@@ -43,7 +43,8 @@ const Cart = () => {
     })
     const [upiInput, setupiInput] = useState({
         upiid: 0,
-        upi: ''
+        upi: '',
+        upipin: ''
     })
     const [code, setCode] = useState('')
     const [discountInput, setDiscountInput] = useState('')
@@ -78,8 +79,12 @@ const Cart = () => {
         exdate: true,
         cvv: true
     })
-    const [upiErrors, setupiErrors] = useState(true)
+    const [upiErrors, setupiErrors] = useState({
+        upi: true,
+        pin: true
+    })
     const [codeApplied, setCodeApplied] = useState(false)
+    const [paymentok, setpaymentok] = useState(true)
     // eslint-disable-next-line
     const price = eval(totalprice) + 4.99
     // eslint-disable-next-line
@@ -236,6 +241,14 @@ const Cart = () => {
             error.upi = 'Please Enter UPI Id'
         } else if (!upi.test(upiInput.upi)) {
             error.upi = 'Invalid UPI Id'
+        }
+
+        const pin4 = /^[0-9]{4}$/
+        const pin6 = /^[0-9]{6}$/
+        if (upiInput.upipin === '') {
+            error.pin = 'Please Enter UPI Pin'
+        } else if ((!pin4.test(upiInput.upipin)) && (!pin6.test(upiInput.upipin))) {
+            error.pin = 'Invalid UPI Pin'
         }
 
         setupiErr(error)
@@ -448,283 +461,249 @@ const Cart = () => {
                     </div>
                 </div>
             </nav>
-            {contextData.firstloading ? (
-                <CartLoader />
-            ) : (
-                <>
-                    {contextData.loading ? (
-                        <Loader />
-                    ) : (
-                        <>
-                            {newOrderData.length === 0 ? (
-                                <>
-                                    <div className="h-screen pt-20">
-                                        <>
-                                            <h1 className="mb-8 text-center text-2xl font-bold">Check Out</h1>
-                                            <div className="mx-auto max-w-6xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-                                                <div className="rounded-lg md:w-2/3">
 
-                                                    <div className="justify-between rounded-lg bg-white p-3 sm:flex sm:justify-start">
+            <>
+                {contextData.loading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        {newOrderData.length === 0 ? (
+                            <>
+                                <div className="h-screen pt-20">
+                                    <h1 className="mb-8 text-center text-2xl font-bold">Check Out</h1>
+                                    <div className="mx-auto max-w-6xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+                                        <div className="rounded-lg md:w-2/3">
 
-                                                        <div className="border-gray-900/10 w-full">
-                                                            <h1 className="leading-7 text-red-700 font-bold text-lg pb-2">
-                                                                1. Select a delivery address</h1>
+                                            <div className="justify-between rounded-lg bg-white p-3 sm:flex sm:justify-start">
 
-                                                            {expanded.address ? (
-                                                                <>
-                                                                    <div className='border rounded-lg p-5'>
-                                                                        <p className='font-semibold'>Your Addresses</p>
-                                                                        <hr className="my-4" />
-                                                                        {saveAddress}
-                                                                        <button
-                                                                            className="form-exp-heading cursor-pointer text-blue-700 "
-                                                                            onClick={addNewAddress}
-                                                                        >
-                                                                            <strong className='justify-items-end'>{expanded.addAddress ? '- ' : '+ '}</strong>
-                                                                            <span> Add a new address</span>
-                                                                        </button>
+                                                <div className="border-gray-900/10 w-full">
+                                                    <h1 className="leading-7 text-red-700 font-bold text-lg pb-2">
+                                                        1. Select a delivery address</h1>
 
-                                                                        {expanded.addAddress && (
-                                                                            <>
-                                                                                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 border rounded-lg p-5">
-                                                                                    <div className="sm:col-span-3">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">First name</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="text"
-                                                                                                value={addressInput.fname}
-                                                                                                onChange={(e) => {
-                                                                                                    setAddressinput({ ...addressInput, fname: e.target.value, addressid: newaddid })
-                                                                                                    seterrors({ ...errors, fname: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{errors.fname && <span className='text-red-500 text-xs'>{err.fname}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
+                                                    {expanded.address ? (
+                                                        <>
+                                                            <div className='border rounded-lg p-5'>
+                                                                <p className='font-semibold'>Your Addresses</p>
+                                                                <hr className="my-4" />
+                                                                {saveAddress}
+                                                                <button
+                                                                    className="form-exp-heading cursor-pointer text-blue-700 "
+                                                                    onClick={addNewAddress}
+                                                                >
+                                                                    <strong className='justify-items-end'>{expanded.addAddress ? '- ' : '+ '}</strong>
+                                                                    <span> Add a new address</span>
+                                                                </button>
 
-                                                                                    <div className="sm:col-span-3">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="text"
-                                                                                                value={addressInput.lname}
-                                                                                                onChange={(e) => {
-                                                                                                    setAddressinput({ ...addressInput, lname: e.target.value })
-                                                                                                    seterrors({ ...errors, lname: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{errors.lname && <span className='text-red-500 text-xs'>{err.lname}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="sm:col-span-4">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Contact Number</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="number"
-                                                                                                value={addressInput.mobile}
-                                                                                                onChange={(e) => {
-                                                                                                    setAddressinput({ ...addressInput, mobile: e.target.value })
-                                                                                                    seterrors({ ...errors, mobile: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{errors.mobile && <span className='text-red-500 text-xs'>{err.mobile}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="sm:col-span-3">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Country/Region</label>
-                                                                                        <div className="mt-2">
-                                                                                            <select value={addressInput.country} onChange={(e) => { setAddressinput({ ...addressInput, country: e.target.value }) }} className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
-                                                                                                <option value={'US'}>United States</option>
-                                                                                                <option value={'canada'}>Canada</option>
-                                                                                                <option value={'mexico'}>Mexico</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="col-span-full">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Address line 1</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="text"
-                                                                                                value={addressInput.add1}
-                                                                                                onChange={(e) => {
-                                                                                                    setAddressinput({ ...addressInput, add1: e.target.value })
-                                                                                                    seterrors({ ...errors, add1: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{errors.add1 && <span className='text-red-500 text-xs'>{err.add1}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="col-span-full">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Address line 2</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type='text'
-                                                                                                value={addressInput.add2}
-                                                                                                onChange={(e) => {
-                                                                                                    setAddressinput({ ...addressInput, add2: e.target.value })
-                                                                                                    seterrors({ ...errors, add2: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{errors.add2 && <span className='text-red-500 text-xs'>{err.add2}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="sm:col-span-2 sm:col-start-1">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">City</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="text"
-                                                                                                value={addressInput.city}
-                                                                                                onChange={(e) => {
-                                                                                                    setAddressinput({ ...addressInput, city: e.target.value })
-                                                                                                    seterrors({ ...errors, city: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{errors.city && <span className='text-red-500 text-xs'>{err.city}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="sm:col-span-2">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="text"
-                                                                                                value={addressInput.state}
-                                                                                                onChange={(e) => {
-                                                                                                    setAddressinput({ ...addressInput, state: e.target.value })
-                                                                                                    seterrors({ ...errors, state: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{errors.state && <span className='text-red-500 text-xs'>{err.state}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="sm:col-span-2">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="text"
-                                                                                                placeholder='00000-0000'
-                                                                                                value={addressInput.zipcode}
-                                                                                                onChange={(e) => {
-                                                                                                    setAddressinput({ ...addressInput, zipcode: e.target.value })
-                                                                                                    seterrors({ ...errors, zipcode: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{errors.zipcode && <span className='text-red-500 text-xs'>{err.zipcode}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <button
-                                                                                        type="submit"
-                                                                                        onClick={(e) => {
-                                                                                            e.preventDefault()
-                                                                                            seterrors({
-                                                                                                ...errors,
-                                                                                                fname: true,
-                                                                                                lname: true,
-                                                                                                mobile: true,
-                                                                                                add1: true,
-                                                                                                add2: true,
-                                                                                                city: true,
-                                                                                                state: true,
-                                                                                                zipcode: true,
-                                                                                            })
-                                                                                            if (addressValidate()) {
-                                                                                                contextData.addAddress(addressInput)
-                                                                                                setaddid(addressInput.addressid)
-                                                                                                setExpanded({ ...expanded, addAddress: false })
-                                                                                                setAddressinput({
-                                                                                                    addressid: 0,
-                                                                                                    fname: '',
-                                                                                                    lname: '',
-                                                                                                    mobile: '',
-                                                                                                    country: 'US',
-                                                                                                    add1: '',
-                                                                                                    add2: '',
-                                                                                                    city: '',
-                                                                                                    state: '',
-                                                                                                    zipcode: ''
-                                                                                                })
-                                                                                            }
+                                                                {expanded.addAddress && (
+                                                                    <>
+                                                                        <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 border rounded-lg p-5">
+                                                                            <div className="sm:col-span-3">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        value={addressInput.fname}
+                                                                                        onChange={(e) => {
+                                                                                            setAddressinput({ ...addressInput, fname: e.target.value, addressid: newaddid })
+                                                                                            seterrors({ ...errors, fname: false })
                                                                                         }}
-                                                                                        className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                                                                    >
-                                                                                        Add
-                                                                                    </button>
-                                                                                </div>
-                                                                            </>
-                                                                        )}
-                                                                        <hr className="my-4" />
-
-                                                                        {expanded.addAddress ? (
-                                                                            <button
-                                                                                type='button'
-                                                                                disabled
-                                                                                className="w-full md:w-2/5 rounded-md bg-blue-400 py-1.5 font-medium text-blue-50"
-                                                                            >
-                                                                                Use this address
-                                                                            </button>
-                                                                        ) : (
-                                                                            <>
-                                                                                {addid === 0 ? (
-                                                                                    <>
-                                                                                        <button
-                                                                                            type='button'
-                                                                                            disabled
-                                                                                            className="w-full md:w-2/5 rounded-md bg-blue-400 py-1.5 font-medium text-blue-50"
-                                                                                        >
-                                                                                            Use this address
-                                                                                        </button>
-                                                                                    </>
-                                                                                ) : (
-                                                                                    <>
-                                                                                        <button
-                                                                                            type='button'
-                                                                                            className="w-full md:w-2/5 rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
-                                                                                            onClick={() => {
-                                                                                                if (!expanded.paymentselected) {
-                                                                                                    setExpanded({ ...expanded, address: !expanded.address, addressselected: !expanded.addressselected })
-                                                                                                } else {
-                                                                                                    setExpanded({ ...expanded, address: !expanded.address })
-                                                                                                }
-                                                                                            }}
-                                                                                        >
-                                                                                            Use this address
-                                                                                        </button>
-                                                                                    </>
-                                                                                )}
-                                                                            </>
-                                                                        )}
-                                                                    </div>
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <div className='border rounded-lg'>
-                                                                        <div className="justify-between rounded-lg flex gap-x-2 my-4 mx-6">
-                                                                            <div className="inline-flex w-full cursor-default max-w-full">
-                                                                                <div>
-                                                                                    <p className="font-bold text-gray-900">{radiodata.fname} {radiodata.lname}</p>
-                                                                                    <p className="text-sm">{radiodata.add1},</p>
-                                                                                    <p className="text-sm">{radiodata.add2},</p>
-                                                                                    <p className="text-sm">{radiodata.city}, {radiodata.state}, {radiodata.zipcode}.</p>
-                                                                                    <small><span>Contact No.: {radiodata.mobile}</span></small>
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{errors.fname && <span className='text-red-500 text-xs'>{err.fname}</span>}</small>
                                                                                 </div>
                                                                             </div>
-                                                                            <div>
-                                                                                <button className="text-red-700 py-1.5 hover:text-blue-700"
+
+                                                                            <div className="sm:col-span-3">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        value={addressInput.lname}
+                                                                                        onChange={(e) => {
+                                                                                            setAddressinput({ ...addressInput, lname: e.target.value })
+                                                                                            seterrors({ ...errors, lname: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{errors.lname && <span className='text-red-500 text-xs'>{err.lname}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="sm:col-span-4">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Contact Number</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="number"
+                                                                                        value={addressInput.mobile}
+                                                                                        onChange={(e) => {
+                                                                                            setAddressinput({ ...addressInput, mobile: e.target.value })
+                                                                                            seterrors({ ...errors, mobile: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{errors.mobile && <span className='text-red-500 text-xs'>{err.mobile}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="sm:col-span-3">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Country/Region</label>
+                                                                                <div className="mt-2">
+                                                                                    <select value={addressInput.country} onChange={(e) => { setAddressinput({ ...addressInput, country: e.target.value }) }} className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
+                                                                                        <option value={'US'}>United States</option>
+                                                                                        <option value={'canada'}>Canada</option>
+                                                                                        <option value={'mexico'}>Mexico</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="col-span-full">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Address line 1</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        value={addressInput.add1}
+                                                                                        onChange={(e) => {
+                                                                                            setAddressinput({ ...addressInput, add1: e.target.value })
+                                                                                            seterrors({ ...errors, add1: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{errors.add1 && <span className='text-red-500 text-xs'>{err.add1}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="col-span-full">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Address line 2</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type='text'
+                                                                                        value={addressInput.add2}
+                                                                                        onChange={(e) => {
+                                                                                            setAddressinput({ ...addressInput, add2: e.target.value })
+                                                                                            seterrors({ ...errors, add2: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{errors.add2 && <span className='text-red-500 text-xs'>{err.add2}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="sm:col-span-2 sm:col-start-1">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">City</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        value={addressInput.city}
+                                                                                        onChange={(e) => {
+                                                                                            setAddressinput({ ...addressInput, city: e.target.value })
+                                                                                            seterrors({ ...errors, city: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{errors.city && <span className='text-red-500 text-xs'>{err.city}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="sm:col-span-2">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        value={addressInput.state}
+                                                                                        onChange={(e) => {
+                                                                                            setAddressinput({ ...addressInput, state: e.target.value })
+                                                                                            seterrors({ ...errors, state: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{errors.state && <span className='text-red-500 text-xs'>{err.state}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="sm:col-span-2">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        placeholder='00000-0000'
+                                                                                        value={addressInput.zipcode}
+                                                                                        onChange={(e) => {
+                                                                                            setAddressinput({ ...addressInput, zipcode: e.target.value })
+                                                                                            seterrors({ ...errors, zipcode: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{errors.zipcode && <span className='text-red-500 text-xs'>{err.zipcode}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <button
+                                                                                type="submit"
+                                                                                onClick={(e) => {
+                                                                                    e.preventDefault()
+                                                                                    seterrors({
+                                                                                        ...errors,
+                                                                                        fname: true,
+                                                                                        lname: true,
+                                                                                        mobile: true,
+                                                                                        add1: true,
+                                                                                        add2: true,
+                                                                                        city: true,
+                                                                                        state: true,
+                                                                                        zipcode: true,
+                                                                                    })
+                                                                                    if (addressValidate()) {
+                                                                                        contextData.addAddress(addressInput)
+                                                                                        setaddid(addressInput.addressid)
+                                                                                        setExpanded({ ...expanded, addAddress: false })
+                                                                                        setAddressinput({
+                                                                                            addressid: 0,
+                                                                                            fname: '',
+                                                                                            lname: '',
+                                                                                            mobile: '',
+                                                                                            country: 'US',
+                                                                                            add1: '',
+                                                                                            add2: '',
+                                                                                            city: '',
+                                                                                            state: '',
+                                                                                            zipcode: ''
+                                                                                        })
+                                                                                    }
+                                                                                }}
+                                                                                className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                                            >
+                                                                                Add
+                                                                            </button>
+                                                                        </div>
+                                                                    </>
+                                                                )}
+                                                                <hr className="my-4" />
+
+                                                                {expanded.addAddress ? (
+                                                                    <button
+                                                                        type='button'
+                                                                        disabled
+                                                                        className="w-full md:w-2/5 rounded-md bg-blue-400 py-1.5 font-medium text-blue-50"
+                                                                    >
+                                                                        Use this address
+                                                                    </button>
+                                                                ) : (
+                                                                    <>
+                                                                        {addid === 0 ? (
+                                                                            <>
+                                                                                <button
+                                                                                    type='button'
+                                                                                    disabled
+                                                                                    className="w-full md:w-2/5 rounded-md bg-blue-400 py-1.5 font-medium text-blue-50"
+                                                                                >
+                                                                                    Use this address
+                                                                                </button>
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
+                                                                                <button
+                                                                                    type='button'
+                                                                                    className="w-full md:w-2/5 rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
                                                                                     onClick={() => {
                                                                                         if (!expanded.paymentselected) {
                                                                                             setExpanded({ ...expanded, address: !expanded.address, addressselected: !expanded.addressselected })
@@ -733,35 +712,92 @@ const Cart = () => {
                                                                                         }
                                                                                     }}
                                                                                 >
-                                                                                    Change
+                                                                                    Use this address
                                                                                 </button>
-                                                                            </div>
-
+                                                                            </>
+                                                                        )}
+                                                                    </>
+                                                                )}
+                                                            </div>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <div className='border rounded-lg'>
+                                                                <div className="justify-between rounded-lg flex gap-x-2 my-4 mx-6">
+                                                                    <div className="inline-flex w-full cursor-default max-w-full">
+                                                                        <div>
+                                                                            <p className="font-bold text-gray-900">{radiodata.fname} {radiodata.lname}</p>
+                                                                            <p className="text-sm">{radiodata.add1},</p>
+                                                                            <p className="text-sm">{radiodata.add2},</p>
+                                                                            <p className="text-sm">{radiodata.city}, {radiodata.state}, {radiodata.zipcode}.</p>
+                                                                            <small><span>Contact No.: {radiodata.mobile}</span></small>
                                                                         </div>
                                                                     </div>
-                                                                </>
-                                                            )}
+                                                                    <div>
+                                                                        <button className="text-red-700 py-1.5 hover:text-blue-700"
+                                                                            onClick={() => {
+                                                                                if (!expanded.paymentselected) {
+                                                                                    setExpanded({ ...expanded, address: !expanded.address, addressselected: !expanded.addressselected })
+                                                                                } else {
+                                                                                    setExpanded({ ...expanded, address: !expanded.address })
+                                                                                }
+                                                                            }}
+                                                                        >
+                                                                            Change
+                                                                        </button>
+                                                                    </div>
 
-                                                        </div>
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    )}
+
+                                                </div>
 
 
-                                                    </div>
+                                            </div>
 
-                                                    <div className="justify-between rounded-lg bg-white p-3 sm:flex sm:justify-start">
+                                            <div className="justify-between rounded-lg bg-white p-3 sm:flex sm:justify-start">
 
-                                                        <div className="border-gray-900/10 w-full">
-                                                            <h1 className="leading-7 text-red-700 font-bold text-lg pb-2">
-                                                                2. Payment method
-                                                            </h1>
+                                                <div className="border-gray-900/10 w-full">
+                                                    <h1 className="leading-7 text-red-700 font-bold text-lg pb-2">
+                                                        2. Payment method
+                                                    </h1>
 
-                                                            {expanded.addressselected ? (
-                                                                <>
-                                                                    {expanded.payment ? (
-                                                                        <div className='border rounded-lg p-5'>
-                                                                            <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                                                Discount code
-                                                                            </label>
-                                                                            <div className='relative flex flex-wrap items-stretch'>
+                                                    {expanded.addressselected ? (
+                                                        <>
+                                                            {expanded.payment ? (
+                                                                <div className='border rounded-lg p-5'>
+                                                                    <label className="block text-sm font-medium leading-6 text-gray-900">
+                                                                        Discount code
+                                                                    </label>
+                                                                    <div className='relative flex flex-wrap items-stretch'>
+                                                                        {codeApplied ? (
+                                                                            <>
+                                                                                <input
+                                                                                    type="text"
+                                                                                    value={discountInput}
+                                                                                    disabled
+                                                                                    onChange={(e) => {
+                                                                                        setcodeErr({})
+                                                                                        setDiscountInput(`${e.target.value}`)
+                                                                                    }}
+                                                                                    className="relative block me-3 flex-auto rounded-l border-solid rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                />
+                                                                                <button
+                                                                                    className="px-6 text-sm rounded-md bg-blue-600 font-medium text-blue-50 hover:bg-blue-700 "
+                                                                                    type="button"
+                                                                                    id="button-addon2"
+                                                                                    onClick={() => {
+                                                                                        setCodeApplied(false)
+                                                                                        setCode('')
+                                                                                    }}
+                                                                                >
+                                                                                    Remove
+                                                                                </button>
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
                                                                                 <input
                                                                                     type="text"
                                                                                     placeholder='FIRST10'
@@ -772,322 +808,363 @@ const Cart = () => {
                                                                                     }}
                                                                                     className="relative block me-3 flex-auto rounded-l border-solid rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                                                 />
-                                                                                {codeApplied ? (
-                                                                                    <>
-                                                                                        <button
-                                                                                            className="px-6 text-sm rounded-md bg-blue-600 font-medium text-blue-50 hover:bg-blue-700 "
-                                                                                            type="button"
-                                                                                            id="button-addon2"
-                                                                                            onClick={() => {
-                                                                                                setCodeApplied(false)
-                                                                                                setCode('')
-                                                                                            }}
-                                                                                        >
-                                                                                            Remove
-                                                                                        </button>
-                                                                                    </>
-                                                                                ) : (
-                                                                                    <>
-                                                                                        <button
-                                                                                            className="px-6 text-sm rounded-md bg-blue-600 font-medium text-blue-50 hover:bg-blue-700 "
-                                                                                            type="button"
-                                                                                            id="button-addon2"
-                                                                                            onClick={() => {
-                                                                                                if (discountValidate()) {
-                                                                                                    setCode(discountInput.toUpperCase())
-                                                                                                    setCodeApplied(true)
-                                                                                                    setDiscountInput('')
-                                                                                                    setcodeErr({})
-                                                                                                }
-                                                                                            }}
-                                                                                        >
-                                                                                            Apply
-                                                                                        </button>
-                                                                                    </>
-                                                                                )}
-                                                                            </div>
-                                                                            <small>{code === '' ?
-                                                                                <span className='text-red-500 text-xs'>{codeErr.code}</span>
-                                                                                :
-                                                                                <span className=' text-green-500 text-xs'>'{code}' Code Applied</span>}</small>
-                                                                            <hr className="my-4" />
-                                                                            <p className='font-semibold my-4'>Credit & Debit Cards</p>
-                                                                            <hr className="my-4" />
-                                                                            {saveCards}
-                                                                            <button
-                                                                                className="form-exp-heading cursor-pointer text-blue-700 "
-                                                                                onClick={addNewCard}
-                                                                            >
-                                                                                <strong className='justify-items-end'>{expanded.addCard ? '- ' : '+ '}</strong>
-                                                                                <span> Add a new card</span>
-                                                                            </button>
+                                                                                <button
+                                                                                    className="px-6 text-sm rounded-md bg-blue-600 font-medium text-blue-50 hover:bg-blue-700 "
+                                                                                    type="button"
+                                                                                    id="button-addon2"
+                                                                                    onClick={() => {
+                                                                                        if (discountValidate()) {
+                                                                                            setCode(discountInput.toUpperCase())
+                                                                                            setCodeApplied(true)
+                                                                                            setDiscountInput('')
+                                                                                            setcodeErr({})
+                                                                                        }
+                                                                                    }}
+                                                                                >
+                                                                                    Apply
+                                                                                </button>
+                                                                            </>
+                                                                        )}
+                                                                    </div>
+                                                                    <small>
+                                                                        {code === '' ?
+                                                                            <span className='text-red-500 text-xs'>{codeErr.code}</span>
+                                                                            :
+                                                                            <span className=' text-green-500 text-xs'>'{code}' Code Applied</span>}
+                                                                    </small>
+                                                                    <hr className="my-4" />
+                                                                    <p className='font-semibold my-4'>Credit & Debit Cards</p>
+                                                                    <hr className="my-4" />
+                                                                    {saveCards}
+                                                                    <button
+                                                                        className="form-exp-heading cursor-pointer text-blue-700 "
+                                                                        onClick={addNewCard}
+                                                                    >
+                                                                        <strong className='justify-items-end'>{expanded.addCard ? '- ' : '+ '}</strong>
+                                                                        <span> Add a new card</span>
+                                                                    </button>
 
-                                                                            {expanded.addCard && (
-                                                                                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 border rounded-lg p-5">
+                                                                    {expanded.addCard && (
+                                                                        <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 border rounded-lg p-5">
 
-                                                                                    <div className="sm:col-span-4">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Name on card</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="text"
-                                                                                                value={cardInput.name}
-                                                                                                onChange={(e) => {
-                                                                                                    setCardInput({ ...cardInput, name: e.target.value, cardid: newcardid })
-                                                                                                    setCardErrors({ ...CardErrors, name: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{CardErrors.name && <span className='text-red-500 text-xs'>{cardErr.name}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="sm:col-span-4">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Card number</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="tel"
-                                                                                                maxLength={16}
-                                                                                                value={cardInput.cardnumber}
-                                                                                                onChange={(e) => {
-                                                                                                    setCardInput({ ...cardInput, cardnumber: e.target.value })
-                                                                                                    setCardErrors({ ...CardErrors, cardnumber: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{CardErrors.cardnumber && <span className='text-red-500 text-xs'>{cardErr.cardnumber}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="sm:col-span-2 sm:col-start-1">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Expiration date (MM/YY)</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="tel"
-                                                                                                maxLength={5}
-                                                                                                value={cardInput.exdate}
-                                                                                                onChange={(e) => {
-                                                                                                    setCardInput({ ...cardInput, exdate: e.target.value })
-                                                                                                    setCardErrors({ ...CardErrors, exdate: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{CardErrors.exdate && <span className='text-red-500 text-xs'>{cardErr.date}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="sm:col-span-2">
-                                                                                        <label className="block text-sm font-medium leading-6 text-gray-900">CVV</label>
-                                                                                        <div className="mt-2">
-                                                                                            <input
-                                                                                                type="tel"
-                                                                                                maxLength={3}
-                                                                                                value={cardInput.cvv}
-                                                                                                onChange={(e) => {
-                                                                                                    setCardInput({ ...cardInput, cvv: e.target.value })
-                                                                                                    setCardErrors({ ...CardErrors, cvv: false })
-                                                                                                }}
-                                                                                                className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                                            />
-                                                                                            <small>{CardErrors.cvv && <span className='text-red-500 text-xs'>{cardErr.cvv}</span>}</small>
-                                                                                        </div>
-                                                                                    </div>
-
-
-                                                                                    <div className="sm:col-span-2 sm:col-start-1">
-                                                                                        <button
-                                                                                            type="submit"
-                                                                                            className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                                                                            onClick={(e) => {
-                                                                                                e.preventDefault()
-                                                                                                setCardErrors({
-                                                                                                    name: true,
-                                                                                                    cardnumber: true,
-                                                                                                    exdate: true,
-                                                                                                    cvv: true
-                                                                                                })
-                                                                                                if (cardValidate()) {
-                                                                                                    contextData.addCard(cardInput)
-                                                                                                    setExpanded({ ...expanded, addCard: false })
-                                                                                                    setCardInput({
-                                                                                                        cardid: 0,
-                                                                                                        name: '',
-                                                                                                        cardnumber: '',
-                                                                                                        exdate: '',
-                                                                                                        cvv: ''
-                                                                                                    })
-                                                                                                }
-                                                                                            }}
-                                                                                        >
-                                                                                            Add Card
-                                                                                        </button>
-                                                                                    </div>
+                                                                            <div className="sm:col-span-4">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Name on card</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        value={cardInput.name}
+                                                                                        onChange={(e) => {
+                                                                                            setCardInput({ ...cardInput, name: e.target.value, cardid: newcardid })
+                                                                                            setCardErrors({ ...CardErrors, name: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{CardErrors.name && <span className='text-red-500 text-xs'>{cardErr.name}</span>}</small>
                                                                                 </div>
-                                                                            )}
+                                                                            </div>
 
-                                                                            <hr className="my-4" />
-                                                                            <p className='font-semibold my-4'>UPI</p>
-                                                                            <hr className="my-4" />
-                                                                            {saveupi}
-                                                                            <button
-                                                                                className="form-exp-heading cursor-pointer text-blue-700 "
-                                                                                onClick={addNewUpi}
-                                                                            >
-                                                                                <strong className='justify-items-end'>{expanded.addUPI ? '- ' : '+ '}</strong>
-                                                                                <span>Enter UPI id</span>
-                                                                            </button>
+                                                                            <div className="sm:col-span-4">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Card number</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="tel"
+                                                                                        maxLength={16}
+                                                                                        value={cardInput.cardnumber}
+                                                                                        onChange={(e) => {
+                                                                                            setCardInput({ ...cardInput, cardnumber: e.target.value })
+                                                                                            setCardErrors({ ...CardErrors, cardnumber: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{CardErrors.cardnumber && <span className='text-red-500 text-xs'>{cardErr.cardnumber}</span>}</small>
+                                                                                </div>
+                                                                            </div>
 
-                                                                            {expanded.addUPI && (
-                                                                                <div className='my-4'>
-                                                                                    <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                                                        UPI ID
-                                                                                    </label>
-                                                                                    <div className='relative flex flex-wrap items-stretch'>
+                                                                            <div className="sm:col-span-2 sm:col-start-1">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Expiration date (MM/YY)</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="tel"
+                                                                                        maxLength={5}
+                                                                                        value={cardInput.exdate}
+                                                                                        onChange={(e) => {
+                                                                                            setCardInput({ ...cardInput, exdate: e.target.value })
+                                                                                            setCardErrors({ ...CardErrors, exdate: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{CardErrors.exdate && <span className='text-red-500 text-xs'>{cardErr.date}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="sm:col-span-2">
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">CVV</label>
+                                                                                <div className="mt-2">
+                                                                                    <input
+                                                                                        type="tel"
+                                                                                        maxLength={3}
+                                                                                        value={cardInput.cvv}
+                                                                                        onChange={(e) => {
+                                                                                            setCardInput({ ...cardInput, cvv: e.target.value })
+                                                                                            setCardErrors({ ...CardErrors, cvv: false })
+                                                                                        }}
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    />
+                                                                                    <small>{CardErrors.cvv && <span className='text-red-500 text-xs'>{cardErr.cvv}</span>}</small>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                            <div className="sm:col-span-2 sm:col-start-1">
+                                                                                <button
+                                                                                    type="submit"
+                                                                                    className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                                                    onClick={(e) => {
+                                                                                        e.preventDefault()
+                                                                                        setCardErrors({
+                                                                                            name: true,
+                                                                                            cardnumber: true,
+                                                                                            exdate: true,
+                                                                                            cvv: true
+                                                                                        })
+                                                                                        if (cardValidate()) {
+                                                                                            contextData.addCard(cardInput)
+                                                                                            setExpanded({ ...expanded, addCard: false })
+                                                                                            setCardInput({
+                                                                                                cardid: 0,
+                                                                                                name: '',
+                                                                                                cardnumber: '',
+                                                                                                exdate: '',
+                                                                                                cvv: ''
+                                                                                            })
+                                                                                        }
+                                                                                    }}
+                                                                                >
+                                                                                    Add Card
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    )}
+
+                                                                    <hr className="my-4" />
+                                                                    <p className='font-semibold my-4'>UPI</p>
+                                                                    <hr className="my-4" />
+                                                                    {saveupi}
+                                                                    <button
+                                                                        className="form-exp-heading cursor-pointer text-blue-700 "
+                                                                        onClick={addNewUpi}
+                                                                    >
+                                                                        <strong className='justify-items-end'>{expanded.addUPI ? '- ' : '+ '}</strong>
+                                                                        <span>Enter UPI id</span>
+                                                                    </button>
+
+                                                                    {expanded.addUPI && (
+                                                                        <div className='my-4'>
+                                                                            <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 border rounded-lg p-5">
+
+                                                                                <div className="sm:col-span-4">
+                                                                                    <label className="block text-sm font-medium leading-6 text-gray-900">UPI ID</label>
+                                                                                    <div className="mt-2">
                                                                                         <input
                                                                                             type="text"
                                                                                             value={upiInput.upi}
                                                                                             onChange={(e) => {
-                                                                                                setupiErrors(false)
+                                                                                                setupiErrors({ ...upiErrors, upi: false })
                                                                                                 setupiInput({ ...upiInput, upi: e.target.value, upiid: newupiid })
                                                                                             }}
-                                                                                            className="relative block me-3 flex-auto rounded-l border-solid rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                            className="block outline-none w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                                                         />
-                                                                                        <button
-                                                                                            className="px-6 text-sm rounded-md bg-blue-600 font-medium text-blue-50 hover:bg-blue-700 "
-                                                                                            type="button"
-                                                                                            id="button-addon2"
-                                                                                            onClick={(e) => {
-                                                                                                e.preventDefault()
-                                                                                                setupiErrors(true)
-                                                                                                if (upivalidate()) {
-                                                                                                    contextData.addUpi(upiInput)
-                                                                                                    setExpanded({ ...expanded, addUPI: false })
-                                                                                                    setupiInput('')
-                                                                                                    // alert('ok')
-                                                                                                }
-                                                                                            }}
-                                                                                        >
-                                                                                            Add
-                                                                                        </button>
+                                                                                        <small>{upiErrors.upi && <span className='text-red-500 text-xs'>{upiErr.upi}</span>}</small>
                                                                                     </div>
-                                                                                    <small>{upiErrors && <span className='text-red-500 text-xs'>{upiErr.upi}</span>}</small>
                                                                                 </div>
-                                                                            )}
 
-                                                                            <hr className="my-4" />
+                                                                                <div className="sm:col-span-2 sm:col-start-1">
+                                                                                    <label className="block text-sm font-medium leading-6 text-gray-900">Pin</label>
+                                                                                    <div className="mt-2">
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            value={upiInput.upipin}
+                                                                                            onChange={(e) => {
+                                                                                                setupiErrors({ ...upiErrors, pin: false })
+                                                                                                setupiInput({ ...upiInput, upipin: e.target.value })
+                                                                                            }}
+                                                                                            className="block outline-none w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        />
+                                                                                        <small>{upiErrors.pin && <span className='text-red-500 text-xs'>{upiErr.pin}</span>}</small>
+                                                                                    </div>
+                                                                                </div>
 
-                                                                            {cardid === 0 && upiid === 0 ? (
-                                                                                <>
-
+                                                                                <div className="sm:col-span-2 sm:col-start-1">
                                                                                     <button
-                                                                                        type='button'
-                                                                                        className="mt-6 w-full md:w-2/5 rounded-md bg-blue-400 py-1.5 font-medium text-blue-50"
-                                                                                        disabled
-                                                                                    >
-                                                                                        Use this payment method
-                                                                                    </button>
-                                                                                </>
-                                                                            ) : (
-                                                                                <>
-
-                                                                                    <button
-                                                                                        type='button'
-                                                                                        className="mt-6 w-full md:w-2/5 rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
-                                                                                        onClick={() => {
-                                                                                            if (cardid > 0) {
-                                                                                                if (cvvvalidate()) {
-                                                                                                    setExpanded({ ...expanded, payment: false, paymentselected: true })
-                                                                                                }
-                                                                                            } else {
-                                                                                                setExpanded({ ...expanded, payment: false, paymentselected: true })
+                                                                                        type="button"
+                                                                                        className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                                                        onClick={(e) => {
+                                                                                            e.preventDefault()
+                                                                                            setupiErrors({
+                                                                                                upi: true,
+                                                                                                pin: true
+                                                                                            })
+                                                                                            if (upivalidate()) {
+                                                                                                contextData.addUpi(upiInput)
+                                                                                                setExpanded({ ...expanded, addUPI: false })
+                                                                                                setupiInput('')
+                                                                                                // alert('ok')
                                                                                             }
                                                                                         }}
                                                                                     >
-                                                                                        Use this payment method
+                                                                                        Add UPI
                                                                                     </button>
-                                                                                </>
-                                                                            )}
-
-
-
-                                                                        </div>
-                                                                    ) : (
-                                                                        <>
-                                                                            <div className='border rounded-lg'>
-                                                                                <div className="justify-between rounded-lg flex gap-x-2 my-4 mx-6">
-                                                                                    <div className="inline-flex w-full cursor-default max-w-full">
-                                                                                        {cardid > 0 &&
-                                                                                            <div>
-                                                                                                <p className="font-bold text-gray-900">{radiocarddata.name}</p>
-                                                                                                <p className="text-sm">{radiocarddata.cardnumber}</p>
-                                                                                            </div>
-                                                                                        }
-                                                                                        {upiid > 0 &&
-                                                                                            <div>
-                                                                                                <p className="font-semibold text-gray-900">Pay Using {radioupidata.upi} Upi</p>
-                                                                                            </div>
-                                                                                        }
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <button className="text-red-700 py-1.5 hover:text-blue-700 outline-none"
-                                                                                            onClick={() => {
-                                                                                                setExpanded({ ...expanded, payment: !expanded.payment })
-                                                                                            }}
-                                                                                        >
-                                                                                            Change
-                                                                                        </button>
-                                                                                    </div>
-
                                                                                 </div>
                                                                             </div>
+                                                                        </div>
+                                                                    )}
+
+                                                                    <hr className="my-4" />
+
+                                                                    {cardid === 0 && upiid === 0 ? (
+                                                                        <>
+
+                                                                            <button
+                                                                                type='button'
+                                                                                className="mt-6 w-full md:w-2/5 rounded-md bg-blue-400 py-1.5 font-medium text-blue-50"
+                                                                                disabled
+                                                                            >
+                                                                                Use this payment method
+                                                                            </button>
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+
+                                                                            <button
+                                                                                type='button'
+                                                                                className="mt-6 w-full md:w-2/5 rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
+                                                                                onClick={() => {
+                                                                                    if (cardid > 0) {
+                                                                                        if (cvvvalidate()) {
+                                                                                            setExpanded({ ...expanded, payment: false, paymentselected: true })
+                                                                                        }
+                                                                                    } else {
+                                                                                        setExpanded({ ...expanded, payment: false, paymentselected: true })
+                                                                                    }
+                                                                                }}
+                                                                            >
+                                                                                Use this payment method
+                                                                            </button>
                                                                         </>
                                                                     )}
-                                                                </>
+
+
+
+                                                                </div>
                                                             ) : (
                                                                 <>
-                                                                    <hr className="my-4" />
+                                                                    <div className='border rounded-lg'>
+                                                                        <div className="justify-between rounded-lg flex gap-x-2 my-4 mx-6">
+                                                                            <div className="inline-flex w-full cursor-default max-w-full">
+                                                                                {cardid > 0 &&
+                                                                                    <div>
+                                                                                        <p className="font-bold text-gray-900">{radiocarddata.name}</p>
+                                                                                        <p className="text-sm">{radiocarddata.cardnumber}</p>
+                                                                                    </div>
+                                                                                }
+                                                                                {upiid > 0 &&
+                                                                                    <div>
+                                                                                        <p className="font-semibold text-gray-900">Pay Using {radioupidata.upi} Upi</p>
+                                                                                    </div>
+                                                                                }
+                                                                            </div>
+                                                                            <div>
+                                                                                <button className="text-red-700 py-1.5 hover:text-blue-700 outline-none"
+                                                                                    onClick={() => {
+                                                                                        setExpanded({ ...expanded, payment: !expanded.payment })
+                                                                                    }}
+                                                                                >
+                                                                                    Change
+                                                                                </button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
                                                                 </>
                                                             )}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-2/5">
-                                                    {items}
-                                                    <hr className="my-4" />
-                                                    <div className="mb-2 flex justify-between">
-                                                        <p className="text-gray-700">Subtotal</p>
-                                                        <p className="text-gray-700">${totalprice}</p>
-                                                    </div>
-                                                    {code !== '' &&
-                                                        <div className="mb-2 flex justify-between">
-                                                            <p className="text-gray-700">Coupon Discount</p>
-                                                            <p className="text-gray-700">-$10</p>
-                                                        </div>
-                                                    }
-                                                    <div className="flex justify-between">
-                                                        <p className="text-gray-700">Shipping Charge</p>
-                                                        <p className="text-gray-700">{totalprice >= 100 ? 'Free Delivery' : '$4.99'}</p>
-                                                    </div>
-                                                    <hr className="my-4" />
-                                                    <div className="flex justify-between">
-                                                        <p className="text-lg font-bold">Total</p>
-                                                        <div className="">
-                                                            <p className="mb-1 text-lg font-bold">{totalprice <= 100 ? <>{codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}</> : `$${totalprice}`}</p>
-                                                        </div>
-                                                    </div>
-                                                    {!expanded.address && !expanded.payment ? (
+                                                        </>
+                                                    ) : (
                                                         <>
-                                                            {cardid > 0 ? (
-                                                                <>
-                                                                    <button className="mt-6 w-full rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
-                                                                        onClick={() => {
-                                                                            
-                                                                            contextData.orderPlaced(radiodata, radiocarddata, 'Card', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)
-                                                                            // navigate(`./orderstatus`)
-                                                                        }}
-                                                                    >
-                                                                        Place your order and pay
-                                                                    </button>
-                                                                </>
+                                                            <hr className="my-4" />
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-2/5">
+                                            {items}
+                                            <hr className="my-4" />
+                                            <div className="mb-2 flex justify-between">
+                                                <p className="text-gray-700">Subtotal</p>
+                                                <p className="text-gray-700">${totalprice}</p>
+                                            </div>
+                                            {code !== '' &&
+                                                <div className="mb-2 flex justify-between">
+                                                    <p className="text-gray-700">Coupon Discount</p>
+                                                    <p className="text-gray-700">-$10</p>
+                                                </div>
+                                            }
+                                            <div className="flex justify-between">
+                                                <p className="text-gray-700">Shipping Charge</p>
+                                                <p className="text-gray-700">{totalprice >= 100 ? 'Free Delivery' : '$4.99'}</p>
+                                            </div>
+                                            <hr className="my-4" />
+                                            <div className="flex justify-between">
+                                                <p className="text-lg font-bold">Total</p>
+                                                <div className="">
+                                                    <p className="mb-1 text-lg font-bold">{totalprice <= 100 ? <>{codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}</> : `$${totalprice}`}</p>
+                                                </div>
+                                            </div>
+                                            {!expanded.address && !expanded.payment ? (
+                                                <>
+                                                    {/* {cardid > 0 ? (
+                                                                <> */}
+                                                    <button className="mt-6 w-full rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
+                                                        onClick={() => {
+                                                            if (upiid > 0) {
+                                                                const conformation = prompt('enter upi pin')
+                                                                const checkpin = contextData.upi.every(item => {
+                                                                    if (item.upipin === conformation) {
+                                                                        return true
+                                                                    } else {
+                                                                        return false
+                                                                    }
+                                                                })
+                                                                if (checkpin) {
+                                                                    setpaymentok(true)
+                                                                    contextData.orderPlaced(radiodata, radioupidata, 'UPI', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)
+                                                                } else {
+                                                                    setpaymentok(false)
+                                                                    contextData.setNewOrderData(contextData.cart)
+                                                                }
+                                                            } else {
+                                                                const checkcvv = contextData.card.every(item => {
+                                                                    if (item.cvv === cvvInput) {
+                                                                        return true
+                                                                    } else {
+                                                                        return false
+                                                                    }
+                                                                })
+                                                                if (checkcvv) {
+                                                                    setpaymentok(true)
+                                                                    contextData.orderPlaced(radiodata, radiocarddata, 'Card', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)
+                                                                } else {
+                                                                    setpaymentok(false)
+                                                                    contextData.setNewOrderData(contextData.cart)
+                                                                }
+                                                            }
+                                                            // contextData.orderPlaced(radiodata, radiocarddata, 'Card', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)
+                                                            // navigate(`./orderstatus`)
+                                                        }}
+                                                    >
+                                                        Place your order and pay
+                                                    </button>
+                                                    {/* </>
                                                             ) : (
                                                                 <>
                                                                     <button className="mt-6 w-full rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"
@@ -1099,78 +1176,189 @@ const Cart = () => {
                                                                         Place your order and pay
                                                                     </button>
                                                                 </>
-                                                            )}
+                                                            )} */}
 
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            <button disabled className="mt-6 w-full rounded-md bg-blue-400 py-1.5 font-medium text-blue-50 ">
-                                                                Place your order and pay
-                                                            </button>
-                                                        </>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </>
-
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-                                        <div className="text-center">
-                                            <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl">Your Order Placed Successfully</h1>
-                                            <p className="mt-6 text-base leading-7 text-gray-600">We are dispatch your order within 24 hours</p>
-
-
-
-                                            {contextData.newOrderData.length !== 0 &&
-                                                <div className=' block my-4 w-full h-full'>
-                                                    <div className='flex justify-center align-bottom'>
-                                                        <img src={contextData.newOrderData[0].image} alt='Item Images' className="w-40 rounded-lg aspect-[10/7] object-contain border-[1px]" />
-                                                        {contextData.newOrderData.length > 0 &&
-                                                            <>
-                                                                <small className='relative pt-[30%] md:pt-[25%] inline-block h-full' >
-                                                                    <span >
-                                                                        + {contextData.newOrderData.length - 1}
-                                                                    </span>
-                                                                </small>
-                                                            </>
-                                                        }
-                                                    </div>
-                                                </div>
-                                            }
-
-                                            <div className="mt-10 flex items-center justify-center gap-x-6">
-                                                <NavLink
-                                                    to="/"
-                                                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                                    onClick={() => {
-                                                        contextData.setNewOrderData([])
-                                                    }}
-                                                >
-                                                    Continue Shopping
-                                                </NavLink>
-                                                <Link
-                                                    to="/contact"
-                                                    className="text-sm font-semibold text-gray-900"
-                                                    onClick={() => {
-                                                        contextData.setNewOrderData([])
-                                                    }}
-                                                >
-                                                    Go to my orders
-                                                    <span aria-hidden="true">&rarr;</span>
-                                                </Link>
-                                            </div>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <button
+                                                        disabled
+                                                        className="mt-6 w-full rounded-md bg-blue-400 py-1.5 font-medium text-blue-50 "
+                                                    >
+                                                        Place your order and pay
+                                                    </button>
+                                                </>
+                                            )}
                                         </div>
-                                    </main>
-                                </>
-                            )}
-                        </>
-                    )}
-                </>
-            )
-            }
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                {paymentok ? (
+                                    <>
+                                        <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                                            <div className="text-center">
+                                                <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl">Your Order Placed Successfully</h1>
+                                                <p className="mt-6 text-base leading-7 text-gray-600">We are dispatch your order within 24 hours</p>
+
+
+
+                                                {contextData.newOrderData.length !== 0 &&
+                                                    <div className=' block my-4 w-full h-full'>
+                                                        <div className='flex justify-center align-bottom'>
+                                                            <img src={contextData.newOrderData[0].image} alt='Item Images' className="w-40 rounded-lg aspect-[10/7] object-contain border-[1px]" />
+                                                            {contextData.newOrderData.length > 1 &&
+                                                                <>
+                                                                    <small className='relative pt-[30%] md:pt-[25%] inline-block h-full' >
+                                                                        <span >
+                                                                            + {contextData.newOrderData.length - 1}
+                                                                        </span>
+                                                                    </small>
+                                                                </>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                                <div className="mt-10 flex items-center justify-center gap-x-6">
+                                                    <NavLink
+                                                        to="/"
+                                                        className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                        onClick={() => {
+                                                            contextData.setNewOrderData([])
+                                                            contextData.orderNotPlaced()
+                                                        }}
+                                                    >
+                                                        Continue Shopping
+                                                    </NavLink>
+                                                    <Link
+                                                        to="/contact"
+                                                        className="text-sm font-semibold text-gray-900"
+                                                        onClick={() => {
+                                                            contextData.setNewOrderData([])
+                                                            contextData.orderNotPlaced()
+                                                        }}
+                                                    >
+                                                        Go to my orders
+                                                        <span aria-hidden="true">&rarr;</span>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </main>
+                                    </>
+                                ) : (
+                                    <>
+                                        {cardid > 0 ? (
+                                            <>
+                                                <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                                                    <div className="text-center">
+                                                        <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl">Your Order Not Placed</h1>
+                                                        <p className="mt-6 text-base leading-7 text-red-500">Wrong CVV Entered</p>
+
+                                                        {contextData.newOrderData.length !== 0 &&
+                                                            <div className=' block my-4 w-full h-full'>
+                                                                <div className='flex justify-center align-bottom'>
+                                                                    <img src={contextData.newOrderData[0].image} alt='Item Images' className="w-40 rounded-lg aspect-[10/7] object-contain border-[1px]" />
+                                                                    {contextData.newOrderData.length > 1 &&
+                                                                        <>
+                                                                            <small className='relative pt-[30%] md:pt-[25%] inline-block h-full' >
+                                                                                <span >
+                                                                                    + {contextData.newOrderData.length - 1}
+                                                                                </span>
+                                                                            </small>
+                                                                        </>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                        <div className="mt-10 flex items-center justify-center gap-x-6">
+                                                            <NavLink
+                                                                to="/"
+                                                                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                                onClick={() => {
+                                                                    contextData.setNewOrderData([])
+                                                                    contextData.orderNotPlaced()
+                                                                }}
+                                                            >
+                                                                Continue Shopping
+                                                            </NavLink>
+                                                            <Link
+                                                                to="/cart"
+                                                                className="text-sm font-semibold text-gray-900"
+                                                                onClick={() => {
+                                                                    contextData.setNewOrderData([])
+                                                                    contextData.rendomcode()
+                                                                }}
+                                                            >
+                                                                Order Again
+                                                                <span aria-hidden="true">&rarr;</span>
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+                                                </main>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                                                    <div className="text-center">
+                                                        <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl">Your Order Not Placed</h1>
+                                                        <p className="mt-6 text-base leading-7 text-red-500">Worng UPI Pin Entered</p>
+
+                                                        {contextData.newOrderData.length !== 0 &&
+                                                            <div className=' block my-4 w-full h-full'>
+                                                                <div className='flex justify-center align-bottom'>
+                                                                    <img src={contextData.newOrderData[0].image} alt='Item Images' className="w-40 rounded-lg aspect-[10/7] object-contain border-[1px]" />
+                                                                    {contextData.newOrderData.length > 1 &&
+                                                                        <>
+                                                                            <small className='relative pt-[30%] md:pt-[25%] inline-block h-full' >
+                                                                                <span >
+                                                                                    + {contextData.newOrderData.length - 1}
+                                                                                </span>
+                                                                            </small>
+                                                                        </>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                        <div className="mt-10 flex items-center justify-center gap-x-6">
+                                                            <NavLink
+                                                                to="/"
+                                                                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                                onClick={() => {
+                                                                    contextData.setNewOrderData([])
+                                                                    contextData.orderNotPlaced()
+                                                                }}
+                                                            >
+                                                                Continue Shopping
+                                                            </NavLink>
+                                                            <Link
+                                                                to="/cart"
+                                                                className="text-sm font-semibold text-gray-900"
+                                                                onClick={() => {
+                                                                    contextData.setNewOrderData([])
+                                                                    contextData.rendomcode()
+                                                                }}
+                                                            >
+                                                                Order Again
+                                                                <span aria-hidden="true">&rarr;</span>
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+                                                </main>
+                                            </>
+                                        )}
+
+                                    </>
+                                )}
+
+                            </>
+                        )}
+                    </>
+                )}
+            </>
         </div>
     )
 }

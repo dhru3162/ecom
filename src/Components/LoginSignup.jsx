@@ -16,8 +16,6 @@ const LoginSignup = () => {
     const [loading, setLoading] = useState(false)
     const email = sessionStorage.getItem('email')
     const mobile = sessionStorage.getItem('mobile')
-    console.log(email)
-    console.log(mobile)
     const contextData = useContext(Datacontext)
     const { setchang, change } = contextData
 

@@ -13,7 +13,6 @@ import LoginSignup from "./Components/LoginSignup";
 import Profile from "./Components/Profile";
 import RagisterDetails from "./Components/RagisterDetails";
 import CheckOut from "./Components/CheckOut";
-import OrderStatus from "./Components/OrderStatus";
 import { useContext } from "react";
 import { Datacontext } from "./Components/Context";
 
@@ -32,8 +31,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/f&q" element={<FQ />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path={`/cart/${contextData.ab}`} element={<CheckOut />} />
-        <Route path="/cart/checkout/orderstatus" element={<OrderStatus />} />
+        <Route path={`/cart/${contextData.palceorder}`} element={<CheckOut />} />
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/ragister" element={<RagisterDetails />} />

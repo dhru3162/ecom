@@ -16,7 +16,6 @@ const RagisterDetails = () => {
     const email = sessionStorage.getItem('email')
     const ifmobile = sessionStorage.getItem('mobile')
     const [loading, setLoading] = useState(true)
-    // console.log(mobilemail.signup)
 
     useEffect(() => {
         emaildata()
