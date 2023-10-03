@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 
 const LoginSignup = () => {
     const [checkNum, setCheckNum] = useState()
-    const [userData, setUserData] = useState({ email: '', mobile: '', pass: '', fname: "", lname: '', signup: false })
+    const [userData, setUserData] = useState({ email: '', mobile: '', pass: '', fname: "", lname: '', signup: false, role: 'user' })
     const [existuser, setexistuser] = useState([])
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
@@ -68,6 +68,7 @@ const LoginSignup = () => {
                 })
                     .then(() => {
                         sessionStorage.setItem('mobile', userData.mobile)
+                        sessionStorage.setItem('role', userData.role)
                         axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${userData.mobile}`)
                             .then((data) => {
                                 const userdata = data.data[0].id
@@ -91,6 +92,7 @@ const LoginSignup = () => {
                 })
                     .then(() => {
                         sessionStorage.setItem('email', userData.email)
+                        sessionStorage.setItem('role', userData.role)
                         axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${userData.email}`)
                             .then((data) => {
                                 const userdata = data.data[0].id
@@ -116,13 +118,18 @@ const LoginSignup = () => {
                             .then((data) => {
                                 if (data[0].pass === userData.pass) {
                                     sessionStorage.setItem('mobile', userData.mobile)
+                                    sessionStorage.setItem('role', data[0].role)
                                     setLoading(false)
-                                    toast.success('Login Successfully')
                                     setchang(!change)
                                     if (data[0].signup) {
                                         navigate('/')
                                     } else {
                                         navigate(`/ragister`)
+                                    }
+                                    if (data[0].role === 'admin') {
+                                        toast.success('Admin Logged Successfully')
+                                    } else {
+                                        toast.success('Login Successfully')
                                     }
                                 }
                                 else {
@@ -141,13 +148,18 @@ const LoginSignup = () => {
                             .then((data) => {
                                 if (data[0].pass === userData.pass) {
                                     sessionStorage.setItem('email', userData.email)
+                                    sessionStorage.setItem('role', data[0].role)
                                     setLoading(false)
-                                    toast.success('Login Successfully')
                                     setchang(!change)
                                     if (data[0].signup) {
                                         navigate('/')
                                     } else {
                                         navigate(`/ragister`)
+                                    }
+                                    if (data[0].role === 'admin') {
+                                        toast.success('Admin Logged Successfully')
+                                    } else {
+                                        toast.success('Login Successfully')
                                     }
                                 }
                                 else {
@@ -232,7 +244,7 @@ const LoginSignup = () => {
                                                         required
                                                         autoComplete='off'
                                                         onPaste={(e) => paste(e)}
-                                                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                        className="block w-full rounded-md outline-none border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                         onChange={(e) => {
                                                             setCheckNum(!isNaN(e.target.value))
                                                             if (checkNum) {
@@ -274,7 +286,7 @@ const LoginSignup = () => {
                                                         type="password"
                                                         required
                                                         onPaste={(e) => paste(e)}
-                                                        className="block w-full pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                        className="block w-full pl-2 outline-none rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                         onChange={(e) => { setUserData({ ...userData, pass: e.target.value }) }}
                                                     />
                                                 </div>

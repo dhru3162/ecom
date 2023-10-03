@@ -5,12 +5,14 @@ import Footer from './Footer';
 import { Datacontext } from './Context';
 import { HashLoader } from 'react-spinners';
 import HomeLoader from './Loader/HomeLoader';
+import AdminNavbar from './AdminNavbar'
 
 const Home = () => {
     const [product, setproduct] = useState([])
     const [addid, setaddid] = useState()
     const [loading, setLoading] = useState(true)
     const contextData = useContext(Datacontext)
+    const role = sessionStorage.getItem('role')
 
     useEffect(() => {
         data()
@@ -67,7 +69,6 @@ const Home = () => {
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-3xl font-bold text-gray-900 dark:text-white">${data.price}</span>
-                            {/* <Link to="#" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}> */}
                             {contextData.loading ? (
                                 <>
                                     {addid === data.id ? (
@@ -104,11 +105,21 @@ const Home = () => {
 
     )
 
+    if (role === 'admin') {
+        return (
+            <>
+                <AdminNavbar />
+                <div className='mt-16'>
+                    <div className=' flex justify-center font-bold text-2xl pt-5'>
+                        Wellcome Admin
+                    </div>
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
 
-    return (
-        <>
-            <Navbar />
-            <div>
                 {loading ? (
                     <div className='mt-16'>
                         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
@@ -117,16 +128,19 @@ const Home = () => {
                     </div>
 
                 ) : (
-                    <div className='mt-16'>
-                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-                            {cards}
+                    <>
+                        <Navbar />
+                        <div className='mt-16'>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+                                {cards}
+                            </div>
+                            <Footer />
                         </div>
-                        <Footer />
-                    </div>
+                    </>
                 )}
-            </div>
-        </>
-    )
+            </>
+        )
+    }
 }
 
 export default Home

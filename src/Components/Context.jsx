@@ -20,6 +20,12 @@ const Dataprovider = ({ children }) => {
     const storeemail = sessionStorage.getItem('email')
     const storemobile = sessionStorage.getItem('mobile')
 
+    useEffect(() => {
+        fatchcartdata()
+        rendomcode()
+        // eslint-disable-next-line
+    }, [change])
+
     const rendomcode = () => {
         const characters = "abcdefghiklmnopqrstuvwxyz1234567890"
 
@@ -34,12 +40,6 @@ const Dataprovider = ({ children }) => {
         }
         setpalceorder(randomstring)
     }
-
-    useEffect(() => {
-        fatchcartdata()
-        rendomcode()
-        // eslint-disable-next-line
-    }, [change])
 
     const fatchcartdata = () => {
         if (storeemail !== null || storemobile !== null) {
@@ -275,18 +275,18 @@ const Dataprovider = ({ children }) => {
         setloading(true)
         const date = new Date()
         const time = date.toDateString()
-        const addNewUpi = () => {
+        const newOrderId = () => {
             if (myOrders.length !== 0) {
                 const orderid = myOrders.map(data => {
                     return data.orderid
                 })
                 return (Math.max(...orderid) + 1)
             } else {
-                return 1
+                return 123456789
             }
         }
         const neworderDetails = {
-            orderid: addNewUpi(),
+            orderid: newOrderId(),
             time: time,
             orderItem: cart,
             addressdetails: radiodata,

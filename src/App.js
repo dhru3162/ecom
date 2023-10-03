@@ -15,6 +15,10 @@ import RagisterDetails from "./Components/RagisterDetails";
 import CheckOut from "./Components/CheckOut";
 import { useContext } from "react";
 import { Datacontext } from "./Components/Context";
+import MyOrders from "./Components/MyOrders";
+import Users from "./Components/Users";
+import Products from "./Components/Products";
+import EditUser from "./Components/EditUser";
 
 function App() {
   const contextData = useContext(Datacontext)
@@ -23,7 +27,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<ProductPage/>}/>
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/feature" element={<Feature />} />
@@ -31,11 +35,15 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/f&q" element={<FQ />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/myorders" element={<MyOrders />} />
         <Route path={`/cart/${contextData.palceorder}`} element={<CheckOut />} />
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/ragister" element={<RagisterDetails />} />
-        <Route path="*" element={<PageNotFound/>} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/users/:id" element={<EditUser />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );
