@@ -28,7 +28,7 @@ const ProductPage = () => {
         setLoading(false)
     }
 
-    if (role === 'admin') {
+    if (role === 'user') {
         return (
             <div>
                 <Navbar />
