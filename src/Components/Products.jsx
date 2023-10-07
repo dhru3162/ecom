@@ -17,9 +17,9 @@ const Products = () => {
 }, [])
 
   return (
-    <>
+    <div className='dark:bg-black h-screen'>
      <AdminNavbar/> 
-    </>
+    </div>
   )
 }
 

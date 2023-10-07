@@ -72,7 +72,7 @@ const Users = () => {
 
     if (role === 'admin') {
         return (
-            <div className=' dark:bg-black'>
+            <div className=' dark:bg-black h-screen' >
                 {firstloading ? (
                     <div className='dark:bg-black'>
                         <AdminNavbar />

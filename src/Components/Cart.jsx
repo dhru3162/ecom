@@ -80,7 +80,7 @@ const Cart = () => {
     )
 
     return (
-        <div className='dark:bg-black h-screen'>
+        <div className='dark:bg-black min-h-fit'>
             <Navbar />
             {contextData.firstloading ? (
                 <CartLoader />
@@ -88,12 +88,12 @@ const Cart = () => {
                 <>
                     {email === null && mobile === null ? (
                         <>
-                            <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                            <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-black">
 
                                 <div className="text-center">
                                     <p className="text-base font-semibold text-indigo-600">405</p>
-                                    <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Access Denied</h1>
-                                    <p className="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t access this page without login please login first</p>
+                                    <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white">Access Denied</h1>
+                                    <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-300">Sorry, we couldn’t access this page without login please login first</p>
                                     <div className="mt-10 flex items-center justify-center gap-x-6">
                                         <NavLink
                                             to="/login"
@@ -101,7 +101,7 @@ const Cart = () => {
                                         >
                                             Login Now
                                         </NavLink>
-                                        <NavLink to="/contact" className="text-sm font-semibold text-gray-900">
+                                        <NavLink to="/contact" className="text-sm font-semibold text-gray-900 dark:text-white">
                                             Contact support <span aria-hidden="true">&rarr;</span>
                                         </NavLink>
                                     </div>
@@ -110,15 +110,15 @@ const Cart = () => {
                         </>
 
                     ) : (
-                        <div className="h-screen pt-20 dark:bg-black">
+                        <div className="h-screen pt-20">
                             {cart.length === 0 ? (
                                 <>
                                     <h1 className="mb-10 text-center text-2xl font-bold dark:text-white">Cart Was Empty</h1>
                                 </>
                             ) : (
-                                <>
+                                <div className='dark:bg-black'>
                                     <h1 className="mb-10 text-center text-2xl font-bold dark:text-white">Cart Items</h1>
-                                    <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+                                    <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0 ">
                                         <div className="rounded-lg md:w-2/3">
                                             {items}
                                         </div>
@@ -147,7 +147,7 @@ const Cart = () => {
                                             </button>
                                         </div>
                                     </div>
-                                </>
+                                </div>
                             )}
                         </div>
                     )}
