@@ -72,7 +72,7 @@ const Profile = () => {
                     {loading ? (<Loader />) : (
                         <div>
                             <form onSubmit={change}>
-                                <div className='mt-16'>
+                                <div className='mt-16 dark:bg-black'>
                                     <div className=' p-10'>
                                         <div className="space-y-12">
                                             <div>
@@ -85,11 +85,11 @@ const Profile = () => {
                                                 <h2 className="text-base font-semibold leading-7 text-blue-700">Personal Information</h2>
                                                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                                     <div className="sm:col-span-3">
-                                                        <label className="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                                                        <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">First name</label>
                                                         <div className="mt-2">
                                                             <input
                                                                 type="text"
-                                                                className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0 dark:disabled:text-gray-400"
                                                                 value={data.fname}
                                                                 onChange={(e) => {
                                                                     setdata({ ...data, fname: e.target.value })
@@ -99,11 +99,11 @@ const Profile = () => {
                                                     </div>
 
                                                     <div className="sm:col-span-3">
-                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                                                        <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Last name</label>
                                                         <div className="mt-2">
                                                             <input
                                                                 type="text"
-                                                                className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0 dark:disabled:text-gray-400"
                                                                 value={data.lname}
                                                                 onChange={(e) => {
                                                                     setdata({ ...data, lname: e.target.value })
@@ -112,36 +112,36 @@ const Profile = () => {
                                                         </div>
                                                     </div>
                                                     <div className="sm:col-span-3">
-                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Email ID</label>
+                                                        <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Email ID</label>
                                                         <div className="mt-2">
                                                             <input
                                                                 type="email"
                                                                 disabled
-                                                                className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0 dark:disabled:text-gray-400"
                                                                 value={data.email}
                                                             />
                                                         </div>
                                                     </div>
 
                                                     <div className="sm:col-span-3">
-                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Mobile Number</label>
+                                                        <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Mobile Number</label>
                                                         <div className="mt-2">
                                                             <input
                                                                 type="number"
                                                                 disabled
-                                                                className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0 dark:disabled:text-gray-400"
                                                                 value={data.mobile}
                                                             />
                                                         </div>
                                                     </div>
 
                                                     <div className="sm:col-span-2 sm:col-start-1">
-                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                                                        <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Password</label>
                                                         <div className="mt-2">
                                                             <input
                                                                 type="password"
                                                                 disabled
-                                                                className="block w-full ps-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                className="block w-full ps-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0 dark:disabled:text-gray-400"
                                                                 value={data.pass}
                                                             />
                                                         </div>
@@ -175,7 +175,7 @@ const Profile = () => {
             <>
                 <Navbar />
                 {checkemail === null && checkmobile === null ? (
-                    <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                    <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 ">
                         <div className="text-center">
                             <p className="text-base font-semibold text-indigo-600">405</p>
                             <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Access Denied</h1>
@@ -198,7 +198,7 @@ const Profile = () => {
                         {loading ? (<Loader />) : (
                             <div>
                                 <form onSubmit={change}>
-                                    <div className='mt-16'>
+                                    <div className='mt-16 dark:bg-black'>
                                         <div className=' p-10'>
                                             <div className="space-y-12">
                                                 <div>
@@ -211,11 +211,11 @@ const Profile = () => {
                                                     <h2 className="text-base font-semibold leading-7 text-blue-700">Personal Information</h2>
                                                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                                         <div className="sm:col-span-3">
-                                                            <label className="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                                                            <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">First name</label>
                                                             <div className="mt-2">
                                                                 <input
                                                                     type="text"
-                                                                    className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                    className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                     value={data.fname}
                                                                     onChange={(e) => {
                                                                         setdata({ ...data, fname: e.target.value })
@@ -225,11 +225,11 @@ const Profile = () => {
                                                         </div>
 
                                                         <div className="sm:col-span-3">
-                                                            <label className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                                                            <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Last name</label>
                                                             <div className="mt-2">
                                                                 <input
                                                                     type="text"
-                                                                    className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                    className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                     value={data.lname}
                                                                     onChange={(e) => {
                                                                         setdata({ ...data, lname: e.target.value })
@@ -238,36 +238,36 @@ const Profile = () => {
                                                             </div>
                                                         </div>
                                                         <div className="sm:col-span-3">
-                                                            <label className="block text-sm font-medium leading-6 text-gray-900">Email ID</label>
+                                                            <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Email ID</label>
                                                             <div className="mt-2">
                                                                 <input
                                                                     type="email"
                                                                     disabled
-                                                                    className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                    className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0 dark:disabled:text-gray-400"
                                                                     value={data.email}
                                                                 />
                                                             </div>
                                                         </div>
 
                                                         <div className="sm:col-span-3">
-                                                            <label className="block text-sm font-medium leading-6 text-gray-900">Mobile Number</label>
+                                                            <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Mobile Number</label>
                                                             <div className="mt-2">
                                                                 <input
                                                                     type="number"
                                                                     disabled
-                                                                    className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                    className="block ps-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0 dark:disabled:text-gray-400"
                                                                     value={data.mobile}
                                                                 />
                                                             </div>
                                                         </div>
 
                                                         <div className="sm:col-span-2 sm:col-start-1">
-                                                            <label className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                                                            <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Password</label>
                                                             <div className="mt-2">
                                                                 <input
                                                                     type="password"
                                                                     disabled
-                                                                    className="block w-full ps-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                    className="block w-full ps-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0 dark:disabled:text-gray-400"
                                                                     value={data.pass}
                                                                 />
                                                             </div>

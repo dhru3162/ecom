@@ -1,18 +1,19 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
+import Navbar from '../Navbar'
 
 const HomeLoader = () => {
     return (
         Array(12).fill(0).map((item) => (
-            <div>
-                <div className='m-5'>
+            <div className='dark:bg-black'>
+                <Navbar />
+                <div className='m-5 dark:bg-black'>
                     <div className=" w-full aspect-[9/12] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <div className='flex justify-center items-center'>
                             <div className="p-5 rounded-t-lg h-60 w-4/6">
                                 <Skeleton
                                     height={'100%'}
                                     width={'100%'}
-
                                 />
                             </div>
                         </div>

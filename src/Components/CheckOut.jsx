@@ -271,14 +271,14 @@ const Cart = () => {
     }
 
     const items = cart.map((cartdata, index) =>
-        <div key={index}>
+        <div key={index} className='dark:bg-gray-800'>
             <div className="justify-between mb-6 rounded-lg flex">
                 <img src={cartdata.image} alt={cartdata.image} className="w-1/3 p-2 rounded-lg aspect-[1/1] object-contain border-[1px]" />
                 <div className="ml-4 inline-flex w-full">
                     <div className="">
-                        <h2 className="font-bold text-gray-900">{cartdata.title}</h2>
-                        <p className="text-sm">${cartdata.price}</p>
-                        <small><span>Quantity: {cartdata.qtn}</span></small>
+                        <h2 className="font-bold text-gray-900 dark:text-white">{cartdata.title}</h2>
+                        <p className="text-sm dark:text-white">${cartdata.price}</p>
+                        <small><span className='dark:text-white'>Quantity: {cartdata.qtn}</span></small>
 
                         <div className='mt-3'>
                             <button
@@ -329,11 +329,11 @@ const Cart = () => {
                         setaddid(data.addressid)
                         setradiodata(data)
                     }}>
-                        <p className="font-bold text-gray-900">{data.fname} {data.lname}</p>
-                        <p className="text-sm">{data.add1}</p>
-                        <p className="text-sm">{data.add2}</p>
-                        <p className="text-sm">{data.city}, {data.state}, {data.zipcode}.</p>
-                        <small><span>Contact No.: {data.mobile}</span></small>
+                        <p className="font-bold text-gray-900 dark:text-white">{data.fname} {data.lname}</p>
+                        <p className="text-sm dark:text-white">{data.add1}</p>
+                        <p className="text-sm dark:text-white">{data.add2}</p>
+                        <p className="text-sm dark:text-white">{data.city}, {data.state}, {data.zipcode}.</p>
+                        <small><span className='dark:text-white'>Contact No.: {data.mobile}</span></small>
                     </div>
                 </div>
             </div>
@@ -368,8 +368,8 @@ const Cart = () => {
                                         setradiocarddata(data)
                                     }}
                                 />
-                                <p className="text-gray-900 font-medium">{data.cardnumber}</p>
-                                <p className="text-gray-900 font-medium">{data.exdate}</p>
+                                <p className="text-gray-900 font-medium dark:text-white">{data.cardnumber}</p>
+                                <p className="text-gray-900 font-medium dark:text-white">{data.exdate}</p>
 
                             </div>
                         </div>
@@ -386,7 +386,7 @@ const Cart = () => {
                                                     setcvvErr(true)
                                                     setcvvInput(e.target.value)
                                                 }}
-                                                className="mt-2 h-8 md:mt-0 ms-4 block w-[40%] rounded-md border py-1.5 pl-3 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 relative me-3 flex-auto rounded-l border-solid ring-1 ring-inset ring-gray-300 focus:ring-blue-700 outline-none"
+                                                className="mt-2 h-8 md:mt-0 ms-4 block w-[40%] rounded-md border py-1.5 pl-3 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 relative me-3 flex-auto rounded-l border-solid ring-1 ring-inset ring-gray-300 focus:ring-blue-700 outline-none dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                             />
                                         </>
                                     ) : (
@@ -398,7 +398,7 @@ const Cart = () => {
                                                     setcvvErr(true)
                                                     setcvvInput(e.target.value)
                                                 }}
-                                                className="mt-2 h-8 md:mt-0 ms-4 block w-[40%] border-2 border-red-600 rounded-md py-1.5 pl-3 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 relative me-3 flex-auto rounded-l focus:border-red-800 outline-none"
+                                                className="mt-2 h-8 md:mt-0 ms-4 block w-[40%] border-2 border-red-600 rounded-md py-1.5 pl-3 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 relative me-3 flex-auto rounded-l focus:border-red-800 outline-none dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                             />
                                         </>
                                     )}
@@ -440,7 +440,7 @@ const Cart = () => {
                                         setradioupidata(data)
                                     }}
                                 />
-                                <p className="text-gray-900 font-medium">{data.upi}</p>
+                                <p className="text-gray-900 font-medium dark:text-white">{data.upi}</p>
                             </div>
                         </div>
                     </div>
@@ -450,7 +450,7 @@ const Cart = () => {
     )
 
     return (
-        <div>
+        <div className='dark:bg-black h-fit'>
             <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <NavLink to="/" className="flex items-center">
@@ -469,12 +469,12 @@ const Cart = () => {
                     <>
                         {newOrderData.length === 0 ? (
                             <>
-                                <div className="h-screen pt-20">
-                                    <h1 className="mb-8 text-center text-2xl font-bold">Check Out</h1>
+                                <div className="h-screen pt-20 dark:bg-black">
+                                    <h1 className="mb-8 text-center text-2xl font-bold dark:text-white">Check Out</h1>
                                     <div className="mx-auto max-w-6xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
                                         <div className="rounded-lg md:w-2/3">
 
-                                            <div className="justify-between rounded-lg bg-white p-3 sm:flex sm:justify-start">
+                                            <div className="justify-between rounded-lg bg-white p-3 sm:flex sm:justify-start dark:bg-gray-800">
 
                                                 <div className="border-gray-900/10 w-full">
                                                     <h1 className="leading-7 text-red-700 font-bold text-lg pb-2">
@@ -483,7 +483,7 @@ const Cart = () => {
                                                     {expanded.address ? (
                                                         <>
                                                             <div className='border rounded-lg p-5'>
-                                                                <p className='font-semibold'>Your Addresses</p>
+                                                                <p className='font-semibold dark:text-white'>Your Addresses</p>
                                                                 <hr className="my-4" />
                                                                 {saveAddress}
                                                                 <button
@@ -498,7 +498,7 @@ const Cart = () => {
                                                                     <>
                                                                         <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 border rounded-lg p-5">
                                                                             <div className="sm:col-span-3">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">First name</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="text"
@@ -507,14 +507,14 @@ const Cart = () => {
                                                                                             setAddressinput({ ...addressInput, fname: e.target.value, addressid: newaddid })
                                                                                             seterrors({ ...errors, fname: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{errors.fname && <span className='text-red-500 text-xs'>{err.fname}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-3">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Last name</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="text"
@@ -523,14 +523,14 @@ const Cart = () => {
                                                                                             setAddressinput({ ...addressInput, lname: e.target.value })
                                                                                             seterrors({ ...errors, lname: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{errors.lname && <span className='text-red-500 text-xs'>{err.lname}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-4">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Contact Number</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Contact Number</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="number"
@@ -539,16 +539,16 @@ const Cart = () => {
                                                                                             setAddressinput({ ...addressInput, mobile: e.target.value })
                                                                                             seterrors({ ...errors, mobile: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{errors.mobile && <span className='text-red-500 text-xs'>{err.mobile}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-3">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Country/Region</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Country/Region</label>
                                                                                 <div className="mt-2">
-                                                                                    <select value={addressInput.country} onChange={(e) => { setAddressinput({ ...addressInput, country: e.target.value }) }} className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
+                                                                                    <select value={addressInput.country} onChange={(e) => { setAddressinput({ ...addressInput, country: e.target.value }) }} className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0" >
                                                                                         <option value={'US'}>United States</option>
                                                                                         <option value={'canada'}>Canada</option>
                                                                                         <option value={'mexico'}>Mexico</option>
@@ -557,7 +557,7 @@ const Cart = () => {
                                                                             </div>
 
                                                                             <div className="col-span-full">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Address line 1</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Address line 1</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="text"
@@ -566,14 +566,14 @@ const Cart = () => {
                                                                                             setAddressinput({ ...addressInput, add1: e.target.value })
                                                                                             seterrors({ ...errors, add1: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{errors.add1 && <span className='text-red-500 text-xs'>{err.add1}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="col-span-full">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Address line 2</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Address line 2</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type='text'
@@ -582,14 +582,14 @@ const Cart = () => {
                                                                                             setAddressinput({ ...addressInput, add2: e.target.value })
                                                                                             seterrors({ ...errors, add2: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{errors.add2 && <span className='text-red-500 text-xs'>{err.add2}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-2 sm:col-start-1">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">City</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">City</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="text"
@@ -598,14 +598,14 @@ const Cart = () => {
                                                                                             setAddressinput({ ...addressInput, city: e.target.value })
                                                                                             seterrors({ ...errors, city: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{errors.city && <span className='text-red-500 text-xs'>{err.city}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-2">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">State / Province</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="text"
@@ -614,14 +614,14 @@ const Cart = () => {
                                                                                             setAddressinput({ ...addressInput, state: e.target.value })
                                                                                             seterrors({ ...errors, state: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{errors.state && <span className='text-red-500 text-xs'>{err.state}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-2">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">ZIP / Postal code</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="text"
@@ -631,7 +631,7 @@ const Cart = () => {
                                                                                             setAddressinput({ ...addressInput, zipcode: e.target.value })
                                                                                             seterrors({ ...errors, zipcode: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{errors.zipcode && <span className='text-red-500 text-xs'>{err.zipcode}</span>}</small>
                                                                                 </div>
@@ -726,11 +726,11 @@ const Cart = () => {
                                                                 <div className="justify-between rounded-lg flex gap-x-2 my-4 mx-6">
                                                                     <div className="inline-flex w-full cursor-default max-w-full">
                                                                         <div>
-                                                                            <p className="font-bold text-gray-900">{radiodata.fname} {radiodata.lname}</p>
-                                                                            <p className="text-sm">{radiodata.add1},</p>
-                                                                            <p className="text-sm">{radiodata.add2},</p>
-                                                                            <p className="text-sm">{radiodata.city}, {radiodata.state}, {radiodata.zipcode}.</p>
-                                                                            <small><span>Contact No.: {radiodata.mobile}</span></small>
+                                                                            <p className="font-bold text-gray-900 dark:text-white">{radiodata.fname} {radiodata.lname}</p>
+                                                                            <p className="text-sm dark:text-white">{radiodata.add1},</p>
+                                                                            <p className="text-sm dark:text-white">{radiodata.add2},</p>
+                                                                            <p className="text-sm dark:text-white">{radiodata.city}, {radiodata.state}, {radiodata.zipcode}.</p>
+                                                                            <small><span className='dark:text-white'>Contact No.: {radiodata.mobile}</span></small>
                                                                         </div>
                                                                     </div>
                                                                     <div>
@@ -757,7 +757,7 @@ const Cart = () => {
 
                                             </div>
 
-                                            <div className="justify-between rounded-lg bg-white p-3 sm:flex sm:justify-start">
+                                            <div className="justify-between rounded-lg bg-white p-3 sm:flex sm:justify-start dark:bg-gray-800">
 
                                                 <div className="border-gray-900/10 w-full">
                                                     <h1 className="leading-7 text-red-700 font-bold text-lg pb-2">
@@ -768,7 +768,7 @@ const Cart = () => {
                                                         <>
                                                             {expanded.payment ? (
                                                                 <div className='border rounded-lg p-5'>
-                                                                    <label className="block text-sm font-medium leading-6 text-gray-900">
+                                                                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
                                                                         Discount code
                                                                     </label>
                                                                     <div className='relative flex flex-wrap items-stretch'>
@@ -782,7 +782,7 @@ const Cart = () => {
                                                                                         setcodeErr({})
                                                                                         setDiscountInput(`${e.target.value}`)
                                                                                     }}
-                                                                                    className="relative block me-3 flex-auto rounded-l border-solid rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    className="relative block me-3 flex-auto rounded-l border-solid rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                 />
                                                                                 <button
                                                                                     className="px-6 text-sm rounded-md bg-blue-600 font-medium text-blue-50 hover:bg-blue-700 "
@@ -806,7 +806,7 @@ const Cart = () => {
                                                                                         setcodeErr({})
                                                                                         setDiscountInput(`${e.target.value}`)
                                                                                     }}
-                                                                                    className="relative block me-3 flex-auto rounded-l border-solid rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                    className="relative block me-3 flex-auto rounded-l border-solid rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                 />
                                                                                 <button
                                                                                     className="px-6 text-sm rounded-md bg-blue-600 font-medium text-blue-50 hover:bg-blue-700 "
@@ -833,7 +833,7 @@ const Cart = () => {
                                                                             <span className=' text-green-500 text-xs'>'{code}' Code Applied</span>}
                                                                     </small>
                                                                     <hr className="my-4" />
-                                                                    <p className='font-semibold my-4'>Credit & Debit Cards</p>
+                                                                    <p className='font-semibold my-4 dark:text-white'>Credit & Debit Cards</p>
                                                                     <hr className="my-4" />
                                                                     {saveCards}
                                                                     <button
@@ -848,7 +848,7 @@ const Cart = () => {
                                                                         <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 border rounded-lg p-5">
 
                                                                             <div className="sm:col-span-4">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Name on card</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Name on card</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="text"
@@ -857,14 +857,14 @@ const Cart = () => {
                                                                                             setCardInput({ ...cardInput, name: e.target.value, cardid: newcardid })
                                                                                             setCardErrors({ ...CardErrors, name: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{CardErrors.name && <span className='text-red-500 text-xs'>{cardErr.name}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-4">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Card number</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Card number</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="tel"
@@ -874,14 +874,14 @@ const Cart = () => {
                                                                                             setCardInput({ ...cardInput, cardnumber: e.target.value })
                                                                                             setCardErrors({ ...CardErrors, cardnumber: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{CardErrors.cardnumber && <span className='text-red-500 text-xs'>{cardErr.cardnumber}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-2 sm:col-start-1">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">Expiration date (MM/YY)</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Expiration date (MM/YY)</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="tel"
@@ -891,14 +891,14 @@ const Cart = () => {
                                                                                             setCardInput({ ...cardInput, exdate: e.target.value })
                                                                                             setCardErrors({ ...CardErrors, exdate: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{CardErrors.exdate && <span className='text-red-500 text-xs'>{cardErr.date}</span>}</small>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="sm:col-span-2">
-                                                                                <label className="block text-sm font-medium leading-6 text-gray-900">CVV</label>
+                                                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">CVV</label>
                                                                                 <div className="mt-2">
                                                                                     <input
                                                                                         type="tel"
@@ -908,7 +908,7 @@ const Cart = () => {
                                                                                             setCardInput({ ...cardInput, cvv: e.target.value })
                                                                                             setCardErrors({ ...CardErrors, cvv: false })
                                                                                         }}
-                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                        className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                     />
                                                                                     <small>{CardErrors.cvv && <span className='text-red-500 text-xs'>{cardErr.cvv}</span>}</small>
                                                                                 </div>
@@ -947,7 +947,7 @@ const Cart = () => {
                                                                     )}
 
                                                                     <hr className="my-4" />
-                                                                    <p className='font-semibold my-4'>UPI</p>
+                                                                    <p className='font-semibold my-4 dark:text-white'>UPI</p>
                                                                     <hr className="my-4" />
                                                                     {saveupi}
                                                                     <button
@@ -963,7 +963,7 @@ const Cart = () => {
                                                                             <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 border rounded-lg p-5">
 
                                                                                 <div className="sm:col-span-4">
-                                                                                    <label className="block text-sm font-medium leading-6 text-gray-900">UPI ID</label>
+                                                                                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">UPI ID</label>
                                                                                     <div className="mt-2">
                                                                                         <input
                                                                                             type="text"
@@ -972,14 +972,14 @@ const Cart = () => {
                                                                                                 setupiErrors({ ...upiErrors, upi: false })
                                                                                                 setupiInput({ ...upiInput, upi: e.target.value, upiid: newupiid })
                                                                                             }}
-                                                                                            className="block outline-none w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                            className="block outline-none w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                         />
                                                                                         <small>{upiErrors.upi && <span className='text-red-500 text-xs'>{upiErr.upi}</span>}</small>
                                                                                     </div>
                                                                                 </div>
 
                                                                                 <div className="sm:col-span-2 sm:col-start-1">
-                                                                                    <label className="block text-sm font-medium leading-6 text-gray-900">Pin</label>
+                                                                                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Pin</label>
                                                                                     <div className="mt-2">
                                                                                         <input
                                                                                             type="text"
@@ -988,7 +988,7 @@ const Cart = () => {
                                                                                                 setupiErrors({ ...upiErrors, pin: false })
                                                                                                 setupiInput({ ...upiInput, upipin: e.target.value })
                                                                                             }}
-                                                                                            className="block outline-none w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                                            className="block outline-none w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                                                         />
                                                                                         <small>{upiErrors.pin && <span className='text-red-500 text-xs'>{upiErr.pin}</span>}</small>
                                                                                     </div>
@@ -1066,13 +1066,13 @@ const Cart = () => {
                                                                             <div className="inline-flex w-full cursor-default max-w-full">
                                                                                 {cardid > 0 &&
                                                                                     <div>
-                                                                                        <p className="font-bold text-gray-900">{radiocarddata.name}</p>
-                                                                                        <p className="text-sm">{radiocarddata.cardnumber}</p>
+                                                                                        <p className="font-bold text-gray-900 dark:text-white">{radiocarddata.name}</p>
+                                                                                        <p className="text-sm dark:text-white">{radiocarddata.cardnumber}</p>
                                                                                     </div>
                                                                                 }
                                                                                 {upiid > 0 &&
                                                                                     <div>
-                                                                                        <p className="font-semibold text-gray-900">Pay Using {radioupidata.upi} Upi</p>
+                                                                                        <p className="font-semibold text-gray-900 dark:text-white">Pay Using {radioupidata.upi} Upi</p>
                                                                                     </div>
                                                                                 }
                                                                             </div>
@@ -1099,28 +1099,28 @@ const Cart = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-2/5">
+                                        <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-2/5 dark:bg-gray-800 dark:border-white">
                                             {items}
                                             <hr className="my-4" />
                                             <div className="mb-2 flex justify-between">
-                                                <p className="text-gray-700">Subtotal</p>
-                                                <p className="text-gray-700">${totalprice}</p>
+                                                <p className="text-gray-700 dark:text-white">Subtotal</p>
+                                                <p className="text-gray-700 dark:text-white">${totalprice}</p>
                                             </div>
                                             {code !== '' &&
                                                 <div className="mb-2 flex justify-between">
-                                                    <p className="text-gray-700">Coupon Discount</p>
-                                                    <p className="text-gray-700">-$10</p>
+                                                    <p className="text-gray-700 dark:text-white">Coupon Discount</p>
+                                                    <p className="text-gray-700 dark:text-white">-$10</p>
                                                 </div>
                                             }
                                             <div className="flex justify-between">
-                                                <p className="text-gray-700">Shipping Charge</p>
-                                                <p className="text-gray-700">{totalprice >= 100 ? 'Free Delivery' : '$4.99'}</p>
+                                                <p className="text-gray-700 dark:text-white">Shipping Charge</p>
+                                                <p className="text-gray-700 dark:text-white">{totalprice >= 100 ? 'Free Delivery' : '$4.99'}</p>
                                             </div>
                                             <hr className="my-4" />
                                             <div className="flex justify-between">
-                                                <p className="text-lg font-bold">Total</p>
+                                                <p className="text-lg font-bold dark:text-white">Total</p>
                                                 <div className="">
-                                                    <p className="mb-1 text-lg font-bold">{totalprice <= 100 ? <>{codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}</> : `$${totalprice}`}</p>
+                                                    <p className="mb-1 text-lg font-bold dark:text-white">{totalprice <= 100 ? <>{codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}</> : `$${totalprice}`}</p>
                                                 </div>
                                             </div>
                                             {!expanded.address && !expanded.payment ? (
@@ -1196,10 +1196,10 @@ const Cart = () => {
                             <>
                                 {paymentok ? (
                                     <>
-                                        <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                                        <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-black h-screen">
                                             <div className="text-center">
-                                                <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl">Your Order Placed Successfully</h1>
-                                                <p className="mt-6 text-base leading-7 text-gray-600">We are dispatch your order within 24 hours</p>
+                                                <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl dark:text-white">Your Order Placed Successfully</h1>
+                                                <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-300">We are dispatch your order within 24 hours</p>
 
 
 
@@ -1233,7 +1233,7 @@ const Cart = () => {
                                                     </NavLink>
                                                     <Link
                                                         to="/contact"
-                                                        className="text-sm font-semibold text-gray-900"
+                                                        className="text-sm font-semibold text-gray-900 dark:text-white"
                                                         onClick={() => {
                                                             contextData.setNewOrderData([])
                                                             contextData.orderNotPlaced()
@@ -1250,9 +1250,9 @@ const Cart = () => {
                                     <>
                                         {cardid > 0 ? (
                                             <>
-                                                <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                                                <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-black h-screen">
                                                     <div className="text-center">
-                                                        <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl">Your Order Not Placed</h1>
+                                                        <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl dark:text-white">Your Order Not Placed</h1>
                                                         <p className="mt-6 text-base leading-7 text-red-500">Wrong CVV Entered</p>
 
                                                         {contextData.newOrderData.length !== 0 &&
@@ -1285,7 +1285,7 @@ const Cart = () => {
                                                             </NavLink>
                                                             <Link
                                                                 to="/cart"
-                                                                className="text-sm font-semibold text-gray-900"
+                                                                className="text-sm font-semibold text-gray-900 dark:text-white"
                                                                 onClick={() => {
                                                                     contextData.setNewOrderData([])
                                                                     contextData.rendomcode()
@@ -1300,9 +1300,9 @@ const Cart = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+                                                <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-black h-screen">
                                                     <div className="text-center">
-                                                        <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl">Your Order Not Placed</h1>
+                                                        <h1 className="mt-4 text-lg font-bold tracking-tight text-gray-900 md:text-3xl dark:text-white">Your Order Not Placed</h1>
                                                         <p className="mt-6 text-base leading-7 text-red-500">Worng UPI Pin Entered</p>
 
                                                         {contextData.newOrderData.length !== 0 &&
@@ -1335,7 +1335,7 @@ const Cart = () => {
                                                             </NavLink>
                                                             <Link
                                                                 to="/cart"
-                                                                className="text-sm font-semibold text-gray-900"
+                                                                className="text-sm font-semibold text-gray-900 dark:text-white"
                                                                 onClick={() => {
                                                                     contextData.setNewOrderData([])
                                                                     contextData.rendomcode()

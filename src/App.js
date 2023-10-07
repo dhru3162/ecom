@@ -19,6 +19,7 @@ import MyOrders from "./Components/MyOrders";
 import Users from "./Components/Users";
 import Products from "./Components/Products";
 import EditUser from "./Components/EditUser";
+import AddUser from "./Components/AddUser";
 
 function App() {
   const contextData = useContext(Datacontext)
@@ -42,6 +43,7 @@ function App() {
         <Route path="/ragister" element={<RagisterDetails />} />
         <Route path="/users" element={<Users />} />
         <Route path="/users/:id" element={<EditUser />} />
+        <Route path="/users/adduser" element={<AddUser />} />
         <Route path="/products" element={<Products />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

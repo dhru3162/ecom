@@ -73,28 +73,28 @@ const Home = () => {
                                 <>
                                     {addid === data.id ? (
                                         <>
-                                            <Link to="#" className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
+                                            <button type='button' className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
                                                 <div className='flex justify-center items-center h-full'>
                                                     <HashLoader
                                                         color="#c7cbfd"
                                                         size={19}
                                                     />
                                                 </div>
-                                            </Link>
+                                            </button>
                                         </>
                                     ) : (
                                         <>
-                                            <Link to="#" className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
+                                            <button type='button' className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
                                                 Add To Cart
-                                            </Link>
+                                            </button>
                                         </>
                                     )}
                                 </>
                             ) : (
                                 <>
-                                    <Link to="#" className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
+                                    <button type='button' className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
                                         Add To Cart
-                                    </Link>
+                                    </button>
                                 </>
                             )}
                         </div>
@@ -109,8 +109,8 @@ const Home = () => {
         return (
             <>
                 <AdminNavbar />
-                <div className='mt-16'>
-                    <div className=' flex justify-center font-bold text-2xl pt-5'>
+                <div className='mt-16 dark:bg-black h-screen'>
+                    <div className=' flex justify-center font-bold text-2xl pt-5 dark:text-white'>
                         Wellcome Admin
                     </div>
                 </div>
@@ -130,7 +130,7 @@ const Home = () => {
                 ) : (
                     <>
                         <Navbar />
-                        <div className='mt-16'>
+                        <div className='mt-16 dark:bg-black'>
                             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                                 {cards}
                             </div>

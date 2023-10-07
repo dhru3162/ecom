@@ -3,8 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 
 const UserListLoader = () => {
     return (
-        <div>
-            <div className="relative overflow-x-auto sm:rounded-lg mt-20 m-10">
+        <div className='dark:bg-black'>
+            <div className="relative overflow-x-auto sm:rounded-lg mt-16 pt-4 m-10">
                 <div className="flex items-center justify-between pb-4">
                     <div className='rounded-t-lg'>
                         <Skeleton
