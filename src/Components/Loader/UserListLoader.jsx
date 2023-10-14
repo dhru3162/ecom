@@ -3,241 +3,272 @@ import Skeleton from 'react-loading-skeleton'
 
 const UserListLoader = () => {
     return (
-        <div className='dark:bg-black'>
-            <div className="relative overflow-x-auto sm:rounded-lg mt-16 pt-4 m-10">
-                <div className="flex items-center justify-between pb-4">
-                    <div className='rounded-t-lg'>
-                        <Skeleton
-                            borderRadius={'10px'}
-                            height={'2.30rem'}
-                            width={'5rem'}
-                        />
-                    </div>
-                    <label className="sr-only">Search</label>
-                    <div className="relative">
-                        <Skeleton
-                            borderRadius={'10px'}
-                            height={'2.30rem'}
-                            width={'20rem'}
-                        />
-                    </div>
-                </div>
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead >
-                        <tr>
-                            <th colSpan={5}>
-                                <Skeleton
-                                    width={'100%'}
-                                    height={'40px'}
-                                />
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <td className='grid grid-flow-col justify-stretch'>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1 text-center'>
-                                    <Skeleton
-                                        width={'40%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <div className='grid grid-flow-col justify-stretch'>
+        <div className='dark:bg-black h-screen pt-16'>
+            <div className="flex flex-col p-2 lg:p-3">
+                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div className="inline-block min-w-full sm:px-6 lg:px-8">
+                        <div className="overflow-hidden">
+                            <div className="relative overflow-x-auto sm:rounded-lg p-3 lg:p-3 lg:pt-0">
+                                <div className="flex items-center justify-between w-full" >
+                                    <div className='w-[30%] md:[15%] lg:w-[10%]'>
                                         <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
+                                            width={'100%'}
+                                            height={'35px'}
                                         />
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='grid grid-flow-col justify-stretch'>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1 text-center'>
-                                    <Skeleton
-                                        width={'40%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <div className='grid grid-flow-col justify-stretch'>
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='grid grid-flow-col justify-stretch'>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1 text-center'>
-                                    <Skeleton
-                                        width={'40%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <div className='grid grid-flow-col justify-stretch'>
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        {/* <tr>
-                            <td className='grid grid-flow-col justify-stretch'>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1 text-center'>
-                                    <Skeleton
-                                        width={'40%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <div className='grid grid-flow-col justify-stretch'>
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <div className='grid grid-flow-col justify-stretch'>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <Skeleton
-                                        width={'70%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1 text-center'>
-                                    <Skeleton
-                                        width={'40%'}
-                                        height={'30px'}
-                                    />
-                                </div>
-                                <div className='p-1'>
-                                    <div className='grid grid-flow-col justify-stretch'>
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
-                                        <Skeleton
-                                            width={'90%'}
-                                            height={'30px'}
-                                        />
+                                    <div className='flex justify-end w-[60%] md:[15%] lg:w-[25%]'>
+                                        <div className="relative w-full">
+                                            <Skeleton
+                                                height={'35px'}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </tr> */}
-                    </tbody>
-                </table>
+                            <table className="min-w-full text-left text-sm font-light text-gray-500 dark:text-gray-400">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <Skeleton
+                                                width={'100%'}
+                                                height={'35px'}
+                                            />
+                                        </th>
+                                        <th scope="col" className="tableresponsive">
+                                            <Skeleton
+                                                width={'100%'}
+                                                height={'35px'}
+                                            />
+                                        </th>
+                                        <th scope="col" className="tableresponsive">
+                                            <Skeleton
+                                                width={'100%'}
+                                                height={'35px'}
+                                            />
+                                        </th>
+                                        <th scope="col">
+                                            <Skeleton
+                                                width={'100%'}
+                                                height={'35px'}
+                                            />
+                                        </th>
+                                        <th scope="col">
+                                            <Skeleton
+                                                width={'100%'}
+                                                height={'35px'}
+                                            />
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="px-3 py-3 text-center" >
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <div className='grid grid-flow-col justify-stretch'>
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td className="px-3 py-3 text-center" >
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <div className='grid grid-flow-col justify-stretch'>
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td className="px-3 py-3 text-center" >
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <div className='grid grid-flow-col justify-stretch'>
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td className="px-3 py-3 text-center" >
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <div className='grid grid-flow-col justify-stretch'>
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td className="px-3 py-3 text-center" >
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center tableresponsive">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <Skeleton
+                                                width={'80%'}
+                                                height={'30px'}
+                                            />
+                                        </td>
+                                        <td className="px-3 py-3 text-center">
+                                            <div className='grid grid-flow-col justify-stretch'>
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                                <Skeleton
+                                                    width={'90%'}
+                                                    height={'30px'}
+                                                />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
         </div>
     )
 }

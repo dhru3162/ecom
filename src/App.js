@@ -3,7 +3,7 @@ import Home from "./Components/Home";
 import PageNotFound from "./Components/PageNotFound";
 import About from "./Components/About";
 import ContactUs from "./Components/ContactUs";
-import Loader from "./Components//Loader/Loader";
+// import Loader from "./Components//Loader/Loader";
 import Feature from "./Components/Feature";
 import Blog from "./Components/Blog";
 import FQ from "./Components/F&Q";
@@ -20,6 +20,9 @@ import Users from "./Components/Users";
 import Products from "./Components/Products";
 import EditUser from "./Components/EditUser";
 import AddUser from "./Components/AddUser";
+import AddProduct from './Components/AddProduct';
+import ProductListLoader from "./Components/Loader/ProductListLoader";
+import EditProduct from './Components/EditProduct'
 
 function App() {
   const contextData = useContext(Datacontext)
@@ -32,7 +35,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/feature" element={<Feature />} />
-        <Route path="/loader" element={<Loader />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/f&q" element={<FQ />} />
         <Route path="/cart" element={<Cart />} />
@@ -45,6 +47,9 @@ function App() {
         <Route path="/users/:id" element={<EditUser />} />
         <Route path="/users/adduser" element={<AddUser />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<EditProduct />} />
+        <Route path="/products/addproduct" element={<AddProduct />} />
+        <Route path="/loader" element={<ProductListLoader />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

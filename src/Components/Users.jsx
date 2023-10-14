@@ -8,6 +8,7 @@ import UserListLoader from './Loader/UserListLoader'
 import { NavLink } from 'react-router-dom'
 import logo from './logo.png'
 import { HashLoader } from 'react-spinners'
+import './Table.css'
 
 const Users = () => {
     const role = sessionStorage.getItem('role')
@@ -46,7 +47,7 @@ const Users = () => {
             pro.id.toLowerCase().includes(search.toLowerCase())
     )
 
-    const deleteuser = (id) => {
+    const deleteProduct = (id) => {
         setdeleteuserid(id)
         setLoading(true)
         axios.delete(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${id}`)
@@ -73,120 +74,127 @@ const Users = () => {
     if (role === 'admin') {
         return (
             <div className=' dark:bg-black h-screen' >
-                {firstloading ? (
-                    <div className='dark:bg-black'>
-                        <AdminNavbar />
-                        <UserListLoader />
-                    </div>
-                ) : (
-                    <>
-                        <AdminNavbar />
-                        <div className="relative overflow-x-auto sm:rounded-lg mt-16 p-6">
-                            <div className="flex items-center justify-between pb-4">
-                                <div>
-                                    <button
-                                        className="inline-flex items-center outline-none text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                                        type="button"
-                                        onClick={() => {
-                                            navigate('/users/adduser')
-                                        }}
-                                    >
-                                        Add User
-                                    </button>
+                <div className=' dark:bg-black h-fit' >
+                    <AdminNavbar />
+                    {firstloading ? (
+                        <div className='dark:bg-black'>
+                            <UserListLoader />
+                        </div>
+                    ) : (
+                        <>
+                            <AdminNavbar />
+                            <div className='mt-16'>
+                                <div className="flex flex-col p-2 lg:p-3">
+                                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                        <div className="inline-block min-w-full sm:px-6 lg:px-8">
+                                            <div className="overflow-hidden">
+                                                <div className="relative overflow-x-auto sm:rounded-lg p-3 lg:p-3 lg:pt-0">
+                                                    <div className="flex items-center justify-between w-full" >
+                                                        <div className='w-[30%] md:[15%] lg:w-[10%]'>
+                                                            <button
+                                                                type="button"
+                                                                className="flex w-full justify-center rounded-md bg-blue-700 px-1 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                                                                onClick={() => navigate('/users/adduser')}
+                                                            >
+                                                                Add User
+                                                            </button>
+                                                        </div>
+                                                        <div className='flex justify-end w-[57%] md:[15%] lg:w-[25%]'>
+                                                            <label className="sr-only">Search</label>
+                                                            <div className="relative w-full">
+                                                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                                    <svg className="h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
+                                                                </div>
+                                                                <input
+                                                                    type="text"
+                                                                    className="block w-full sm:placeholder:truncate p-2 pl-10 text-sm text-gray-900 border border-blue-700 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+                                                                    placeholder="Search for userid, email & mobile"
+                                                                    onChange={(e) => {
+                                                                        setsearch(`${e.target.value}`)
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <small className='text-red-500 textwarning'>
+                                                        *For Best Experience Use PC
+                                                    </small>
+                                                </div>
+                                                <table className="min-w-full text-left text-sm font-light text-gray-500 dark:text-gray-400">
+                                                    <thead className="font-medium text-xs text-gray-700 uppercase bg-blue-50 dark:bg-gray-700 dark:text-white">
+                                                        <tr>
+                                                            <th scope="col" className="px-6 py-4">id</th>
+                                                            <th scope="col" className="px-6 py-4 tableresponsive">Full Name</th>
+                                                            <th scope="col" className="px-6 py-4 tableresponsive">Number</th>
+                                                            <th scope="col" className="px-6 py-4">Email ID</th>
+                                                            <th scope="col" className="px-6 py-4">action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {searchdata.map((user, index) =>
+                                                            <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600">
+                                                                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white truncate" >
+                                                                    {user.id}
+                                                                </td>
+                                                                <td className="whitespace-nowrap px-6 py-4 tableresponsive dark:text-gray-400">
+                                                                    {user.fname} {user.lname}
 
-                                </div>
-                                <label className="sr-only">Search</label>
-                                <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
+                                                                </td>
+                                                                <td className="whitespace-nowrap px-6 py-4 tableresponsive dark:text-gray-400">
+                                                                    {user.mobile}
+                                                                </td>
+                                                                <td className="whitespace-nowrap px-6 py-4 dark:text-gray-400">
+                                                                    {user.email}
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    <button type='button' className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => navigate(`/users/${user.id}`)}>Edit</button>
+                                                                    {loading ? (
+                                                                        <>
+                                                                            {deleteuserid === user.id ? (
+                                                                                <>
+                                                                                    <button type='button' className="w-[42px] h-[20px] font-medium text-red-600 dark:text-red-500 hover:underline mx-3" >
+                                                                                        <div className='flex justify-center items-center h-full'>
+                                                                                            <HashLoader
+                                                                                                color="#E33026"
+                                                                                                size={12}
+                                                                                            />
+                                                                                        </div>
+                                                                                    </button>
+                                                                                </>
+                                                                            ) : (
+                                                                                <>
+                                                                                    <button type='button' className="font-medium text-red-600 dark:text-red-500 hover:underline mx-3">Delete</button>
+                                                                                </>
+                                                                            )}
+
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+                                                                            <button type='button' className="font-medium text-red-600 dark:text-red-500 hover:underline mx-3 " onClick={() => deleteProduct(user.id)}>Delete</button>
+                                                                        </>
+                                                                    )}
+                                                                </td>
+                                                            </tr>
+                                                        )}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input
-                                        type="text"
-                                        className="block p-2 pl-10 text-sm text-gray-900 border border-blue-700 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
-                                        placeholder="Search for mobile, email & userid"
-                                        onChange={(e) => {
-                                            setsearch(`${e.target.value}`)
-                                        }}
-                                    />
                                 </div>
                             </div>
-                            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <thead className="text-xs text-gray-700 uppercase bg-blue-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" className="px-6 py-3">
-                                            User name
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Mobile No.
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            email
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            user ID
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {searchdata.map((user, index) =>
-                                        <tr key={index} className="h-[60px] bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {user.fname} {user.lname}
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                {user.mobile}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {user.email}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {user.id}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <button type='button' className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => navigate(`/users/${user.id}`)}>Edit</button>
-                                                {loading ? (
-                                                    <>
-                                                        {deleteuserid === user.id ? (
-                                                            <>
-                                                                <button type='button' className="w-[42px] h-[20px] font-medium text-red-600 dark:text-red-500 hover:underline mx-3" >
-                                                                    <div className='flex justify-center items-center h-full'>
-                                                                        <HashLoader
-                                                                            color="#E33026"
-                                                                            size={12}
-                                                                        />
-                                                                    </div>
-                                                                </button>
-                                                            </>
-                                                        ) : (
-                                                            <>
-                                                                <button type='button' className="font-medium text-red-600 dark:text-red-500 hover:underline mx-3">Delete</button>
-                                                            </>
-                                                        )}
+                        </>
+                    )
+                    }
 
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <button type='button' className="font-medium text-red-600 dark:text-red-500 hover:underline mx-3 " onClick={() => deleteuser(user.id)}>Delete</button>
-                                                    </>
-                                                )}
-                                            </td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </table>
-                        </div>
-                    </>
-                )
-                }
-
+                </div>
             </div>
         )
     } else if (role === null) {
         return (
-            <>
+            <div>
                 <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
                     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                         <NavLink to="/" className="flex items-center">
@@ -223,8 +231,8 @@ const Users = () => {
                 <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-black">
                     <div className="text-center">
                         <p className="text-base font-semibold text-indigo-600">405</p>
-                        <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Access Denied</h1>
-                        <p className="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t access this page without login please login first</p>
+                        <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white">Access Denied</h1>
+                        <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">Sorry, we couldn’t access this page without login please login first</p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <NavLink
                                 to="/login"
@@ -232,13 +240,15 @@ const Users = () => {
                             >
                                 Login Now
                             </NavLink>
-                            <NavLink to="/contact" className="text-sm font-semibold text-gray-900">
+                            <NavLink to="/contact" className="text-sm font-semibold text-gray-900 dark:text-white">
                                 Contact support <span aria-hidden="true">&rarr;</span>
                             </NavLink>
                         </div>
                     </div>
                 </main>
-            </>
+                <div className='dark:bg-black h-screen'>
+                </div>
+            </div>
         )
 
     } else {
