@@ -8,7 +8,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import { Dataprovider } from './Components/Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Datacontext } from './Context'
 import Skeleton from 'react-loading-skeleton'
 import { HashLoader } from 'react-spinners'
 import { NavLink } from 'react-router-dom'
 import logo from './logo.png'
+import { toast } from 'react-toastify'
 
 const ProductPage = () => {
     const role = sessionStorage.getItem('role')
+    const email = sessionStorage.getItem('email')
+    const mobile = sessionStorage.getItem('mobile')
+    const navigate = useNavigate()
     const { id } = useParams()
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true)
@@ -16,6 +20,13 @@ const ProductPage = () => {
     const [collapse, setcollapse] = useState(true)
 
     useEffect(() => {
+        if (email === null && mobile === null) {
+            navigate('/login')
+            toast('Please login first')
+        } else if (role === 'user') {
+            navigate('/')
+            toast('Something went wrong')
+        }
         getProduct()
         // eslint-disable-next-line
     }, [])

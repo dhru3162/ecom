@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import AdminNavBar from './AdminNavbar'
-import PageNotFound from './PageNotFound'
-import { NavLink, useNavigate } from 'react-router-dom'
-import logo from './logo.png'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Loader from './Loader/Loader'
 
 const AddUser = () => {
   const role = sessionStorage.getItem('role')
+  const email = sessionStorage.getItem('email')
+  const mobile = sessionStorage.getItem('mobile')
   const navigate = useNavigate()
-  const [collapse, setcollapse] = useState(true)
   const [userdata, setuserdata] = useState({ fname: "", lname: "", mobile: "", email: "", signup: false, pass: '', role: 'user' })
   const [existuser, setexistuser] = useState([])
   const [err, seterr] = useState({})
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    if (email === null && mobile === null) {
+      navigate('/login')
+      toast('Please login first')
+    } else if (role === 'user') {
+      navigate('/')
+      toast('Something went wrong')
+    }
     existlist()
     // eslint-disable-next-line
   }, [])
@@ -69,195 +75,130 @@ const AddUser = () => {
     }
   }
 
+  return (
+    <div className='dark:bg-black h-screen'>
+      <AdminNavBar />
+      {loading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          <div className='dark:bg-black h-fit mt-16'>
+            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+              <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+                <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
+                  Add New User
+                </h2>
+              </div>
+              <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
+                <form className="space-y-6" onSubmit={submit}>
 
-  if (role === 'admin') {
-    return (
-      <div className='dark:bg-black h-screen'>
-        <AdminNavBar />
-        {loading ? (
-          <>
-            <Loader />
-          </>
-        ) : (
-          <>
-            <div className='dark:bg-black h-fit mt-16'>
-              <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                  <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
-                    Add New User
-                  </h2>
-                </div>
-                <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-                  <form className="space-y-6" onSubmit={submit}>
-
-                    <div>
-                      <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                        First Name
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="text"
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                          onChange={(e) => {
-                            setuserdata({ ...userdata, fname: e.target.value })
-                          }}
-                        />
-                      </div>
+                  <div>
+                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                      First Name
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        required
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                        onChange={(e) => {
+                          setuserdata({ ...userdata, fname: e.target.value })
+                        }}
+                      />
                     </div>
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                        Last Name
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="text"
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                          onChange={(e) => {
-                            setuserdata({ ...userdata, lname: e.target.value })
-                          }}
-                        />
-                      </div>
+                  <div>
+                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                      Last Name
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        required
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                        onChange={(e) => {
+                          setuserdata({ ...userdata, lname: e.target.value })
+                        }}
+                      />
                     </div>
+                  </div>
 
 
-                    <div>
-                      <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                        Mobile Number
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="number"
-                          className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                          onChange={(e) => {
-                            setuserdata({ ...userdata, mobile: e.target.value })
-                            seterr({ ...err, mobile: '' })
-                          }}
-                        />
-                        <small><span className='text-red-600'>{err.mobile}</span></small>
-                      </div>
+                  <div>
+                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                      Mobile Number
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="number"
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                        onChange={(e) => {
+                          setuserdata({ ...userdata, mobile: e.target.value })
+                          seterr({ ...err, mobile: '' })
+                        }}
+                      />
+                      <small><span className='text-red-600'>{err.mobile}</span></small>
                     </div>
+                  </div>
 
 
 
-                    <div>
-                      <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                        Email Address
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="email"
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                          onChange={(e) => {
-                            setuserdata({ ...userdata, email: e.target.value })
-                            seterr({ ...err, email: '' })
-                          }}
-                        />
-                        <small><span className=' text-red-600'>{err.email}</span></small>
-                      </div>
+                  <div>
+                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                      Email Address
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="email"
+                        required
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                        onChange={(e) => {
+                          setuserdata({ ...userdata, email: e.target.value })
+                          seterr({ ...err, email: '' })
+                        }}
+                      />
+                      <small><span className=' text-red-600'>{err.email}</span></small>
                     </div>
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                        Password
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="text"
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                          onChange={(e) => {
-                            setuserdata({ ...userdata, pass: e.target.value })
-                          }}
-                        />
-                      </div>
+                  <div>
+                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                      Password
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        required
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                        onChange={(e) => {
+                          setuserdata({ ...userdata, pass: e.target.value })
+                        }}
+                      />
                     </div>
+                  </div>
 
 
-                    <div>
-                      <button
-                        type="submit"
-                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  <div>
+                    <button
+                      type="submit"
+                      className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 
-                      >
-                        Ragister
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                    >
+                      Ragister
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
-          </>
-        )}
-      </div>
-    )
-  } else if (role === null) {
-    return (
-      <>
-        <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <NavLink to="/" className="flex items-center">
-              <img src={logo} className="h-8 mr-3" alt="Flowbite Logo" />
-              <p className="font-sans self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Ecom</p>
-            </NavLink>
-            <div className="flex md:order-2">
-              <button data-target='#tttt' data-collapse-toggle="#tttt" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false" onClick={() => setcollapse(!collapse)}>
-                <span className="sr-only">Open main menu</span>
-                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-                </svg>
-              </button>
-            </div>
-            <div className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${collapse ? 'hidden' : ''}`} id="tttt">
-              <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li>
-                  <NavLink to="/" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/about" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/feature" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Feature</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/contact" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</NavLink>
-                </li>
-              </ul>
-            </div>
           </div>
-        </nav>
+        </>
+      )}
+    </div>
+  )
 
-        <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-          <div className="text-center">
-            <p className="text-base font-semibold text-indigo-600">405</p>
-            <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Access Denied</h1>
-            <p className="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t access this page without login please login first</p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <NavLink
-                to="/login"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Login Now
-              </NavLink>
-              <NavLink to="/contact" className="text-sm font-semibold text-gray-900">
-                Contact support <span aria-hidden="true">&rarr;</span>
-              </NavLink>
-            </div>
-          </div>
-        </main>
-      </>
-    )
-
-  } else {
-    return (
-      <>
-        <PageNotFound />
-      </>
-    )
-  }
 }
 
 export default AddUser
