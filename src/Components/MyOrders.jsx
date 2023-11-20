@@ -1,20 +1,34 @@
 import React, { useEffect } from 'react'
 import Navbar from './Navbar'
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const MyOrders = () => {
+    const navigate = useNavigate()
+    const role = sessionStorage.getItem('role')
+    const email = sessionStorage.getItem('email')
+    const mobile = sessionStorage.getItem('mobile')
 
     useEffect(() => {
-        toast('Coming Soon', {
-            position: "bottom-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        if (email === null && mobile === null) {
+            navigate('/login')
+            toast('Please login first')
+        } else if (role === 'admin') {
+            navigate('/')
+            toast('Something went wrong')
+        } else {
+            toast('Coming Soon', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        // eslint-disable-next-line 
     }, [])
 
     return (

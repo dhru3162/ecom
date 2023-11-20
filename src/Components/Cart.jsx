@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 
 const Cart = () => {
     const navigate = useNavigate()
+    const role = sessionStorage.getItem('role')
     const contextData = useContext(Datacontext)
     const { cart, totalprice } = contextData
     const email = sessionStorage.getItem('email')
@@ -21,9 +22,12 @@ const Cart = () => {
         if (email === null && mobile === null) {
             navigate('/login')
             toast('Please login first')
+        } else if (role === 'admin') {
+            navigate('/')
+            toast('Something went wrong')
         }
         // eslint-disable-next-line 
-    },[])
+    }, [])
 
     const items = cart.map((cartdata, index) =>
         <div key={index}>

@@ -20,7 +20,12 @@ const Profile = () => {
 
 
     useEffect(() => {
-        getdata()
+        if (checkemail === null && checkmobile === null) {
+            navigate('/login')
+            toast('Please login first')
+        } else {
+            getdata()
+        }
         // eslint-disable-next-line
     }, [])
 

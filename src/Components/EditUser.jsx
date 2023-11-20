@@ -23,8 +23,9 @@ const EditUser = () => {
     } else if (role === 'user') {
       navigate('/')
       toast('Something went wrong')
+    } else {
+      getData()
     }
-    getData()
     // eslint-disable-next-line
   }, [])
 

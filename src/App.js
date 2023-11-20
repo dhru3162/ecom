@@ -21,8 +21,8 @@ import Products from "./Components/Products";
 import EditUser from "./Components/EditUser";
 import AddUser from "./Components/AddUser";
 import AddProduct from './Components/AddProduct';
-import ProductListLoader from "./Components/Loader/ProductListLoader";
 import EditProduct from './Components/EditProduct'
+import Loader from "./Components/Loader/Loader";
 
 function App() {
   const contextData = useContext(Datacontext)
@@ -49,7 +49,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<EditProduct />} />
         <Route path="/products/addproduct" element={<AddProduct />} />
-        <Route path="/loader" element={<ProductListLoader />} />
+        <Route path="/loader" element={<Loader />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
