@@ -6,8 +6,8 @@ import logo from './logo.png'
 const Navbar = (a) => {
     const [collapse, setcollapse] = useState(true)
     // const contextData = useContext(Datacontext)
-    const checklogin = sessionStorage.getItem('email')
-    const checkmobile = sessionStorage.getItem('mobile')
+    const checklogin = localStorage.getItem('email')
+    const checkmobile = localStorage.getItem('mobile')
     const location = useLocation()
     const curruntRoute = location.pathname
 

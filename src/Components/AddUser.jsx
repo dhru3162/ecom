@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 import Loader from './Loader/Loader'
 
 const AddUser = () => {
-  const role = sessionStorage.getItem('role')
-  const email = sessionStorage.getItem('email')
-  const mobile = sessionStorage.getItem('mobile')
+  const role = localStorage.getItem('role')
+  const email = localStorage.getItem('email')
+  const mobile = localStorage.getItem('mobile')
   const navigate = useNavigate()
   const [userdata, setuserdata] = useState({ fname: "", lname: "", mobile: "", email: "", signup: false, pass: '', role: 'user' })
   const [existuser, setexistuser] = useState([])
@@ -187,7 +187,7 @@ const AddUser = () => {
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 
                     >
-                      Ragister
+                      Add
                     </button>
                   </div>
                 </form>

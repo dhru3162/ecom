@@ -13,9 +13,9 @@ const LoginSignup = () => {
     const [existuser, setexistuser] = useState([])
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
-    const email = sessionStorage.getItem('email')
-    const mobile = sessionStorage.getItem('mobile')
-    const role = sessionStorage.getItem('role')
+    const email = localStorage.getItem('email')
+    const mobile = localStorage.getItem('mobile')
+    const role = localStorage.getItem('role')
     const contextData = useContext(Datacontext)
     const { setchang, change } = contextData
 
@@ -75,8 +75,8 @@ const LoginSignup = () => {
                     body: JSON.stringify(userData)
                 })
                     .then(() => {
-                        sessionStorage.setItem('mobile', userData.mobile)
-                        sessionStorage.setItem('role', userData.role)
+                        localStorage.setItem('mobile', userData.mobile)
+                        localStorage.setItem('role', userData.role)
                         axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${userData.mobile}`)
                             .then((data) => {
                                 const userdata = data.data[0].id
@@ -99,8 +99,8 @@ const LoginSignup = () => {
                     body: JSON.stringify(userData)
                 })
                     .then(() => {
-                        sessionStorage.setItem('email', userData.email)
-                        sessionStorage.setItem('role', userData.role)
+                        localStorage.setItem('email', userData.email)
+                        localStorage.setItem('role', userData.role)
                         axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${userData.email}`)
                             .then((data) => {
                                 const userdata = data.data[0].id
@@ -125,8 +125,8 @@ const LoginSignup = () => {
                         return res.json()
                             .then((data) => {
                                 if (data[0].pass === userData.pass) {
-                                    sessionStorage.setItem('mobile', userData.mobile)
-                                    sessionStorage.setItem('role', data[0].role)
+                                    localStorage.setItem('mobile', userData.mobile)
+                                    localStorage.setItem('role', data[0].role)
                                     setLoading(false)
                                     setchang(!change)
                                     if (data[0].signup) {
@@ -155,8 +155,8 @@ const LoginSignup = () => {
                         return res.json()
                             .then((data) => {
                                 if (data[0].pass === userData.pass) {
-                                    sessionStorage.setItem('email', userData.email)
-                                    sessionStorage.setItem('role', data[0].role)
+                                    localStorage.setItem('email', userData.email)
+                                    localStorage.setItem('role', data[0].role)
                                     setLoading(false)
                                     setchang(!change)
                                     if (data[0].signup) {

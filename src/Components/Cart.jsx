@@ -9,11 +9,11 @@ import { toast } from 'react-toastify'
 
 const Cart = () => {
     const navigate = useNavigate()
-    const role = sessionStorage.getItem('role')
+    const role = localStorage.getItem('role')
     const contextData = useContext(Datacontext)
     const { cart, totalprice } = contextData
-    const email = sessionStorage.getItem('email')
-    const mobile = sessionStorage.getItem('mobile')
+    const email = localStorage.getItem('email')
+    const mobile = localStorage.getItem('mobile')
     const [proid, setproid] = useState()
     // eslint-disable-next-line
     const price = eval(totalprice) + 4.99

@@ -7,9 +7,9 @@ import { HashLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 
 const ProductPage = () => {
-    const role = sessionStorage.getItem('role')
-    const email = sessionStorage.getItem('email')
-    const mobile = sessionStorage.getItem('mobile')
+    const role = localStorage.getItem('role')
+    const email = localStorage.getItem('email')
+    const mobile = localStorage.getItem('mobile')
     const navigate = useNavigate()
     const { id } = useParams()
     const [data, setData] = useState({})

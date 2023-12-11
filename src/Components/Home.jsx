@@ -12,7 +12,7 @@ const Home = () => {
     const [addid, setaddid] = useState()
     const [loading, setLoading] = useState(true)
     const contextData = useContext(Datacontext)
-    const role = sessionStorage.getItem('role')
+    const role = localStorage.getItem('role')
 
     useEffect(() => {
         data()

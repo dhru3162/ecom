@@ -5,7 +5,7 @@ const UserListLoader = () => {
     return (
         <div className='dark:bg-black h-screen pt-16'>
             <div className="flex flex-col p-2 lg:p-3">
-                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 dark:bg-black dark:h-screen">
                     <div className="inline-block min-w-full sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
                             <div className="relative overflow-x-auto sm:rounded-lg p-3 lg:p-3 lg:pt-0">

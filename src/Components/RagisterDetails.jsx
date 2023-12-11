@@ -13,12 +13,22 @@ const RagisterDetails = () => {
     const [mobilemail, setmobilemaile] = useState({})
     const [existuser, setexistuser] = useState([])
     const [err, seterr] = useState({})
-    const email = sessionStorage.getItem('email')
-    const ifmobile = sessionStorage.getItem('mobile')
-    const role = sessionStorage.getItem('role')
+    const email = localStorage.getItem('email')
+    const ifmobile = localStorage.getItem('mobile')
+    const role = localStorage.getItem('role')
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        if (email !== null || ifmobile !== null) {
+            navigate('/')
+            // if (role === 'admin') {
+            //     toast('Admin already loggedin')
+            // } else {
+            //     toast('User already loggedin')
+            // }
+        } else if (email === null || ifmobile === null) {
+            navigate('/login')
+        }
         emaildata()
         existlist()
         // eslint-disable-next-line
@@ -41,7 +51,9 @@ const RagisterDetails = () => {
                     }
                     setLoading(false)
                 })
-                .catch((errd) => { alert(errd.massage) })
+                .catch((errd) => {
+                    toast(errd.massage)
+                })
         } else {
             await axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${ifmobile}`)
                 .then((data) => {
@@ -54,12 +66,11 @@ const RagisterDetails = () => {
                         } else {
                             toast('User already registered')
                         }
-                        // toast('Admin already loggedin')
                     }
                     setLoading(false)
                 })
                 .catch((errd) => {
-                    alert(errd.massage)
+                    toast(errd.massage)
                 })
         }
     }
@@ -70,7 +81,7 @@ const RagisterDetails = () => {
                 setexistuser(res.data)
             })
             .catch((err) => {
-                alert(err.message)
+                toast(err.message)
                 navigate('/')
             })
     }
@@ -107,7 +118,7 @@ const RagisterDetails = () => {
                 body: JSON.stringify(userdata)
             })
                 .then(() => {
-                    sessionStorage.setItem('email', userdata.email)
+                    localStorage.setItem('email', userdata.email)
                     toast.success('Details Updated Successfully')
                     navigate('/')
                 })

@@ -7,9 +7,9 @@ import Loader from './Loader/Loader'
 import './Numberstyle.css'
 
 const AddProduct = () => {
-    const role = sessionStorage.getItem('role')
-    const email = sessionStorage.getItem('email')
-    const mobile = sessionStorage.getItem('mobile')
+    const role = localStorage.getItem('role')
+    const email = localStorage.getItem('email')
+    const mobile = localStorage.getItem('mobile')
     const navigate = useNavigate()
     const [productData, setProductData] = useState({ title: '', description: '', category: '', image: "", mrp: '', discount: '', availablestock: '', rating: '' })
     const [err, seterr] = useState({ price: '' })

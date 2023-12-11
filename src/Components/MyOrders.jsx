@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 const MyOrders = () => {
     const navigate = useNavigate()
-    const role = sessionStorage.getItem('role')
-    const email = sessionStorage.getItem('email')
-    const mobile = sessionStorage.getItem('mobile')
+    const role = localStorage.getItem('role')
+    const email = localStorage.getItem('email')
+    const mobile = localStorage.getItem('mobile')
 
     useEffect(() => {
         if (email === null && mobile === null) {

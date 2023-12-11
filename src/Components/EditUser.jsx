@@ -7,9 +7,9 @@ import Skeleton from 'react-loading-skeleton'
 import Loader from './Loader/Loader'
 
 const EditUser = () => {
-  const role = sessionStorage.getItem('role')
-  const email = sessionStorage.getItem('email')
-  const mobile = sessionStorage.getItem('mobile')
+  const role = localStorage.getItem('role')
+  const email = localStorage.getItem('email')
+  const mobile = localStorage.getItem('mobile')
   const [userData, setUserData] = useState({})
   const [firstLoading, setFirstLoading] = useState(true)
   const [loading, setLoading] = useState(false)

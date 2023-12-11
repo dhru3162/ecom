@@ -8,9 +8,9 @@ import './Table.css'
 import ProductListLoader from './Loader/ProductListLoader'
 
 const Products = () => {
-  const mobile = sessionStorage.getItem('mobile')
-  const email = sessionStorage.getItem('email')
-  const role = sessionStorage.getItem('role')
+  const mobile = localStorage.getItem('mobile')
+  const email = localStorage.getItem('email')
+  const role = localStorage.getItem('role')
   const [store, setstore] = useState([])
   const [search, setsearch] = useState("")
   const [deleteProductId, setdeleteProductrId] = useState()

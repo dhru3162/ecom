@@ -11,9 +11,9 @@ import AdminNavbar from './AdminNavbar'
 
 const Profile = () => {
     const navigate = useNavigate()
-    const checkemail = sessionStorage.getItem('email')
-    const checkmobile = sessionStorage.getItem('mobile')
-    const role = sessionStorage.getItem('role')
+    const checkemail = localStorage.getItem('email')
+    const checkmobile = localStorage.getItem('mobile')
+    const role = localStorage.getItem('role')
     const [data, setdata] = useState({ fname: "", lname: "", mobile: "", email: "", pass: "", id: '' })
     const [loading, setLoading] = useState(true)
     const contextData = useContext(Datacontext)
@@ -160,7 +160,7 @@ const Profile = () => {
                                             <button
                                                 type="button" className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                                 onClick={() => {
-                                                    sessionStorage.clear()
+                                                    localStorage.clear()
                                                     navigate('/')
                                                     contextData.setchang(!contextData.change)
                                                 }}>Logout</button>
@@ -286,7 +286,7 @@ const Profile = () => {
                                                 <button
                                                     type="button" className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                                     onClick={() => {
-                                                        sessionStorage.clear()
+                                                        localStorage.clear()
                                                         navigate('/')
                                                         contextData.setchang(!contextData.change)
                                                     }}>Logout</button>

@@ -8,9 +8,9 @@ import { HashLoader } from 'react-spinners'
 import './Table.css'
 
 const Users = () => {
-    const role = sessionStorage.getItem('role')
-    const email = sessionStorage.getItem('email')
-    const mobile = sessionStorage.getItem('mobile')
+    const role = localStorage.getItem('role')
+    const email = localStorage.getItem('email')
+    const mobile = localStorage.getItem('mobile')
     const [store, setstore] = useState([])
     const [search, setsearch] = useState("")
     const [deleteuserid, setdeleteuserid] = useState()
@@ -78,8 +78,8 @@ const Users = () => {
     }
 
     return (
-        <div className=' dark:bg-black h-screen' >
-            <div className=' dark:bg-black h-fit' >
+        <div className='dark:bg-black h-screen' >
+            <div className='dark:bg-black h-fit' >
                 <AdminNavbar />
                 {firstloading ? (
                     <div className='dark:bg-black'>

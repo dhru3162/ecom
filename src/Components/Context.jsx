@@ -2,7 +2,7 @@ import axios from "axios"
 import { createContext, useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
-const Datacontext = createContext()
+const   Datacontext = createContext()
 
 const Dataprovider = ({ children }) => {
     const [palceorder, setpalceorder] = useState('')
@@ -17,8 +17,8 @@ const Dataprovider = ({ children }) => {
     const [userdata, setuserdata] = useState({})
     const [loading, setloading] = useState(false)
     const [firstloading, setFirstLoading] = useState(true)
-    const storeemail = sessionStorage.getItem('email')
-    const storemobile = sessionStorage.getItem('mobile')
+    const storeemail = localStorage.getItem('email')
+    const storemobile = localStorage.getItem('mobile')
 
     useEffect(() => {
         fatchcartdata()
