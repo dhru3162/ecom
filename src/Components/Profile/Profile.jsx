@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Navbar from './Navbar'
+import Navbar from '../Navbars/Navbar'
 import { useNavigate } from 'react-router-dom'
-import Footer from './Footer'
+import Footer from '../Home/Footer'
 import axios from 'axios'
-import Loader from './Loader/Loader'
+import Loader from '../Loader/Loader'
 import { toast } from 'react-toastify'
 import { NavLink } from 'react-router-dom'
-import { Datacontext } from './Context'
-import AdminNavbar from './AdminNavbar'
+import { Datacontext } from '../Context'
+import AdminNavbar from '../Navbars/AdminNavbar'
 
 const Profile = () => {
     const navigate = useNavigate()

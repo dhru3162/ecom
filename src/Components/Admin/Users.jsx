@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import AdminNavbar from './AdminNavbar'
+import AdminNavbar from '../../Components/Navbars/AdminNavbar'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import UserListLoader from './Loader/UserListLoader'
+import UserListLoader from '../Loader/UserListLoader'
 import { HashLoader } from 'react-spinners'
-import './Table.css'
+import '../Table.css'
 
 const Users = () => {
-    const role = localStorage.getItem('role')
-    const email = localStorage.getItem('email')
-    const mobile = localStorage.getItem('mobile')
     const [store, setstore] = useState([])
     const [search, setsearch] = useState("")
     const [deleteuserid, setdeleteuserid] = useState()
@@ -19,13 +16,6 @@ const Users = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (email === null && mobile === null) {
-            navigate('/login')
-            toast('Please login first')
-        } else if (role === 'user') {
-            navigate('/')
-            toast('Something went wrong')
-        }
         getData()
         // eslint-disable-next-line
     }, [])

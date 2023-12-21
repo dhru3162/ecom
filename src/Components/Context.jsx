@@ -2,7 +2,7 @@ import axios from "axios"
 import { createContext, useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
-const   Datacontext = createContext()
+const Datacontext = createContext()
 
 const Dataprovider = ({ children }) => {
     const [palceorder, setpalceorder] = useState('')

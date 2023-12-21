@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Navbar from './Navbar';
+import Navbar from '../Navbars/Navbar';
 import { Link } from 'react-router-dom'
 import Footer from './Footer';
-import { Datacontext } from './Context';
+import { Datacontext } from '../Context';
 import { HashLoader } from 'react-spinners';
-import HomeLoader from './Loader/HomeLoader';
-import AdminNavbar from './AdminNavbar'
+import HomeLoader from '../Loader/HomeLoader';
+import AdminNavbar from '../Navbars/AdminNavbar'
 
 const Home = () => {
     const [product, setproduct] = useState([])

@@ -1,33 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Datacontext } from './Context'
-import Navbar from './Navbar'
-import './Numberstyle.css'
+import React, { useContext, useState } from 'react'
+import { Datacontext } from '../Context'
+import Navbar from '../Navbars/Navbar'
+import '../Numberstyle.css'
 import { useNavigate } from 'react-router-dom'
-import CartLoader from './Loader/CartLoader';
+import CartLoader from '../Loader/CartLoader';
 import { HashLoader } from 'react-spinners'
-import { toast } from 'react-toastify'
 
 const Cart = () => {
     const navigate = useNavigate()
-    const role = localStorage.getItem('role')
     const contextData = useContext(Datacontext)
     const { cart, totalprice } = contextData
-    const email = localStorage.getItem('email')
-    const mobile = localStorage.getItem('mobile')
     const [proid, setproid] = useState()
     // eslint-disable-next-line
     const price = eval(totalprice) + 4.99
-
-    useEffect(() => {
-        if (email === null && mobile === null) {
-            navigate('/login')
-            toast('Please login first')
-        } else if (role === 'admin') {
-            navigate('/')
-            toast('Something went wrong')
-        }
-        // eslint-disable-next-line 
-    }, [])
 
     const items = cart.map((cartdata, index) =>
         <div key={index}>

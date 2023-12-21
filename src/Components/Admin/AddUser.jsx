@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import AdminNavBar from './AdminNavbar'
+import AdminNavBar from '../../Components/Navbars/AdminNavbar'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Loader from './Loader/Loader'
+import Loader from '../Loader/Loader'
 
 const AddUser = () => {
-  const role = localStorage.getItem('role')
-  const email = localStorage.getItem('email')
-  const mobile = localStorage.getItem('mobile')
   const navigate = useNavigate()
   const [userdata, setuserdata] = useState({ fname: "", lname: "", mobile: "", email: "", signup: false, pass: '', role: 'user' })
   const [existuser, setexistuser] = useState([])
@@ -16,13 +13,6 @@ const AddUser = () => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (email === null && mobile === null) {
-      navigate('/login')
-      toast('Please login first')
-    } else if (role === 'user') {
-      navigate('/')
-      toast('Something went wrong')
-    }
     existlist()
     // eslint-disable-next-line
   }, [])
@@ -33,7 +23,7 @@ const AddUser = () => {
         setexistuser(res.data)
       })
       .catch((err) => {
-        alert(err.message)
+        toast.error('Somthing Went Wrong')
         navigate('/')
       })
   }

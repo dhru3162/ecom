@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Navbar from './Navbar'
-import logo from './logo.png'
+import Navbar from '../Navbars/Navbar'
+import logo from '../logo.png'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Loader from './Loader/Loader'
-import { Datacontext } from './Context'
+import Loader from '../Loader/Loader'
+import { Datacontext } from '../Context'
 
 const LoginSignup = () => {
     const [checkNum, setCheckNum] = useState()

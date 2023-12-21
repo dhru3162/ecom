@@ -1,39 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Navbar from './Navbar'
+import Navbar from '../Navbars/Navbar'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Datacontext } from './Context'
+import { Datacontext } from '../Context'
 import Skeleton from 'react-loading-skeleton'
 import { HashLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 
 const ProductPage = () => {
-    const role = localStorage.getItem('role')
-    const email = localStorage.getItem('email')
-    const mobile = localStorage.getItem('mobile')
-    const navigate = useNavigate()
     const { id } = useParams()
+    const navigate = useNavigate()
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true)
     const contextData = useContext(Datacontext)
 
     useEffect(() => {
-        if (email === null && mobile === null) {
-            navigate('/login')
-            toast('Please login first')
-        } else if (role === 'admin') {
-            navigate('/')
-            toast('Something went wrong')
-        } else {
-            getProduct()
-        }
+        getProduct()
         // eslint-disable-next-line
     }, [])
 
     const getProduct = async () => {
-        const data1 = await fetch(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomProducts/${id}`)
-        const myJson = await data1.json()
-        setData({ id: myJson.id, title: myJson.title, rate: myJson.rating.rate, price: myJson.price, description: myJson.description, image: myJson.image })
-        setLoading(false)
+        try {
+            const data1 = await fetch(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomProducts/${id}`)
+            const myJson = await data1.json()
+            setData({ id: myJson.id, title: myJson.title, rate: myJson.rating.rate, price: myJson.price, description: myJson.description, image: myJson.image })
+            setLoading(false)
+        } catch (error) {
+            toast.error(`Something went wrong`)
+            navigate(`/`)
+        }
     }
 
 

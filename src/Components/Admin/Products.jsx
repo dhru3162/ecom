@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import AdminNavbar from './AdminNavbar'
+import AdminNavbar from '../../Components/Navbars/AdminNavbar'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { HashLoader } from 'react-spinners'
-import './Table.css'
-import ProductListLoader from './Loader/ProductListLoader'
+import '../Table.css'
+import ProductListLoader from '../Loader/ProductListLoader'
 
 const Products = () => {
-  const mobile = localStorage.getItem('mobile')
-  const email = localStorage.getItem('email')
-  const role = localStorage.getItem('role')
+  // const mobile = localStorage.getItem('mobile')
+  // const email = localStorage.getItem('email')
+  // const role = localStorage.getItem('role')
   const [store, setstore] = useState([])
   const [search, setsearch] = useState("")
   const [deleteProductId, setdeleteProductrId] = useState()
@@ -19,15 +19,16 @@ const Products = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (email === null && mobile === null) {
-      navigate('/login')
-      toast('Please login first')
-    } else if (role === 'user') {
-      navigate('/')
-      toast('Something went wrong')
-    } else {
-      getData()
-    }
+    // if (email === null && mobile === null) {
+    //   navigate('/login')
+    //   toast('Please login first')
+    // } else if (role === 'user') {
+    //   navigate('/')
+    //   toast('Something went wrong')
+    // } else {
+
+    // }
+    getData()
     // eslint-disable-next-line
   }, [])
 

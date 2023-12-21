@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import github from '../Logos/github.png'
-import twitter from '../Logos/twitter.png'
-import facebook from '../Logos/facebook.png'
-import instagram from '../Logos/instagram (1).png'
-import logo from './logo.png'
+import github from '../../Logos/github.png'
+import twitter from '../../Logos/twitter.png'
+import facebook from '../../Logos/facebook.png'
+import instagram from '../../Logos/instagram (1).png'
+import logo from '../logo.png'
 
 
 const Footer = () => {

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import AdminNavBar from './AdminNavbar'
+import AdminNavBar from '../../Components/Navbars/AdminNavbar'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Skeleton from 'react-loading-skeleton'
-import Loader from './Loader/Loader'
+import Loader from '../Loader/Loader'
 
 const EditUser = () => {
-  const role = localStorage.getItem('role')
-  const email = localStorage.getItem('email')
-  const mobile = localStorage.getItem('mobile')
   const [userData, setUserData] = useState({})
   const [firstLoading, setFirstLoading] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -17,15 +14,7 @@ const EditUser = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (email === null && mobile === null) {
-      navigate('/login')
-      toast('Please login first')
-    } else if (role === 'user') {
-      navigate('/')
-      toast('Something went wrong')
-    } else {
-      getData()
-    }
+    getData()
     // eslint-disable-next-line
   }, [])
 
@@ -36,7 +25,12 @@ const EditUser = () => {
         setFirstLoading(false)
       })
       .catch((err) => {
-        toast.error(`${err.massage}`)
+        if (err.massage === undefined) {
+          navigate(`/`)
+          toast.error('Somthing Went Wrong')
+        } else {
+          toast.error(`${err.massage}`)
+        }
         setFirstLoading(false)
       })
   }

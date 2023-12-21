@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import AdminNavBar from './AdminNavbar'
+import AdminNavBar from '../../Components/Navbars/AdminNavbar'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Loader from './Loader/Loader'
-import './Numberstyle.css'
+import Loader from '../Loader/Loader'
+import '.././Numberstyle.css'
 
 const AddProduct = () => {
-    const role = localStorage.getItem('role')
-    const email = localStorage.getItem('email')
-    const mobile = localStorage.getItem('mobile')
     const navigate = useNavigate()
     const [productData, setProductData] = useState({ title: '', description: '', category: '', image: "", mrp: '', discount: '', availablestock: '', rating: '' })
     const [err, seterr] = useState({ price: '' })
@@ -18,13 +15,13 @@ const AddProduct = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        if (email === null && mobile === null) {
-            navigate('/login')
-            toast('Please login first')
-        } else if (role === 'user') {
-            navigate('/')
-            toast('Something went wrong')
-        }
+        // if (email === null && mobile === null) {
+        //     navigate('/login')
+        //     toast('Please login first')
+        // } else if (role === 'user') {
+        //     navigate('/')
+        //     toast('Something went wrong')
+        // }
         getData()
         // eslint-disable-next-line
     }, [])

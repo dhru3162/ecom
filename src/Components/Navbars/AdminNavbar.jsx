@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import logo from './logo.png'
-import { Datacontext } from './Context'
+import logo from '../logo.png'
+// import { Datacontext } from './Context'
 
-const Navbar = () => {
+const Navbar = (a) => {
     const [collapse, setcollapse] = useState(true)
-    const contextData = useContext(Datacontext)
+    // const contextData = useContext(Datacontext)
     const checklogin = localStorage.getItem('email')
     const checkmobile = localStorage.getItem('mobile')
     const location = useLocation()
@@ -20,11 +20,11 @@ const Navbar = () => {
                         <p className="font-sans self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Ecom</p>
                     </NavLink>
                     <div className="flex md:order-2">
-                        <NavLink to={'/cart'} type="button" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                        {/* <NavLink to={'/cart'} type="button" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                             <i className="bi bi-cart2"></i>
                             {contextData.cart.length > 0 &&
                                 <span className='text-xs h-4 w-4 bg-blue-700 rounded-full text-center text-white font-bold relative right-1 -top-2 inline-block'>{contextData.cart.length}</span>}
-                        </NavLink>
+                        </NavLink> */}
                         <NavLink to={checkmobile === null & checklogin === null ? '/login' : '/profile'} type="button" className="py-2 pr-2 lg:pr-4 lg:pl-3 lg:ml-5 md:pr-4 md:pl-3 md:ml-5 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                             <i className="bi bi-person-circle"></i>
                         </NavLink>
@@ -41,17 +41,17 @@ const Navbar = () => {
                                 <NavLink to="/" className={`${curruntRoute === '/' ? 'text-blue-700' : 'text-gray-900'} block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`} aria-current="location">Home</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/myorders" className={`${curruntRoute === '/myorders' ? 'text-blue-700' : 'text-gray-900'} block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}>My Orders</NavLink>
+                                <NavLink to="/users" className={`${curruntRoute === '/users' ? 'text-blue-700' : 'text-gray-900'} block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}>Users</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/about" className={`${curruntRoute === '/about' ? 'text-blue-700' : 'text-gray-900'} block py-2 pl-3 pr-4 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}>About</NavLink>
+                                <NavLink to="/products" className={`${curruntRoute === '/products' ? 'text-blue-700' : 'text-gray-900'} block py-2 pl-3 pr-4 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}>Products</NavLink>
                             </li>
-                            <li>
+                            {/* <li>
                                 <NavLink to="/feature" className={`${curruntRoute === '/feature' ? 'text-blue-700' : 'text-gray-900'} block py-2 pl-3 pr-4 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}>Feature</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/contact" className={`${curruntRoute === '/contact' ? 'text-blue-700' : 'text-gray-900'} block py-2 pl-3 pr-4 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}>Contact</NavLink>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

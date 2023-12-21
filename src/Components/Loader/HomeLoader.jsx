@@ -1,11 +1,11 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import Navbar from '../Navbar'
+import Navbar from '../../Components/Navbars/Navbar'
 
 const HomeLoader = () => {
     return (
-        Array(12).fill(0).map((item) => (
-            <div className='dark:bg-black'>
+        Array(12).fill(0).map((item, index) => (
+            <div className='dark:bg-black' key={index}>
                 <Navbar />
                 <div className='m-5 dark:bg-black'>
                     <div className=" w-full aspect-[9/12] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

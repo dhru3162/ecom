@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import Navbar from './Navbar'
-import "./Numberstyle.css"
+import Navbar from '../Navbars/Navbar'
+import "../Numberstyle.css"
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
-import Loader from './Loader/Loader'
+import Loader from '../Loader/Loader'
 
 const RagisterDetails = () => {
     const navigate = useNavigate()
@@ -21,11 +21,6 @@ const RagisterDetails = () => {
     useEffect(() => {
         if (email !== null || ifmobile !== null) {
             navigate('/')
-            // if (role === 'admin') {
-            //     toast('Admin already loggedin')
-            // } else {
-            //     toast('User already loggedin')
-            // }
         } else if (email === null || ifmobile === null) {
             navigate('/login')
         }

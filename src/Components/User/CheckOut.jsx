@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Datacontext } from './Context'
-import './Numberstyle.css'
+import { Datacontext } from '../Context'
+import '../Numberstyle.css'
 import { NavLink, useNavigate, Link } from 'react-router-dom'
-// import { toast } from 'react-toastify'
-// import CartLoader from './Loader/CartLoader'
-import logo from './logo.png'
-import Loader from './Loader/Loader'
+import logo from '../logo.png'
+import Loader from '../Loader/Loader'
 
-const Cart = () => {
+const CheckOut = () => {
 
     useEffect(() => {
         contextData.setNewOrderData([])
@@ -1353,4 +1351,4 @@ const Cart = () => {
     )
 }
 
-export default Cart
+export default CheckOut
