@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import Loader from '../Loader/Loader'
 import Navbar from '../../Components/Navbars/AdminNavbar'
 
-const ProtectAdmin = ({Comp}) => {
+const ProtectAdmin = ({ Comp }) => {
     const navigate = useNavigate()
     const role = localStorage.getItem('role')
     const email = localStorage.getItem('email')
@@ -35,7 +35,7 @@ const ProtectAdmin = ({Comp}) => {
                     toast(`${err.massage} Reload Page`)
                 })
         }
-    })
+    }, [role, email, mobile])
 
     return (
         <>

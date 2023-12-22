@@ -37,7 +37,7 @@ const ProtectUser = ({ Comp }) => {
                     toast('Something went wrong')
                 })
         }
-    })
+    }, [role, email, mobile])
 
     return (
         <>
