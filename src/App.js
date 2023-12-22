@@ -23,7 +23,7 @@ import AddProduct from './Components/Admin/AddProduct';
 import EditProduct from './Components/Admin/EditProduct'
 // import Loader from "./Components/Loader/Loader";
 import ProtectAdmin from './Components/ProtectedCom/ProtectAdmin';
-import ProtectUser from './Components/ProtectedCom/ProtectUser';
+import ProtectUser from "./Components/ProtectedCom/ProtectUser";
 
 function App() {
   const contextData = useContext(Datacontext)
@@ -38,9 +38,9 @@ function App() {
         <Route path="/feature" element={<Feature />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/f&q" element={<FQ />} />
-        <Route path="/cart" element={<ProtectUser Comp={<Cart />} />} />
-        <Route path="/myorders" element={<ProtectUser Comp={<MyOrders />} />} />
-        <Route path={`/cart/${contextData.palceorder}`} element={<ProtectUser Comp={<CheckOut />} />} />
+        <Route path="/cart" element={<ProtectUser Comp={Cart} />} />
+        <Route path="/myorders" element={<ProtectUser Comp={MyOrders} />} />
+        <Route path={`/cart/${contextData.palceorder}`} element={<ProtectUser Comp={CheckOut} />} />
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/ragister" element={<RagisterDetails />} />

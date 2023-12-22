@@ -5,8 +5,7 @@ import { toast } from 'react-toastify'
 import Loader from '../Loader/Loader'
 import Navbar from '../../Components/Navbars/Navbar'
 
-const ProtectAdmin = (props) => {
-    const { Comp } = props
+const ProtectUser = ({ Comp }) => {
     const navigate = useNavigate()
     const role = localStorage.getItem('role')
     const email = localStorage.getItem('email')
@@ -14,7 +13,7 @@ const ProtectAdmin = (props) => {
     const [authDone, setAuthDone] = useState(false)
 
     useEffect(() => {
-        if (email === null && mobile === null) {
+        if (email === null && mobile === null && role === null) {
             navigate('/login')
             toast('Please login first')
         } else if (role !== 'user') {
@@ -54,4 +53,4 @@ const ProtectAdmin = (props) => {
     )
 }
 
-export default ProtectAdmin
+export default ProtectUser

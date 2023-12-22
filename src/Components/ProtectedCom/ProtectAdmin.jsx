@@ -5,8 +5,7 @@ import { toast } from 'react-toastify'
 import Loader from '../Loader/Loader'
 import Navbar from '../../Components/Navbars/AdminNavbar'
 
-const ProtectAdmin = (props) => {
-    const { Comp } = props
+const ProtectAdmin = ({Comp}) => {
     const navigate = useNavigate()
     const role = localStorage.getItem('role')
     const email = localStorage.getItem('email')
