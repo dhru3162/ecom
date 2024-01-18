@@ -37,6 +37,7 @@ const ProtectUser = ({ Comp }) => {
                     toast('Something went wrong')
                 })
         }
+        // eslint-disable-next-line
     }, [role, email, mobile])
 
     return (
