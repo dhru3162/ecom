@@ -15,7 +15,7 @@ const LoginSignup = () => {
     const [loading, setLoading] = useState(false)
     const email = localStorage.getItem('email')
     const mobile = localStorage.getItem('mobile')
-    const role = localStorage.getItem('role')
+    // const role = localStorage.getItem('role')
     const contextData = useContext(Datacontext)
     const { setchang, change } = contextData
 
