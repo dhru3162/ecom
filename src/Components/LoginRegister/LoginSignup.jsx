@@ -22,12 +22,13 @@ const LoginSignup = () => {
     useEffect(() => {
         if (email !== null || mobile !== null) {
             navigate('/')
-            if (role === 'admin') {
-                toast('Admin already loggedin')
-            } else {
-                toast('User already loggedin')
-            }
+            // if (role === 'admin') {
+            //     toast('Admin already loggedin')
+            // } else {
+            //     toast('User already loggedin')
+            // }
         }
+        contextData.secretCodeForRegister()
         existlist()
         // eslint-disable-next-line
     }, [])
@@ -86,6 +87,7 @@ const LoginSignup = () => {
                             })
                         setLoading(false)
                         toast.success('Register Successfully')
+                        sessionStorage.setItem('register', contextData.secretCode)
                         setchang(!change)
                         navigate(`/ragister`)
                     })
@@ -110,6 +112,7 @@ const LoginSignup = () => {
                             })
                         setLoading(false)
                         toast.success('Register Successfully')
+                        sessionStorage.setItem('register', contextData.secretCode)
                         setchang(!change)
                         navigate(`/ragister`)
                     })
@@ -135,14 +138,14 @@ const LoginSignup = () => {
                                         navigate(`/ragister`)
                                     }
                                     if (data[0].role === 'admin') {
-                                        toast.success('Admin Logged Successfully')
+                                        toast.success('Admin Logged in Successfully')
                                     } else {
                                         toast.success('Login Successfully')
                                     }
                                 }
                                 else {
                                     setLoading(false)
-                                    toast.error("Your Mobile Number Or Password Is Incorrect")
+                                    toast.error("Wrong Password")
                                 }
                             })
                     })
@@ -172,7 +175,7 @@ const LoginSignup = () => {
                                 }
                                 else {
                                     setLoading(false)
-                                    toast.error("Your Email Id Or Password Is Incorrect")
+                                    toast.error("Wrong Password")
                                 }
                             })
                     })
@@ -248,7 +251,8 @@ const LoginSignup = () => {
                                                 Password
                                             </label>
                                             <div className="text-sm">
-                                                <button type='button' className="font-semibold text-blue-700 hover:text-blue-800"
+                                                <div
+                                                    className="font-semibold text-blue-700 hover:text-blue-800"
                                                     onClick={() => {
                                                         toast('Coming Soon', {
                                                             position: "bottom-right",
@@ -259,11 +263,11 @@ const LoginSignup = () => {
                                                             draggable: true,
                                                             progress: undefined,
                                                             theme: "light",
-                                                        });
+                                                        })
                                                     }}
                                                 >
                                                     Forgot password?
-                                                </button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="mt-2">

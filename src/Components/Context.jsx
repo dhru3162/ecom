@@ -6,6 +6,7 @@ const Datacontext = createContext()
 
 const Dataprovider = ({ children }) => {
     const [palceorder, setpalceorder] = useState('')
+    const [secretCode, setSecretCode] = useState('')
     const [cart, setcart] = useState([])
     const [address, setAddress] = useState([])
     const [card, setCard] = useState([])
@@ -39,6 +40,21 @@ const Dataprovider = ({ children }) => {
             randomstring += characters.substring(rnum, rnum + 1);
         }
         setpalceorder(randomstring)
+    }
+
+    const secretCodeForRegister  = () => {
+        const characters = "abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+
+        //specify the length for the new string
+        const lenString = 10;
+        var randomstring = '';
+
+        //loop to select a new character in each iteration
+        for (var i = 0; i < lenString; i++) {
+            var rnum = Math.floor(Math.random() * characters.length);
+            randomstring += characters.substring(rnum, rnum + 1);
+        }
+        setSecretCode(randomstring)
     }
 
     const fatchcartdata = () => {
@@ -381,6 +397,7 @@ const Dataprovider = ({ children }) => {
             change,
             address,
             loading,
+            secretCode,
             palceorder,
             totalprice,
             newOrderData,
@@ -397,8 +414,10 @@ const Dataprovider = ({ children }) => {
             decreaseQtn,
             fatchcartdata,
             removeProduct,
+            setSecretCode,
             orderNotPlaced,
-            setNewOrderData
+            setNewOrderData,
+            secretCodeForRegister
         }}>
             {children}
         </Datacontext.Provider>

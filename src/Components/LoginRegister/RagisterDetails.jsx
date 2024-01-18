@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Navbar from '../Navbars/Navbar'
@@ -6,6 +6,7 @@ import "../Numberstyle.css"
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import Loader from '../Loader/Loader'
+import { Datacontext } from '../Context'
 
 const RagisterDetails = () => {
     const navigate = useNavigate()
@@ -16,13 +17,15 @@ const RagisterDetails = () => {
     const email = localStorage.getItem('email')
     const ifmobile = localStorage.getItem('mobile')
     const role = localStorage.getItem('role')
+    const registerCode = sessionStorage.getItem('register')
     const [loading, setLoading] = useState(true)
+    const contextData = useContext(Datacontext)
 
     useEffect(() => {
-        if (email !== null || ifmobile !== null) {
+        if (registerCode === null || registerCode === '') {
             navigate('/')
-        } else if (email === null || ifmobile === null) {
-            navigate('/login')
+        } else if (registerCode !== contextData.secretCode) {
+            navigate('/')
         }
         emaildata()
         existlist()
@@ -105,7 +108,7 @@ const RagisterDetails = () => {
 
     const submit = (e) => {
         e.preventDefault()
-
+        sessionStorage.clear('register')
         if (check()) {
             fetch(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${mobilemail.id}`, {
                 method: "PUT",
