@@ -35,6 +35,7 @@ const ProtectAdmin = ({ Comp }) => {
                     toast(`${err.massage} Reload Page`)
                 })
         }
+         // eslint-disable-next-line
     }, [role, email, mobile])
 
     return (
