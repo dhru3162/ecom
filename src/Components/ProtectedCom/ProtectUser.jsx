@@ -9,11 +9,10 @@ const ProtectUser = ({ Comp }) => {
     const navigate = useNavigate()
     const role = localStorage.getItem('role')
     const email = localStorage.getItem('email')
-    const mobile = localStorage.getItem('mobile')
     const [authDone, setAuthDone] = useState(false)
 
     useEffect(() => {
-        if (email === null && mobile === null && role === null) {
+        if (email === null && role === null) {
             navigate('/login')
             toast('Please login first')
         } else if (role !== 'user') {
@@ -38,7 +37,7 @@ const ProtectUser = ({ Comp }) => {
                 })
         }
         // eslint-disable-next-line
-    }, [role, email, mobile])
+    }, [role, email])
 
     return (
         <>

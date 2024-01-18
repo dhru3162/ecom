@@ -11,11 +11,10 @@ import { Datacontext } from '../Context'
 const RagisterDetails = () => {
     const navigate = useNavigate()
     const [userdata, setuserdata] = useState({ fname: "", lname: "", mobile: "", email: "" })
-    const [mobilemail, setmobilemaile] = useState({})
+    const [userEmail, setuserEmail] = useState({})
     const [existuser, setexistuser] = useState([])
     const [err, seterr] = useState({})
     const email = localStorage.getItem('email')
-    const ifmobile = localStorage.getItem('mobile')
     const role = localStorage.getItem('role')
     const registerCode = sessionStorage.getItem('register')
     const [loading, setLoading] = useState(true)
@@ -33,44 +32,23 @@ const RagisterDetails = () => {
     }, [])
 
     const emaildata = async () => {
-        if (ifmobile === null) {
-            await axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${email}`)
-                .then((data) => {
-                    setmobilemaile(data.data[0])
-                    setuserdata(data.data[0])
-                    if (data.data[0].signup) {
-                        navigate('/')
-                        if (role === 'admin') {
-                            toast('Admin already registered')
-                        } else {
-                            toast('User already registered')
-                        }
-                        // toast('Admin already loggedin')
+        await axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${email}`)
+            .then((data) => {
+                setuserEmail(data.data[0])
+                setuserdata(data.data[0])
+                if (data.data[0].signup) {
+                    navigate('/')
+                    if (role === 'admin') {
+                        toast('Admin already registered')
+                    } else {
+                        toast('User already registered')
                     }
-                    setLoading(false)
-                })
-                .catch((errd) => {
-                    toast(errd.massage)
-                })
-        } else {
-            await axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${ifmobile}`)
-                .then((data) => {
-                    setmobilemaile(data.data[0])
-                    setuserdata(data.data[0])
-                    if (data.data[0].signup) {
-                        navigate('/')
-                        if (role === 'admin') {
-                            toast('Admin already registered')
-                        } else {
-                            toast('User already registered')
-                        }
-                    }
-                    setLoading(false)
-                })
-                .catch((errd) => {
-                    toast(errd.massage)
-                })
-        }
+                }
+                setLoading(false)
+            })
+            .catch((errd) => {
+                toast(errd.massage)
+            })
     }
 
     const existlist = async () => {
@@ -89,12 +67,12 @@ const RagisterDetails = () => {
 
         // eslint-disable-next-line 
         existuser.map((data) => {
-            if (mobilemail.mobile === "") {
+            if (userEmail.mobile === "") {
                 if (data.mobile === userdata.mobile) {
                     error.mobile = 'Mobile Number Already Exists'
                 }
             }
-            if (mobilemail.email === '') {
+            if (userEmail.email === '') {
                 if (data.email === userdata.email) {
                     error.email = 'Email Already Exists'
                 }
@@ -110,7 +88,7 @@ const RagisterDetails = () => {
         e.preventDefault()
         sessionStorage.clear('register')
         if (check()) {
-            fetch(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${mobilemail.id}`, {
+            fetch(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin/${userEmail.id}`, {
                 method: "PUT",
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(userdata)
@@ -134,28 +112,7 @@ const RagisterDetails = () => {
             ) : (
                 <div>
                     <div>
-                        {/* {email === null && ifmobile === null ? (
-                            <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-                                <div className="text-center">
-                                    <p className="text-base font-semibold text-indigo-600">405</p>
-                                    <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Access Denied</h1>
-                                    <p className="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t access this page without login please login first</p>
-                                    <div className="mt-10 flex items-center justify-center gap-x-6">
-                                        <NavLink
-                                            to="/login"
-                                            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        >
-                                            Login Now
-                                        </NavLink>
-                                        <NavLink to="/contact" className="text-sm font-semibold text-gray-900">
-                                            Contact support <span aria-hidden="true">&rarr;</span>
-                                        </NavLink>
-                                    </div>
-                                </div>
-                            </main>
-                        ) : (
-                            <> */}
-                        {mobilemail.signup ? (
+                        {userEmail.signup ? (
                             <div className='dark:bg-black h-screen'>
                                 <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
                                     <div className="text-center">
@@ -220,7 +177,7 @@ const RagisterDetails = () => {
                                                 </div>
                                             </div>
 
-                                            {mobilemail.mobile === "" && (
+                                            {userEmail.mobile === "" && (
                                                 <div>
                                                     <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
                                                         Mobile Number
@@ -240,7 +197,7 @@ const RagisterDetails = () => {
                                                 </div>
                                             )}
 
-                                            {mobilemail.email === '' && (
+                                            {userEmail.email === '' && (
                                                 <div>
                                                     <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
                                                         Email Address

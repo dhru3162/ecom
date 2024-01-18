@@ -12,7 +12,6 @@ import AdminNavbar from '../Navbars/AdminNavbar'
 const Profile = () => {
     const navigate = useNavigate()
     const checkemail = localStorage.getItem('email')
-    const checkmobile = localStorage.getItem('mobile')
     const role = localStorage.getItem('role')
     const [data, setdata] = useState({ fname: "", lname: "", mobile: "", email: "", pass: "", id: '' })
     const [loading, setLoading] = useState(true)
@@ -20,7 +19,7 @@ const Profile = () => {
 
 
     useEffect(() => {
-        if (checkemail === null && checkmobile === null) {
+        if (checkemail === null) {
             navigate('/login')
             toast('Please login first')
         } else {
@@ -30,27 +29,15 @@ const Profile = () => {
     }, [])
 
     const getdata = () => {
-        if (checkemail != null) {
-            axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${checkemail}`)
-                .then((data) => {
-                    setdata(data.data[0])
-                    setLoading(false)
-                })
-                .catch((errd) => {
-                    console.log(errd.massage)
-                    toast.warning(`Something Went Wrong Refresh Page`)
-                })
-        } else {
-            axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${checkmobile}`)
-                .then((data) => {
-                    setdata(data.data[0])
-                    setLoading(false)
-                })
-                .catch((errd) => {
-                    console.log(errd.massage)
-                    toast.error(`Something Went Wrong Refresh Page`)
-                })
-        }
+        axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${checkemail}`)
+            .then((data) => {
+                setdata(data.data[0])
+                setLoading(false)
+            })
+            .catch((errd) => {
+                console.log(errd.massage)
+                toast.warning(`Something Went Wrong Refresh Page`)
+            })
     }
 
     const change = (e) => {
@@ -179,7 +166,7 @@ const Profile = () => {
         return (
             <>
                 <Navbar />
-                {checkemail === null && checkmobile === null ? (
+                {checkemail === null ? (
                     <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 ">
                         <div className="text-center">
                             <p className="text-base font-semibold text-indigo-600">405</p>

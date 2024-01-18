@@ -2,11 +2,9 @@ import React, { useEffect } from 'react'
 import Navbar from '../Navbars/Navbar'
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
 
 const MyOrders = () => {
-    // const navigate = useNavigate()
-
+    
     useEffect(() => {
 
         toast('Coming Soon', {

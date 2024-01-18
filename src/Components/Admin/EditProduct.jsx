@@ -15,13 +15,6 @@ const AddProduct = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        // if (email === null && mobile === null) {
-        //     navigate('/login')
-        //     toast('Please login first')
-        // } else if (role === 'user') {
-        //     navigate('/')
-        //     toast('Something went wrong')
-        // }
         getData()
         // eslint-disable-next-line
     }, [])

@@ -48,7 +48,6 @@ const AddUser = () => {
   const submit = (e) => {
     setLoading(true)
     e.preventDefault()
-    // console.log(userdata)
     if (check()) {
       axios.post(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin`, userdata)
         .then(() => {

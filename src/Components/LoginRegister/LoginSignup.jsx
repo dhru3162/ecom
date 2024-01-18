@@ -8,25 +8,17 @@ import Loader from '../Loader/Loader'
 import { Datacontext } from '../Context'
 
 const LoginSignup = () => {
-    const [checkNum, setCheckNum] = useState()
     const [userData, setUserData] = useState({ email: '', mobile: '', pass: '', fname: "", lname: '', signup: false, role: 'user' })
     const [existuser, setexistuser] = useState([])
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const email = localStorage.getItem('email')
-    const mobile = localStorage.getItem('mobile')
-    // const role = localStorage.getItem('role')
     const contextData = useContext(Datacontext)
     const { setchang, change } = contextData
 
     useEffect(() => {
-        if (email !== null || mobile !== null) {
+        if (email !== null) {
             navigate('/')
-            // if (role === 'admin') {
-            //     toast('Admin already loggedin')
-            // } else {
-            //     toast('User already loggedin')
-            // }
         }
         contextData.secretCodeForRegister()
         existlist()
@@ -49,14 +41,8 @@ const LoginSignup = () => {
 
         // eslint-disable-next-line 
         existuser.map((data, index) => {
-            if (checkNum) {
-                if (data.mobile === userData.mobile) {
-                    error.mobile = 'Mobile Number Already Exists'
-                }
-            } else {
-                if (data.email.toUpperCase() === userData.email.toUpperCase()) {
-                    error.email = 'Email Already Exists'
-                }
+            if (data.email.toUpperCase() === userData.email.toUpperCase()) {
+                error.email = 'Email Already Exists'
             }
             <div key={index}></div>
         })
@@ -69,120 +55,61 @@ const LoginSignup = () => {
         e.preventDefault()
         setLoading(true)
         if (checklogin()) {
-            if (checkNum) {
-                fetch("https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin", {
-                    method: "POST",
-                    headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify(userData)
-                })
-                    .then(() => {
-                        localStorage.setItem('mobile', userData.mobile)
-                        localStorage.setItem('role', userData.role)
-                        axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${userData.mobile}`)
-                            .then((data) => {
-                                const userdata = data.data[0].id
-                                axios.post(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomProducts`, { userid: `${userdata}`, product: [] }, {
-                                    headers: { 'content-type': 'application/json' },
-                                })
+            fetch("https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin", {
+                method: "POST",
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(userData)
+            })
+                .then(() => {
+                    localStorage.setItem('email', userData.email)
+                    localStorage.setItem('role', userData.role)
+                    axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${userData.email}`)
+                        .then((data) => {
+                            const userdata = data.data[0].id
+                            axios.post(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomProducts`, { userid: `${userdata}`, product: [] }, {
+                                headers: { 'content-type': 'application/json' },
                             })
-                        setLoading(false)
-                        toast.success('Register Successfully')
-                        sessionStorage.setItem('register', contextData.secretCode)
-                        setchang(!change)
-                        navigate(`/ragister`)
-                    })
-                    .catch((err) => {
-                        alert(err.message)
-                    })
-            } else {
-                fetch("https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin", {
-                    method: "POST",
-                    headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify(userData)
+                        })
+                    setLoading(false)
+                    toast.success('Register Successfully')
+                    sessionStorage.setItem('register', contextData.secretCode)
+                    setchang(!change)
+                    navigate(`/ragister`)
                 })
-                    .then(() => {
-                        localStorage.setItem('email', userData.email)
-                        localStorage.setItem('role', userData.role)
-                        axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${userData.email}`)
-                            .then((data) => {
-                                const userdata = data.data[0].id
-                                axios.post(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomProducts`, { userid: `${userdata}`, product: [] }, {
-                                    headers: { 'content-type': 'application/json' },
-                                })
-                            })
-                        setLoading(false)
-                        toast.success('Register Successfully')
-                        sessionStorage.setItem('register', contextData.secretCode)
-                        setchang(!change)
-                        navigate(`/ragister`)
-                    })
-                    .catch((err) => {
-                        alert(err.message)
-                    })
-            }
-
+                .catch((err) => {
+                    alert(err.message)
+                })
         } else {
-            if (checkNum) {
-                fetch(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?mobile=${userData.mobile}`)
-                    .then((res) => {
-                        return res.json()
-                            .then((data) => {
-                                if (data[0].pass === userData.pass) {
-                                    localStorage.setItem('mobile', userData.mobile)
-                                    localStorage.setItem('role', data[0].role)
-                                    setLoading(false)
-                                    setchang(!change)
-                                    if (data[0].signup) {
-                                        navigate('/')
-                                    } else {
-                                        navigate(`/ragister`)
-                                    }
-                                    if (data[0].role === 'admin') {
-                                        toast.success('Admin Logged in Successfully')
-                                    } else {
-                                        toast.success('Login Successfully')
-                                    }
+            fetch(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${userData.email}`)
+                .then((res) => {
+                    return res.json()
+                        .then((data) => {
+                            if (data[0].pass === userData.pass) {
+                                localStorage.setItem('email', userData.email)
+                                localStorage.setItem('role', data[0].role)
+                                setLoading(false)
+                                setchang(!change)
+                                if (data[0].signup) {
+                                    navigate('/')
+                                } else {
+                                    navigate(`/ragister`)
                                 }
-                                else {
-                                    setLoading(false)
-                                    toast.error("Wrong Password")
+                                if (data[0].role === 'admin') {
+                                    toast.success('Admin Logged Successfully')
+                                } else {
+                                    toast.success('Login Successfully')
                                 }
-                            })
-                    })
-                    .catch((err) => {
-                        alert(err.message)
-                    })
-            } else {
-                fetch(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${userData.email}`)
-                    .then((res) => {
-                        return res.json()
-                            .then((data) => {
-                                if (data[0].pass === userData.pass) {
-                                    localStorage.setItem('email', userData.email)
-                                    localStorage.setItem('role', data[0].role)
-                                    setLoading(false)
-                                    setchang(!change)
-                                    if (data[0].signup) {
-                                        navigate('/')
-                                    } else {
-                                        navigate(`/ragister`)
-                                    }
-                                    if (data[0].role === 'admin') {
-                                        toast.success('Admin Logged Successfully')
-                                    } else {
-                                        toast.success('Login Successfully')
-                                    }
-                                }
-                                else {
-                                    setLoading(false)
-                                    toast.error("Wrong Password")
-                                }
-                            })
-                    })
-                    .catch((err) => {
-                        alert(err.message)
-                    })
-            }
+                            }
+                            else {
+                                setLoading(false)
+                                toast.error("Wrong Password")
+                            }
+                        })
+                })
+                .catch((err) => {
+                    alert(err.message)
+                })
+            // }
         }
     }
 
@@ -224,22 +151,17 @@ const LoginSignup = () => {
                                 <form className="space-y-6" onSubmit={submit}>
                                     <div>
                                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                                            Mobile No. / Email address
+                                            Email address
                                         </label>
                                         <div className="mt-2">
                                             <input
-                                                type="text"
+                                                type="email"
                                                 required
                                                 autoComplete='off'
                                                 onPaste={(e) => paste(e)}
                                                 className="block w-full rounded-md outline-none border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
                                                 onChange={(e) => {
-                                                    setCheckNum(!isNaN(e.target.value))
-                                                    if (checkNum) {
-                                                        setUserData({ ...userData, mobile: e.target.value, email: '' })
-                                                    } else {
-                                                        setUserData({ ...userData, email: e.target.value, mobile: '' })
-                                                    }
+                                                    setUserData({ ...userData, email: e.target.value, mobile: '' })
                                                 }}
                                             />
                                         </div>
