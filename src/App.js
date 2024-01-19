@@ -21,9 +21,9 @@ import EditUser from "./Components/Admin/EditUser";
 import AddUser from "./Components/Admin/AddUser";
 import AddProduct from './Components/Admin/AddProduct';
 import EditProduct from './Components/Admin/EditProduct'
-// import Loader from "./Components/Loader/Loader";
 import ProtectAdmin from './Components/ProtectedCom/ProtectAdmin';
 import ProtectUser from "./Components/ProtectedCom/ProtectUser";
+import Loader from './Components/Loader/Loader';
 
 function App() {
   const contextData = useContext(Datacontext)
@@ -50,7 +50,7 @@ function App() {
         <Route path="/products" element={<ProtectAdmin Comp={Products} />} />
         <Route path="/products/:id" element={<ProtectAdmin Comp={EditProduct} />} />
         <Route path="/products/addproduct" element={<ProtectAdmin Comp={AddProduct} />} />
-        {/* <Route path="/loader" element={<Loader />} /> */}
+        <Route path="/loader" element={<Loader />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
