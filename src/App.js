@@ -24,6 +24,7 @@ import EditProduct from './Components/Admin/EditProduct'
 import ProtectAdmin from './Components/ProtectedCom/ProtectAdmin';
 import ProtectUser from "./Components/ProtectedCom/ProtectUser";
 import Loader from './Components/Loader/Loader';
+import TestComp from "./Components/TestComp";
 
 function App() {
   const contextData = useContext(Datacontext)
@@ -51,6 +52,7 @@ function App() {
         <Route path="/products/:id" element={<ProtectAdmin Comp={EditProduct} />} />
         <Route path="/products/addproduct" element={<ProtectAdmin Comp={AddProduct} />} />
         <Route path="/loader" element={<Loader />} />
+        <Route path="/test" element={<TestComp />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
