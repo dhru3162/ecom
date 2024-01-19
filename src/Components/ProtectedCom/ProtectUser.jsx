@@ -14,10 +14,8 @@ const ProtectUser = ({ Comp }) => {
     useEffect(() => {
         if (email === null && role === null) {
             navigate('/login')
-            toast('Please login first')
         } else if (role !== 'user') {
             navigate('/')
-            toast('Something went wrong')
         } else {
             axios.get(`https://64cc9ddf2eafdcdc851a0938.mockapi.io/EcomLogin?email=${email}`)
                 .then((res) => {
