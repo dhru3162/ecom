@@ -78,10 +78,10 @@ const Users = () => {
                 ) : (
                     <>
                         <AdminNavbar />
-                        <div className='mt-16'>
-                            <div className="flex flex-col p-2 lg:p-3">
-                                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                    <div className="inline-block min-w-full sm:px-6 lg:px-8">
+                        <div className='mt-16 max-w-full'>
+                            <div className="flex flex-col items-center p-2 lg:p-3">
+                                <div className="w-full sm:-mx-6 lg:-mx-8">
+                                    <div className="inline-block min-w-full sm:px-6">
                                         <div className="overflow-hidden">
                                             <div className="relative overflow-x-auto sm:rounded-lg p-3 lg:p-3 lg:pt-0">
                                                 <div className="flex items-center justify-between w-full" >
