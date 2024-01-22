@@ -14,7 +14,7 @@ const CheckOut = () => {
 
     const navigate = useNavigate()
     const contextData = useContext(Datacontext)
-    const { cart, totalprice, address, upi, card, newOrderData } = contextData
+    const { cart, totalprice: totalpriceFormContext, address, upi, card, newOrderData } = contextData
     const [expanded, setExpanded] = useState({
         address: true,
         addressselected: false,
@@ -87,10 +87,9 @@ const CheckOut = () => {
     })
     const [codeApplied, setCodeApplied] = useState(false)
     const [paymentok, setpaymentok] = useState(true)
+    const [totalprice, setTotalprice] = useState(totalpriceFormContext)
     // eslint-disable-next-line
     const price = eval(totalprice) + 4.99
-    // eslint-disable-next-line
-    const codeprice = eval(price) - 10
 
     const addNewAddress = () => {
         setaddid(0)
@@ -794,6 +793,7 @@ const CheckOut = () => {
                                                                                         onClick={() => {
                                                                                             setCodeApplied(false)
                                                                                             setCode('')
+                                                                                            setTotalprice((totalprice + 10).toFixed(2))
                                                                                         }}
                                                                                     >
                                                                                         Remove
@@ -821,6 +821,7 @@ const CheckOut = () => {
                                                                                                 setCodeApplied(true)
                                                                                                 setDiscountInput('')
                                                                                                 setcodeErr({})
+                                                                                                setTotalprice((totalprice - 10).toFixed(2))
                                                                                             }
                                                                                         }}
                                                                                     >
@@ -1123,7 +1124,7 @@ const CheckOut = () => {
                                                 <div className="flex justify-between">
                                                     <p className="text-lg font-bold dark:text-white">Total</p>
                                                     <div className="">
-                                                        <p className="mb-1 text-lg font-bold dark:text-white">{totalprice <= 100 ? <>{codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}</> : `$${totalprice}`}</p>
+                                                        <p className="mb-1 text-lg font-bold dark:text-white">{totalprice < 100 ? price : totalprice}</p>
                                                     </div>
                                                 </div>
                                                 {!expanded.address && !expanded.payment ? (
@@ -1137,7 +1138,7 @@ const CheckOut = () => {
                                                                     const inqtn = contextData.upi.findIndex(((obj) => obj.upiid === upiid))
                                                                     if (contextData.upi[inqtn].upipin === conformation) {
                                                                         setpaymentok(true)
-                                                                        contextData.orderPlaced(radiodata, radioupidata, 'UPI', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)
+                                                                        contextData.orderPlaced(radiodata, radioupidata, 'UPI', `${totalprice < 100 ? price : totalprice}`, `${codeApplied}`)
                                                                     } else {
                                                                         setpaymentok(false)
                                                                         contextData.setloading(true)
@@ -1150,7 +1151,7 @@ const CheckOut = () => {
                                                                     const inqtn = contextData.card.findIndex(((obj) => obj.cardid === cardid))
                                                                     if (contextData.card[inqtn].cvv === cvvInput) {
                                                                         setpaymentok(true)
-                                                                        contextData.orderPlaced(radiodata, radiocarddata, 'Card', `${totalprice <= 100 ? `${codeApplied ? `$${codeprice.toFixed(2)}` : `$${price.toFixed(2)}`}` : `$${totalprice}`}`, `${codeApplied}`)
+                                                                        contextData.orderPlaced(radiodata, radiocarddata, 'Card', `${totalprice < 100 ? price : totalprice}`, `${codeApplied}`)
                                                                     } else {
                                                                         setpaymentok(false)
                                                                         contextData.setloading(true)
@@ -1221,7 +1222,7 @@ const CheckOut = () => {
                                                         Continue Shopping
                                                     </NavLink>
                                                     <Link
-                                                        to="/contact"
+                                                        to="/myorders"
                                                         className="text-sm font-semibold text-gray-900 dark:text-white"
                                                         onClick={() => {
                                                             contextData.setNewOrderData([])

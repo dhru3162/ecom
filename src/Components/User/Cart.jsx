@@ -109,7 +109,7 @@ const Cart = () => {
                                         <div className="flex justify-between">
                                             <p className="text-lg font-bold dark:text-white">Total</p>
                                             <div className="">
-                                                <p className="mb-1 text-lg font-bold dark:text-white">{totalprice <= 100 ? `$${price.toFixed(2)}` : `$${totalprice}`}</p>
+                                                <p className="mb-1 text-lg font-bold dark:text-white">{totalprice < 100 ? `$${price.toFixed(2)}` : `$${totalprice}`}</p>
                                             </div>
                                         </div>
                                         <button className="mt-6 w-full rounded-md bg-blue-600 py-1.5 font-medium text-blue-50 hover:bg-blue-700"

@@ -4,7 +4,6 @@ import { toast } from 'react-toastify'
 import Navbar from '../Navbars/Navbar'
 import "../Numberstyle.css"
 import axios from 'axios'
-import { NavLink } from 'react-router-dom'
 import Loader from '../Loader/Loader'
 import { Datacontext } from '../Context'
 
@@ -112,148 +111,122 @@ const RagisterDetails = () => {
             ) : (
                 <div>
                     <div>
-                        {userEmail.signup ? (
-                            <div className='dark:bg-black h-screen'>
-                                <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-                                    <div className="text-center">
-                                        <p className="text-base font-semibold text-indigo-600">400</p>
-                                        <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Something went wrong</h1>
-                                        <p className="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t access this page you’re looking for.</p>
-                                        <div className="mt-10 flex items-center justify-center gap-x-6">
-                                            <NavLink
-                                                to="/"
-                                                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                            >
-                                                Go to home
-                                            </NavLink>
-                                            <NavLink to="/contact" className="text-sm font-semibold text-gray-900">
-                                                Contact support <span aria-hidden="true">&rarr;</span>
-                                            </NavLink>
-                                        </div>
-                                    </div>
-                                </main>
-                            </div>
-                        ) : (
-                            <div className='dark:bg-black h-screen'>
-                                <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 dark:bg-black">
-                                    <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                                        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
-                                            Fill Your Basic Details
-                                        </h2>
-                                    </div>
-                                    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                                        <form className="space-y-6" onSubmit={submit}>
-                                            <div>
-                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                                                    First Name
-                                                </label>
-                                                <div className="mt-2">
-                                                    <input
-                                                        type="text"
-                                                        required
-                                                        value={userdata.fname}
-                                                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                                                        onChange={(e) => {
-                                                            setuserdata({ ...userdata, fname: e.target.value })
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                                                    Last Name
-                                                </label>
-                                                <div className="mt-2">
-                                                    <input
-                                                        type="text"
-                                                        required
-                                                        value={userdata.lname}
-                                                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                                                        onChange={(e) => {
-                                                            setuserdata({ ...userdata, lname: e.target.value })
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            {userEmail.mobile === "" && (
-                                                <div>
-                                                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                                                        Mobile Number
-                                                    </label>
-                                                    <div className="mt-2">
-                                                        <input
-                                                            type="number"
-                                                            value={userdata.mobile}
-                                                            className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                                                            onChange={(e) => {
-                                                                seterr({})
-                                                                setuserdata({ ...userdata, mobile: e.target.value })
-                                                            }}
-                                                        />
-                                                        <small><span className='text-red-600'>{err.mobile}</span></small>
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {userEmail.email === '' && (
-                                                <div>
-                                                    <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                                                        Email Address
-                                                    </label>
-                                                    <div className="mt-2">
-                                                        <input
-                                                            type="email"
-                                                            required
-                                                            value={userdata.email}
-                                                            className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                                                            onChange={(e) => {
-                                                                seterr({})
-                                                                setuserdata({ ...userdata, email: e.target.value })
-                                                            }}
-                                                        />
-                                                        <small><span className=' text-red-600'>{err.email}</span></small>
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            <div>
-                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-                                                    Password
-                                                </label>
-                                                <div className="mt-2">
-                                                    <input
-                                                        type="text"
-                                                        required
-                                                        value={userdata.pass}
-                                                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
-                                                        onChange={(e) => {
-                                                            setuserdata({ ...userdata, pass: e.target.value })
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <button
-                                                    type="submit"
-                                                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                                    onClick={() => {
-                                                        setuserdata({ ...userdata, signup: true })
+                        <div className='dark:bg-black h-screen'>
+                            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 dark:bg-black">
+                                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+                                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
+                                        Fill Your Basic Details
+                                    </h2>
+                                </div>
+                                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                                    <form className="space-y-6" onSubmit={submit}>
+                                        <div>
+                                            <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                                                First Name
+                                            </label>
+                                            <div className="mt-2">
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    value={userdata.fname}
+                                                    className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                                                    onChange={(e) => {
+                                                        setuserdata({ ...userdata, fname: e.target.value })
                                                     }}
-                                                >
-                                                    Ragister
-                                                </button>
+                                                />
                                             </div>
-                                        </form>
-                                    </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                                                Last Name
+                                            </label>
+                                            <div className="mt-2">
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    value={userdata.lname}
+                                                    className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                                                    onChange={(e) => {
+                                                        setuserdata({ ...userdata, lname: e.target.value })
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {userEmail.mobile === "" && (
+                                            <div>
+                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                                                    Mobile Number
+                                                </label>
+                                                <div className="mt-2">
+                                                    <input
+                                                        type="number"
+                                                        value={userdata.mobile}
+                                                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                                                        onChange={(e) => {
+                                                            seterr({})
+                                                            setuserdata({ ...userdata, mobile: e.target.value })
+                                                        }}
+                                                    />
+                                                    <small><span className='text-red-600'>{err.mobile}</span></small>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {userEmail.email === '' && (
+                                            <div>
+                                                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                                                    Email Address
+                                                </label>
+                                                <div className="mt-2">
+                                                    <input
+                                                        type="email"
+                                                        required
+                                                        value={userdata.email}
+                                                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                                                        onChange={(e) => {
+                                                            seterr({})
+                                                            setuserdata({ ...userdata, email: e.target.value })
+                                                        }}
+                                                    />
+                                                    <small><span className=' text-red-600'>{err.email}</span></small>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <div>
+                                            <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
+                                                Password
+                                            </label>
+                                            <div className="mt-2">
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    value={userdata.pass}
+                                                    className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-0 dark:focus:ring-0"
+                                                    onChange={(e) => {
+                                                        setuserdata({ ...userdata, pass: e.target.value })
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <button
+                                                type="submit"
+                                                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                onClick={() => {
+                                                    setuserdata({ ...userdata, signup: true })
+                                                }}
+                                            >
+                                                Ragister
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        )}
-                        {/* </>
-
-                        )} */}
+                        </div>
                     </div>
 
                 </div>

@@ -12,7 +12,9 @@ const About = () => {
           <div className="flex lg:flex-row flex-col lg:gap-8 sm:gap-10 gap-12">
             <div className="w-full lg:w-6/12">
               <h2 className="w-full font-bold lg:text-4xl text-3xl lg:leading-10 leading-9 dark:text-white">We are here to make great design accessible and delightfull for everyone</h2>
-              <p className="font-normal text-base leading-6 text-gray-600 mt-6 dark:text-gray-500">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God, and by this our present charter confirmed for us and our heirs forever that the English Church shall be free, and shall have her rights entire,</p>
+              <p className="font-normal text-base leading-6 text-justify text-gray-600 mt-6 dark:text-gray-500">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God, and by this our present charter confirmed for us and our heirs forever that the English Church shall be free, and shall have her rights entire,
+              </p>
             </div>
             <div className="w-full lg:w-6/12">
               <img className="lg:block hidden w-full" src="https://i.ibb.co/RjNH7QB/Rectangle-122-1.png" alt="people discussing on board" />
@@ -48,29 +50,39 @@ const About = () => {
                 <path d="M28 15.1301C28.8604 15.3504 29.623 15.8508 30.1676 16.5524C30.7122 17.254 31.0078 18.117 31.0078 19.0051C31.0078 19.8933 30.7122 20.7562 30.1676 21.4578C29.623 22.1594 28.8604 22.6598 28 22.8801" stroke="white" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M33 33.0001V31.0001C32.9949 30.1173 32.6979 29.2609 32.1553 28.5645C31.6126 27.8682 30.8548 27.3708 30 27.1501" stroke="white" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              
+
             </div>
             <hr className="z-10 absolute top-2/4 w-full bg-gray-200" />
           </div>
           <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
             <div>
               <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white mt-6">Founded</p>
-              <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-500 mt-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+              <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-500 mt-6">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+              </p>
             </div>
             <div>
               <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white mt-6">50M montly enrichments</p>
-              <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-500 mt-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+              <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-500 mt-6">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+              </p>
             </div>
             <div className="sm:block hidden">
               <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white mt-6">400k User</p>
-              <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-500 mt-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+              <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-500 mt-6">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+              </p>
             </div>
           </div>
           <div className="flex lg:flex-row flex-col md:gap-14 gap-16 justify-between lg:mt-20 mt-16">
             <div className="w-full lg:w-6/12">
               <h2 className="font-bold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800 dark:text-white">Our Mission</h2>
-              <p className="font-normal text-base leading-6 text-gray-600 mt-6 w-full lg:w-10/12 xl:w-9/12 dark:text-gray-500">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God, and by this our present charter confirmed for us and our heirs forever that the English Church shall be free, and shall have her rights entire, and her liberties inviolate; and we will that it be thus observed; which is apparent from</p>
-              <p className="font-normal text-base leading-6 text-gray-600 w-full lg:w-10/12 xl:w-9/12 mt-10 dark:text-gray-500">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God, and by this our present charter confirmed for us and our heirs forever that the English Church shall be free, and shall have her rights entire, and her liberties inviolate; and we will that it be thus observed; which is apparent from</p>
+              <p className="font-normal text-base text-justify leading-6 text-gray-600 mt-6 w-full lg:w-10/12 xl:w-9/12 dark:text-gray-500">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God, and by this our present charter confirmed for us and our heirs forever that the English Church shall be free, and shall have her rights entire, and her liberties inviolate; and we will that it be thus observed; which is apparent from
+              </p>
+              <p className="font-normal text-base text-justify leading-6 text-gray-600 w-full lg:w-10/12 xl:w-9/12 mt-10 dark:text-gray-500">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God, and by this our present charter confirmed for us and our heirs forever that the English Church shall be free, and shall have her rights entire, and her liberties inviolate; and we will that it be thus observed; which is apparent from
+              </p>
             </div>
             <div className="w-full lg:w-6/12">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:gap-12 gap-10">

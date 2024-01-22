@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Navbar from '../Navbars/Navbar'
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const MyOrders = () => {
     
@@ -25,7 +25,7 @@ const MyOrders = () => {
     return (
         <>
             <Navbar />
-            <div className='pt-16'>
+            {/* <div className='pt-16'>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg m-8">
                     <table className="w-full table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -79,7 +79,7 @@ const MyOrders = () => {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
