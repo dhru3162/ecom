@@ -793,7 +793,9 @@ const CheckOut = () => {
                                                                                         onClick={() => {
                                                                                             setCodeApplied(false)
                                                                                             setCode('')
-                                                                                            setTotalprice((totalprice + 10).toFixed(2))
+                                                                                            // eslint-disable-next-line
+                                                                                            const data = eval(`${totalprice.toString()}+10`).toFixed(2)
+                                                                                            setTotalprice(parseInt(data))
                                                                                         }}
                                                                                     >
                                                                                         Remove
@@ -1124,7 +1126,7 @@ const CheckOut = () => {
                                                 <div className="flex justify-between">
                                                     <p className="text-lg font-bold dark:text-white">Total</p>
                                                     <div className="">
-                                                        <p className="mb-1 text-lg font-bold dark:text-white">{totalprice < 100 ? price : totalprice}</p>
+                                                        <p className="mb-1 text-lg font-bold dark:text-white">${totalprice < 100 ? price : totalprice}</p>
                                                     </div>
                                                 </div>
                                                 {!expanded.address && !expanded.payment ? (
