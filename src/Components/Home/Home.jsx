@@ -69,33 +69,19 @@ const Home = () => {
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-3xl font-bold text-gray-900 dark:text-white">${data.price}</span>
-                            {contextData.loading ? (
-                                <>
-                                    {addid === data.id ? (
-                                        <>
-                                            <button type='button' className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
-                                                <div className='flex justify-center items-center h-full'>
-                                                    <HashLoader
-                                                        color="#c7cbfd"
-                                                        size={19}
-                                                    />
-                                                </div>
-                                            </button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <button type='button' className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
-                                                Add To Cart
-                                            </button>
-                                        </>
-                                    )}
-                                </>
+                            {contextData.loading && addid === data.id ? (
+                                <button type='button' className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
+                                    <div className='flex justify-center items-center h-full'>
+                                        <HashLoader
+                                            color="#c7cbfd"
+                                            size={19}
+                                        />
+                                    </div>
+                                </button>
                             ) : (
-                                <>
-                                    <button type='button' className="w-[48%] h-[12%] text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
-                                        Add To Cart
-                                    </button>
-                                </>
+                                <button type='button' className=" text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" onClick={() => cartupdate(data)}>
+                                    Add To Cart
+                                </button>
                             )}
                         </div>
                     </div>

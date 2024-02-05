@@ -16,13 +16,13 @@ const Navbar = () => {
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <NavLink to="/" className="flex items-center">
                         <img src={logo} className="h-8 mr-3" alt="Flowbite Logo" />
-                        <p className="font-sans self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Ecom</p>
+                        <div className="font-sans self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Ecom</div>
                     </NavLink>
                     <div className="flex md:order-2">
                         <NavLink to={'/cart'} type="button" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                             <i className="bi bi-cart2"></i>
                             {contextData.cart.length > 0 &&
-                                <span className='text-xs h-4 w-4 bg-blue-700 rounded-full text-center text-white font-bold relative right-1 -top-2 inline-block'>{contextData.cart.length}</span>}
+                                <span className='text-xs h-4 w-4 bg-blue-700 rounded-full text-center text-white font-semibold relative right-1 -top-2 inline-block'>{contextData.cart.length}</span>}
                         </NavLink>
                         <NavLink to={checklogin === null ? '/login' : '/profile'} type="button" className="py-2 pr-2 lg:pr-4 lg:pl-3 lg:ml-5 md:pr-4 md:pl-3 md:ml-5 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                             <i className="bi bi-person-circle"></i>

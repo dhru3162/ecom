@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 .scrollbarfirtextarea::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
